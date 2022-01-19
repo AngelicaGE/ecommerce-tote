@@ -1,0 +1,48 @@
+@import '_vars';
+
+.main-navbar{
+    background-color: var(--hospital-green);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--sm);
+}
+
+.tote-pages, .user-pages{
+    display: inline-block;
+    font-size: var(--sm);
+}
+
+.tote-page, .user-page{
+    display: inline-block;
+    margin: 0 0.5rem;
+    font-size: 1.5em;
+}
+
+.tote-page a{
+    text-decoration: none;
+    color: black;
+}
+
+.tote-page a:hover{
+    color: gray;
+}
+
+.tote-page a:hover{
+    text-decoration: underline;
+}
+
+.tote-page a:active{
+    text-decoration: underline;
+}
+
+.logo h1{
+    font-size: 2.5em;
+}
+
+.user-page img{
+    margin: 0 var(--xxs);
+}
+.user-page:hover{
+    cursor: pointer;
+}
