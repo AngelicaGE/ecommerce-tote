@@ -1,0 +1,80 @@
+// Menu animation retrieved from: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_menu_icon_js
+
+.container {
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .bar1, .bar2, .bar3 {
+    height: 0.5rem;
+    background-color: #333;
+    margin: 0.6rem 0;
+    transition: 0.4s;
+  }
+  
+  .change .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-0.9rem, 0.6rem);
+    transform: rotate(-45deg) translate(-0.9rem, 0.6rem);
+  }
+  
+  .change .bar2 {opacity: 0;}
+  
+  .change .bar3 {
+    -webkit-transform: rotate(45deg) translate(-0.8rem, -8px);
+    transform: rotate(45deg) translate(-0.8rem, -0.8rem);
+  }
+
+  .SandwichMenu{
+      width: 3.5rem;
+      height: 3.6rem;
+  }
+
+  
+@media(min-width:300px){
+    .bar1, .bar2, .bar3 {
+        width: 1.6rem;
+        height: 0.2rem;
+        background-color: #333;
+        margin: 0.4rem 0;
+        transition: 0.4s;
+      }
+
+      .bar1{
+          margin-top: 11px;
+      }
+
+      .change .bar1 {
+        -webkit-transform: rotate(-45deg) translate(-5.5px, 3px);
+        transform: rotate(-45deg) translate(-5.5px, 3px);
+      }
+      
+      .change .bar3 {
+        -webkit-transform: rotate(45deg) translate(-0.45rem, -0.4rem);
+        transform: rotate(45deg) translate(-0.45rem, -0.4rem);
+      }
+
+ }
+
+ @media(min-width:800px){
+    .bar1, .bar2, .bar3 {
+        width: 100%;
+        height: 0.5rem;
+        background-color: #333;
+        margin: 0.6rem 0;
+        transition: 0.4s;
+      }
+      
+      .change .bar1 {
+        -webkit-transform: rotate(-45deg) translate(-0.9rem, 0.6rem);
+        transform: rotate(-45deg) translate(-0.9rem, 0.6rem);
+      }
+            
+      .change .bar3 {
+        -webkit-transform: rotate(45deg) translate(-0.8rem, -0.8rem);
+        transform: rotate(45deg) translate(-0.8rem, -0.8rem);
+      }
+ }
+
+ @media(min-width:1024px){
+
+ }

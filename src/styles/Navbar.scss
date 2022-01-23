@@ -1,16 +1,40 @@
 @import '_vars';
-
-.main-navbar{
+.Navbar {
     background-color: var(--hospital-green);
+}
+.main-navbar{
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: var(--sm);
+    max-width: 1280px;
+    margin: auto;
 }
 
-.tote-pages, .user-pages{
+.tote-pages, 
+.user-pages, 
+.sandwich-menu,
+.logo{
+    width: 33%;
+}
+
+.sandwich-menu, .tote-pages, .user-pages{
+    //background-color: red;
+}
+
+.logo{
+    //background-color: blue;
+    text-align: center;
+    font-family: 'Sedgwick Ave', cursive;
+}
+
+.tote-pages, .user-pages, .sandwich-menu{
     display: inline-block;
     font-size: var(--sm);
+}
+.user-pages {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .tote-page, .user-page{
@@ -43,6 +67,39 @@
 .user-page img{
     margin: 0 var(--xxs);
 }
-.user-page:hover{
+.user-page:hover, .logo:hover{
     cursor: pointer;
 }
+
+@media(min-width:300px){
+    .tote-pages{
+        display: none;
+    }
+    .user, .whishlist{
+        display: none;
+    }
+ }
+
+ @media(min-width:800px){
+    .tote-pages, .user, .whishlist{
+        display: none;
+    }
+    .user, .whishlist{
+        display: inline-block;
+    }
+ }
+
+ @media(min-width:1024px){
+    .tote-pages{
+        display: inline-block;
+    }
+    .hide-in-laptop{
+        display: none;
+    }
+    .user, .whishlist{
+        display: inline-block;
+    }
+
+ }
+
+ 

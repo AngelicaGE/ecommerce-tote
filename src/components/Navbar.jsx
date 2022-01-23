@@ -1,17 +1,24 @@
-import React from 'react'
+import React, {useState} from 'react'
 import '../styles/Navbar.scss'
+import SandwichMenu from '../containers/SandwichMenu.jsx'
+
 import searchIcon from '../assets/icons/search.png'
+import searchIconSmall from '../assets/icons/search-small.png'
 import userIcon from '../assets/icons/user.png'
 import wishlistIcon from '../assets/icons/heart.png'
 import wishlistSelectedIcon from '../assets/icons/heart-fill.png'
 import cartIcon from '../assets/icons/bag.png'
-
+import cartIconSmall from '../assets/icons/bag-small.png'
 
 const Navbar = () => {
     return (
         <div className='Navbar'>
             <div className='main-navbar'>
-                <ul className='tote-pages'>
+
+                <div className='sandwich-menu hide-in-laptop'>
+                    <SandwichMenu/>
+                </div>
+                <ul className='tote-pages ' >
                     <li className='tote-page'>
                         <a href='#'>Shop</a>
                     </li>
@@ -24,24 +31,33 @@ const Navbar = () => {
                     <li className='tote-page'>
                         <a href='#'>About</a>
                     </li>
-                </ul>
+               </ul>
+
                 <div className='logo'>
                     <h1>TOTE-ME</h1>
                 </div>
-                <ul className='user-pages'>
-                    <li className='user-page'>
-                        <img alt='search icon' src={searchIcon}/>
+
+                <ul className='user-pages' >
+                    <li className='user-page search'>
+                        <picture>
+                            <source media="(min-width:800px)" srcSet={searchIcon}></source>
+                            <img alt='search icon' src={searchIconSmall}/>
+                        </picture>
                     </li>
-                    <li className='user-page'>
+                    <li className='user-page user'>
                         <img alt='user icon' src={userIcon}/>
                     </li>
-                    <li className='user-page'>
+                    <li className='user-page whishlist'>
                         <img alt='wishlist icon' src={wishlistIcon}/>
                     </li>
-                    <li className='user-page'>
-                        <img alt='cart icon' src={cartIcon}/>
+                    <li className='user-page cart'>
+                        <picture>
+                            <source media="(min-width:800px)" srcSet={cartIcon}></source>
+                            <img alt='cart icon' src={cartIconSmall}/>
+                        </picture>
                     </li>
                 </ul>
+
             </div>
         </div>
     );
