@@ -7,8 +7,7 @@ import searchIconSmall from '../assets/icons/search-small.png'
 import userIcon from '../assets/icons/user.png'
 import wishlistIcon from '../assets/icons/heart.png'
 import wishlistSelectedIcon from '../assets/icons/heart-fill.png'
-import cartIcon from '../assets/icons/bag.png'
-import cartIconSmall from '../assets/icons/bag-small.png'
+import CarWidget from '../containers/CarWidget'
 
 const Navbar = () => {
     return (
@@ -51,10 +50,7 @@ const Navbar = () => {
                         <img alt='wishlist icon' src={wishlistIcon}/>
                     </li>
                     <li className='user-page cart'>
-                        <picture>
-                            <source media="(min-width:800px)" srcSet={cartIcon}></source>
-                            <img alt='cart icon' src={cartIconSmall}/>
-                        </picture>
+                        <CarWidget></CarWidget>
                     </li>
                 </ul>
 

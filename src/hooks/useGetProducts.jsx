@@ -1,15 +1,18 @@
 import React, {useEffect, useState} from 'react';
-
-const API = 'https://api.escuelajs.co/api/v1/products';
 import axios from 'axios';
 
 const useGetProducts = () => {
-  const [products, setproducts] = useState([]);
+    const API = 'https://api.escuelajs.co/api/v1/products';
+    const [products, setproducts] = useState([]);
 
-  useEffect(async () => {
+  useEffect( async () => {
     const respose = await axios(API);
-    setproducts(respose);
+    setproducts(respose.data);
   }, []);
+
+  //const  getProducts = () => {return products};
+  
+  return products;
 
 };
 
