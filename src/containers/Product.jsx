@@ -1,7 +1,7 @@
 import React from 'react';
-import '../styles/ProductItem.scss'
+import '../styles/Product.scss'
 
-const ProductItem = ({name, price, imagePath}) => {
+const Product = ({name, price, imagePath}) => {
     return(
         <div className='ProductItem'>
                 <picture>
@@ -18,4 +18,4 @@ const ProductItem = ({name, price, imagePath}) => {
     );
 };
 
-export default ProductItem;
+export default Product;

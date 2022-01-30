@@ -1,7 +1,7 @@
 //rafce
 import React from 'react';
 import useGetProducts from '../hooks/useGetProducts';
-import ProductItem from '../containers/ProductItem';
+import Product from '../containers/Product';
 import '../styles/ProductList.scss'
 
 const ProductList = () => {
@@ -12,7 +12,7 @@ const ProductList = () => {
         <div className='products-container'>
             {
                 products.map(product => (
-                    <ProductItem name={product.title} price={product.price} imagePath={product.images[0]} key={product.id}></ProductItem>
+                    <Product name={product.title} price={product.price} imagePath={product.images[0]} key={product.id}></Product>
                 ))
             }
         </div>
