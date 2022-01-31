@@ -9,7 +9,7 @@ import wishlistIcon from '../assets/icons/heart.png'
 import wishlistSelectedIcon from '../assets/icons/heart-fill.png'
 import CarWidget from '../containers/CarWidget'
 
-const Navbar = () => {
+const Navbar = ({name}) => {
     return (
         <div className='Navbar'>
             <div className='main-navbar'>
@@ -33,7 +33,7 @@ const Navbar = () => {
                </ul>
 
                 <div className='logo'>
-                    <h1>TOTE-ME</h1>
+                    <h1>{name}</h1>
                 </div>
 
                 <ul className='user-pages' >
