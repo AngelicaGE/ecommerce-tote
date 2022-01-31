@@ -1,5 +1,5 @@
 import './styles/global.css'
-import Navbar from './components/Navbar'
+import NavbarContainer from './components/NavbarContainer'
 import ProductsContainer from './components/ProductsContainer';
 import ProductsContainerWithHook from './components/ProductsContainerWithHook';
 
@@ -8,18 +8,18 @@ function App() {
     <div className="App"> 
       {
         // CHALLENGE MAP AND PROMISES
-        <>
+        /*<>
           <Navbar name="My book store"/>
           <ProductsContainer/>
-        </>
+        </>*/
       }
 
       {
         // PERSONAL WORK (HOOKS)
-        /*<>
-          <Navbar name="TOTE-ME"/>
+        <>
+          <NavbarContainer name="TOTE-ME"/>
           <ProductsContainerWithHook/>
-        </>*/
+        </>
       }
     </div>
   );

@@ -1,13 +1,13 @@
 @import '_vars';
 
+.ProductList{
+    margin-top: 1rem;
+}
+
 .products-container{
-    //border: 1px solid red;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    
-    //margin-top: 1rem;
-    //margin: auto;
 }
 
 @media(min-width:300px){

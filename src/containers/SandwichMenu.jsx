@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import '../styles/SandwichMenu.scss';
 
 
-const SandwichMenu = () => {
-    const [menuSelected, setmenuSelected] = useState(false);
+const SandwichMenu = ({isSelected}) => {
+    const [menuSelected, setmenuSelected] = useState(isSelected);
 
     const classChange = "SandwichMenu container change";
     const classNotChange = "SandwichMenu container";

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import '../styles/Navbar.scss'
 import SandwichMenu from '../containers/SandwichMenu.jsx'
 
@@ -9,15 +9,16 @@ import wishlistIcon from '../assets/icons/heart.png'
 import wishlistSelectedIcon from '../assets/icons/heart-fill.png'
 import CarWidget from '../containers/CarWidget'
 
-const Navbar = ({name}) => {
-    return (
-        <div className='Navbar'>
-            <div className='main-navbar'>
+const Navbar = ({name, clickOnMenu}) => {
 
-                <div className='sandwich-menu hide-in-laptop'>
-                    <SandwichMenu/>
+
+    return (
+        <div className='Navbar'>    
+                <div className='main-navbar'>
+                <div className='sandwich-menu hide-in-laptop' onClick={clickOnMenu}>
+                    <SandwichMenu isSelected={false}/>
                 </div>
-                <ul className='tote-pages ' >
+                <ul className='tote-pages' >
                     <li className='tote-page'>
                         <a href='#'>Shop</a>
                     </li>
@@ -30,7 +31,7 @@ const Navbar = ({name}) => {
                     <li className='tote-page'>
                         <a href='#'>About</a>
                     </li>
-               </ul>
+                </ul>
 
                 <div className='logo'>
                     <h1>{name}</h1>
@@ -53,8 +54,7 @@ const Navbar = ({name}) => {
                         <CarWidget></CarWidget>
                     </li>
                 </ul>
-
-            </div>
+                </div>
         </div>
     );
 }
