@@ -1,7 +1,5 @@
 import './styles/global.css'
-import NavbarContainer from './components/NavbarContainer'
-import ProductsContainer from './components/ProductsContainer';
-import ProductsContainerWithHook from './components/ProductsContainerWithHook';
+import Paths from './routes/Paths';
 
 function App() {
   return (
@@ -16,11 +14,13 @@ function App() {
 
       {
         // PERSONAL WORK (HOOKS)
-        <>
+        /*<>
           <NavbarContainer name="TOTE-ME"/>
           <ProductsContainerWithHook/>
-        </>
+        </>*/
       }
+      <Paths></Paths>
+
     </div>
   );
 }
