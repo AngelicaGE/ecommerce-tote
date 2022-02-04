@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import Navbar from '../components/Navbar'
+import NavbarContainer from '../components/NavbarContainer'
 import ProductsContainerWithHook from '../components/ProductsContainerWithHook'
 import ProductsContainerWithPromises from '../components/ProductsContainerWithPromises'
 import NotFound from '../components/NotFound';
@@ -9,7 +9,7 @@ import ProductDetailContainer from '../components/ProductDetailContainer';
 const Paths = () => {
   return (
     <BrowserRouter>
-      <Navbar name="TOTE-ME"></Navbar>
+      <NavbarContainer name="TOTE-ME"/>
       <Routes>
         <Route path="/" element={<ProductsContainerWithHook/>}/>
         <Route path="/books" element={<ProductsContainerWithPromises/>}/>
