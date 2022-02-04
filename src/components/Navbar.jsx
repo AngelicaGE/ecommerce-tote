@@ -1,4 +1,6 @@
 import React from 'react'
+import {Link, NavLink} from 'react-router-dom'
+// con navlink podemos usar estilos customisados
 import '../styles/Navbar.scss'
 import SandwichMenu from '../containers/SandwichMenu.jsx'
 
@@ -11,6 +13,9 @@ import CarWidget from '../containers/CarWidget'
 
 const Navbar = ({name, clickOnMenu}) => {
 
+    const activeStyle = {
+        color: 'red'
+    }
 
     return (
         <div className='Navbar'>    
@@ -20,10 +25,10 @@ const Navbar = ({name, clickOnMenu}) => {
                 </div>
                 <ul className='tote-pages' >
                     <li className='tote-page'>
-                        <a href='#'>Shop</a>
+                        <NavLink to="dfghj" style={({isActive}) => isActive? activeStyle: undefined}>Shop</NavLink>
                     </li>
                     <li className='tote-page'>
-                        <a href='#'>New arrivals</a>
+                        <NavLink to="fghj" className={({isActive}) => (isActive? 'activeClass': '')}>New arrivals</NavLink>
                     </li>
                     <li className='tote-page'>
                         <a href='#'>Sale</a>

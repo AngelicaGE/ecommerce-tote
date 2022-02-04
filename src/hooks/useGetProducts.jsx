@@ -1,18 +1,24 @@
-import React, {useEffect, useState} from 'react';
-import axios from 'axios';
+import {useEffect, useState} from 'react';
 
-const useGetProducts = () => {
-    const API = 'https://api.escuelajs.co/api/v1/products';
-    const [products, setproducts] = useState([]);
+const useGetProducts =  (API) => {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
 
-  useEffect( async () => {
-    const respose = await axios(API);
-    setproducts(respose.data);
-  }, []);
 
-  //const  getProducts = () => {return products};
-  
-  return products;
+    useEffect( async () => {
+      try{
+        const response = await fetch(API);
+        const data = await response.json();
+        setProducts(data);
+      }catch(error){
+        setError(`ERROR ${error.message}`)
+      } finally{
+        setLoading(false);
+      }
+    }, []);
+    
+  return {products, loading, error};
 
 };
 
