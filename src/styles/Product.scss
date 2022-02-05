@@ -9,6 +9,12 @@
     width: 12rem;
     text-align: center;
 }
+.ProductItem:hover{
+    background-color: aqua;
+}
+.ver-mas{
+    width: 100%;
+}
 .name{
     font-weight: 400;
 }
@@ -40,7 +46,7 @@
     }
     .ProductItem img{
         width: 12rem;
-        height: 12rem;
+        height: 17rem;
     }
     .name{
         font-size: small;
@@ -62,8 +68,8 @@
         width: 18.28rem;
     }
     .ProductItem img{
-        width: 18.28rem;
-        height: 18.28rem;
+        width: 16.28rem;
+        height: 23.28rem;
     }
     .colors-container div{
         width: 2rem;
@@ -77,8 +83,8 @@
         width: 23.066rem;
     }
     .ProductItem img{
-        width: 23.066rem;
-        height: 23.066rem;
+        width: 21.065rem;
+        height: 29.065rem;
     }
     .colors-container div{
         width: 2rem;
@@ -94,7 +100,7 @@
     }
     .ProductItem img{
         width: 20.4rem;
-        height: 20.4rem;
+        height: 26.4rem;
     }
     .name{
         font-size:medium;

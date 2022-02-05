@@ -17,8 +17,8 @@ const Product = ({name, price, imagePath, hookAPI}) => {
                     </div>
                     : ''
                 }
-
                 <p className='price'>${price}</p>
+                <button className='ver-mas'>Ver Más</button>
         </div>
     );
 };

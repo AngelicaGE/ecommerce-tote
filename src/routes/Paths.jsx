@@ -11,8 +11,8 @@ const Paths = () => {
     <BrowserRouter>
       <NavbarContainer name="TOTE-ME"/>
       <Routes>
-        <Route path="/" element={<ProductsContainerWithHook/>}/>
-        <Route path="/books" element={<ProductsContainerWithPromises/>}/>
+        <Route path="/" element={<ProductsContainerWithPromises/>}/>
+        <Route path="/api" element={<ProductsContainerWithHook/>}/>
         <Route path="/product/:id" element={<ProductDetailContainer/>}/>
         <Route path="/category/:id" element={<ProductsContainerWithPromises/>}/>
         <Route path="*" element={<NotFound></NotFound>}></Route>
