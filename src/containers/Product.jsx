@@ -22,7 +22,7 @@ const Product = ({id, name, price, imagePath, hookAPI}) => {
                     : ''
                 }
                 <p className='price'>${price}</p>
-                <Link to={`/api`} id="ver-mas" className={selected? 'selected':'unselected'} type='button'>Ver Más</Link>
+                <Link to={`/product/${id}`} id="ver-mas" className={selected? 'selected':'unselected'} type='button'>Ver Más</Link>
         </div>
     );
 };
