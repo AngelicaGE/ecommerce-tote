@@ -1,11 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
+import { Link, NavLink } from "react-router-dom";
 import '../styles/Product.scss'
 
-const Product = ({name, price, imagePath, hookAPI}) => {
+const Product = ({id, name, price, imagePath, hookAPI}) => {
+    const [selected, setselected] = useState(false);
+
+
     return(
-        <div className='ProductItem'>
+        <div className='ProductItem' onMouseEnter={() => setselected(true)} onMouseLeave={() => setselected(false)}>
                 <picture>
-                    <img src={imagePath} alt={'producto ' + name} />
+                    <img src={imagePath} alt={'producto ' + name} className={selected? 'selected':''}/>
                 </picture>
                 <p className='name'>{name}</p>
                 {
@@ -18,7 +22,7 @@ const Product = ({name, price, imagePath, hookAPI}) => {
                     : ''
                 }
                 <p className='price'>${price}</p>
-                <button className='ver-mas'>Ver Más</button>
+                <Link to={`/api`} id="ver-mas" className={selected? 'selected':'unselected'} type='button'>Ver Más</Link>
         </div>
     );
 };

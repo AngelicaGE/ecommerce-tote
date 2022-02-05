@@ -8,12 +8,28 @@
     display:inline-block;
     width: 12rem;
     text-align: center;
+    margin: 1rem 0;
+    padding-top: 1rem;
 }
 .ProductItem:hover{
-    background-color: aqua;
+    cursor: pointer;
 }
-.ver-mas{
+.selected{
+    display: inline-block;
+    transform: scale(1.05);
+    cursor: pointer;
+}
+.unselected{
+    visibility: hidden;
+}
+#ver-mas{
     width: 100%;
+    background-color: black;
+    color: white;
+    display: inline-block;
+    border:2px;
+    padding: 1rem 0;    
+    text-decoration: none;
 }
 .name{
     font-weight: 400;
@@ -21,15 +37,9 @@
 .name, .price{
     font-family: system-ui;
 }
-.color1{
-    background-color: pink;
-}
-.color2{
-    background-color: green;
-}
-.color3{
-    background-color: indigo;
-}
+.color1{ background-color: pink;}
+.color2{background-color: green;}
+.color3{background-color: indigo;}
 .colors-container{
     display: flex;
     flex-direction: row;
@@ -41,7 +51,8 @@
 
 @media(min-width:300px){
     .ProductItem{
-        padding: 0 1rem;
+        padding: 1rem 1rem;
+        padding-bottom: 0;
         width: 14rem;
     }
     .ProductItem img{
@@ -56,6 +67,9 @@
         font-size: small;
         padding: 0.5rem 0;
     }
+    #ver-mas{
+        font-size: small;
+    }
     .colors-container div{
         width: 1rem;
         height: 1rem;
@@ -66,6 +80,7 @@
  @media(min-width:425px){
     .ProductItem{
         width: 18.28rem;
+        padding-top: 1rem;
     }
     .ProductItem img{
         width: 16.28rem;
@@ -81,6 +96,7 @@
  @media(min-width:800px){
     .ProductItem{
         width: 23.066rem;
+        padding-top: 1rem;
     }
     .ProductItem img{
         width: 21.065rem;
@@ -91,16 +107,18 @@
         height: 2rem;
         margin: 0 0.2rem;
     }
+
  }
 
  @media(min-width:1024px){
     .ProductItem{
         width: 22.8rem;
         padding: 1.2rem;
+        padding-bottom: 0;
     }
     .ProductItem img{
         width: 20.4rem;
-        height: 26.4rem;
+        height: 27.4rem;
     }
     .name{
         font-size:medium;
@@ -116,4 +134,5 @@
         margin: 0 0.2rem;
     }
  }
+
 

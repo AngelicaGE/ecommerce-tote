@@ -9,7 +9,7 @@ import ProductDetailContainer from '../components/ProductDetailContainer';
 const Paths = () => {
   return (
     <BrowserRouter>
-      <NavbarContainer name="TOTE-ME"/>
+      <NavbarContainer name="Bazar de libros"/>
       <Routes>
         <Route path="/" element={<ProductsContainerWithPromises/>}/>
         <Route path="/api" element={<ProductsContainerWithHook/>}/>
