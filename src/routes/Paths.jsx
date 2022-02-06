@@ -11,11 +11,16 @@ const Paths = () => {
     <BrowserRouter>
       <NavbarContainer name="Bazar de libros"/>
       <Routes>
-        <Route path="/" element={<ProductsContainerWithPromises/>}/>
-        <Route path="/api" element={<ProductsContainerWithHook/>}/>
+        <Route path="/" element={<ProductsContainerWithHook category="Juvenile Nonfiction" maxResults={40}/>}/>
         <Route path="/product/:id" element={<ProductDetailContainer/>}/>
-        <Route path="/category/:id" element={<ProductsContainerWithPromises/>}/>
         <Route path="*" element={<NotFound></NotFound>}></Route>
+
+        {
+          /*
+            <Route path="/" element={<ProductsContainerWithPromises/>}/>
+            <Route path="/category/:id" element={<ProductsContainerWithPromises/>}/>
+          */
+        }
       </Routes>
     
     </BrowserRouter>

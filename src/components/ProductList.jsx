@@ -10,11 +10,15 @@ const ProductList = ({products, hookAPI}) => {
         <div className='products-container'>
             {
                 products.map(product => (
-                    hookAPI 
-                    ? 
-                      <Product id={product.id} name={product.title} price={product.price} imagePath={product.images[0]} key={product.id} hookAPI={hookAPI}></Product>
-                    : 
-                      <Product id={product.id} name={product.name} price={product.price} imagePath={product.imagePath} key={product.id} hookAPI={hookAPI}></Product>
+                      <Product 
+                        hookAPI={hookAPI}
+                        id={product.id} 
+                        key={product.id} 
+                        name={product.volumeInfo.title} 
+                        saleability = {product.saleInfo.saleability}
+                        price={product.saleInfo.listPrice} 
+                        imagePath={product.volumeInfo.imageLinks}>
+                      </Product>
                   ))
             }
         </div>

@@ -37,17 +37,6 @@
 .name, .price{
     font-family: system-ui;
 }
-.color1{ background-color: pink;}
-.color2{background-color: green;}
-.color3{background-color: indigo;}
-.colors-container{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-.colors-container div{
-    border-radius: 50%;
-}
 
 @media(min-width:300px){
     .ProductItem{
@@ -86,11 +75,6 @@
         width: 16.28rem;
         height: 23.28rem;
     }
-    .colors-container div{
-        width: 2rem;
-        height: 2rem;
-        margin: 0 0.2rem;
-    }
  }
 
  @media(min-width:800px){
@@ -102,12 +86,6 @@
         width: 21.065rem;
         height: 29.065rem;
     }
-    .colors-container div{
-        width: 2rem;
-        height: 2rem;
-        margin: 0 0.2rem;
-    }
-
  }
 
  @media(min-width:1024px){
@@ -128,11 +106,4 @@
         font-size: small;
         padding: 0.5rem 0;
     }
-    .colors-container div{
-        width: 2rem;
-        height: 2rem;
-        margin: 0 0.2rem;
-    }
  }
-
-

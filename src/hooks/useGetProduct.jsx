@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 
-const useGetProducts =  (API) => {
-    const [products, setProducts] = useState([]);
+const useGetProduct =  (API) => {
+    const [product, setProduct] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
@@ -9,19 +9,19 @@ const useGetProducts =  (API) => {
       try{
         const response = await fetch(API);
         const data = await response.json();
-        console.log(data)
-        setProducts(data.items);
+        //console.log(data)
+        setProduct(data);
       }catch(error){
         console.log(error)
         setError(`ERROR ${error.message}`)
       } finally{
-        console.log("finished consuming api GET BOOKS")
+        console.log("finished consuming api useGetProduct");
         setLoading(false);
       }
     }, []);
     
-  return {products, loading, error};
+  return {product, loading, error};
 
 };
 
-export default useGetProducts;
+export default useGetProduct;
