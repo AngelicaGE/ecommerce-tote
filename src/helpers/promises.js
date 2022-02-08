@@ -29,7 +29,6 @@ export function getCategories(categories){
             });
             resolve(newCategories)            
         } else {
-            console.log("got " + categories)
             reject(Error("Received empty or undefined array for categories"))
         }
     });

@@ -1,78 +1,4 @@
 .ProductDetails{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-.names{
-    background-color: aqua;
-    height: 3rem;
-}
-.pic{
-    background-color: rebeccapurple;
-    height: 5rem;
-}
-
-.det{
-    background-color: palevioletred;
-    height: 5rem;
-}
-.buy{
-    background-color: green;
-    height: 6rem;
-}
-.synop{
-    background-color: orange;
-    height: 10rem;
-}
-
-@media(min-width:300px){
-    .pic-det{
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        height: auto; /*para que crezca con relacion al contenido*/
-    }
-    .pic, .det{
-        width: 50%;
-    }
-    .names, .buy, .synop{
-        width: 100%;
-    }
-    .pic-det .synop{
-        display: none;
-    }
- }
-
- @media(min-width:400px){
-     .pic-det{
-        display: flex;
-        flex-wrap: wrap;
-        width: 75%;
-         
-     }
-     .pic, .det{
-         width: 50%;
-     }
-     .synop{
-         width: 100%;
-     }
-     .buy{
-        width: 25%;
-        height: 15rem;
-        
-    }
-    .ProductDetails .synop{
-        display: none;
-    }
-    .pic-det .synop{
-        display:inline-block;
-    }
-  }
-
- @media(min-width:500px){
-
- }
-/*.ProductDetails{
     background-color:azure;
     margin: 1rem;
     max-width: var(--max-size);
@@ -87,15 +13,34 @@
 }
 .section-title{
     font-weight: bold;
+    font-size: large;
 }
+/*
 section{
     border: 1px solid black;
-}
+}*/
 .book-details-group p, 
 .book-sale-group p,
 .title, .subtitle{
     display: inline-block;
 }
+.dets-info{
+    display: flex;
+}
+.book-sale-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.book-sale-group, 
+.book-details-group,
+.book-sale-info .sale-btn{
+    margin: .8rem 0;
+}
+.book-sale-info{
+    background-color: antiquewhite;
+}
+
 @media(min-width:300px){
     .category{
         font-size: x-small;
@@ -110,15 +55,19 @@ section{
         justify-content: left;
         width: 14rem;
     }
-    .book-details{
-
+    p{
+        font-size: medium;
     }
  }
 
  @media(min-width:800px){
-
+    p{
+        font-size: large;
+    }
  }
 
  @media(min-width:1024px){
-
- }*/
+    p{
+        font-size: large;
+    }
+ }
