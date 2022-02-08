@@ -20,3 +20,12 @@ const ProductsContainerWithHook = ({category, maxResults}) => {
 };
 
 export default ProductsContainerWithHook;
+
+
+/**
+partial - Returns results where at least parts of the text are previewable.
+full - Only returns results where all of the text is viewable.
+free-ebooks - Only returns results that are free Google eBooks.
+paid-ebooks - Only returns results that are Google eBooks with a price.
+ebooks - Only returns results that are Google eBooks, paid or free. Examples of non-eBooks would be publisher content that is available in limited preview and not for sale, or magazines.
+ */

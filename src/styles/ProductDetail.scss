@@ -1,11 +1,124 @@
+.ProductDetails{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.names{
+    background-color: aqua;
+    height: 3rem;
+}
+.pic{
+    background-color: rebeccapurple;
+    height: 5rem;
+}
+
+.det{
+    background-color: palevioletred;
+    height: 5rem;
+}
+.buy{
+    background-color: green;
+    height: 6rem;
+}
+.synop{
+    background-color: orange;
+    height: 10rem;
+}
+
+@media(min-width:300px){
+    .pic-det{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        height: auto; /*para que crezca con relacion al contenido*/
+    }
+    .pic, .det{
+        width: 50%;
+    }
+    .names, .buy, .synop{
+        width: 100%;
+    }
+    .pic-det .synop{
+        display: none;
+    }
+ }
+
+ @media(min-width:400px){
+     .pic-det{
+        display: flex;
+        flex-wrap: wrap;
+        width: 75%;
+         
+     }
+     .pic, .det{
+         width: 50%;
+     }
+     .synop{
+         width: 100%;
+     }
+     .buy{
+        width: 25%;
+        height: 15rem;
+        
+    }
+    .ProductDetails .synop{
+        display: none;
+    }
+    .pic-det .synop{
+        display:inline-block;
+    }
+  }
+
+ @media(min-width:500px){
+
+ }
+/*.ProductDetails{
+    background-color:azure;
+    margin: 1rem;
+    max-width: var(--max-size);
+    margin: auto;
+}
 .main-info h3, .main-info h4 {
  display: inline-block;
 }
-
 .category{
     display: inline-block;
     background-color: rgb(156, 95, 213);
-    padding: 1rem 1rem;
-    border-radius: 25px;
-    font-size: small;
 }
+.section-title{
+    font-weight: bold;
+}
+section{
+    border: 1px solid black;
+}
+.book-details-group p, 
+.book-sale-group p,
+.title, .subtitle{
+    display: inline-block;
+}
+@media(min-width:300px){
+    .category{
+        font-size: x-small;
+        padding: 1rem 1rem;
+        border-radius: 25px;
+    }
+    section{
+        margin: 1rem;
+    }
+    .book-image{
+        display: flex;
+        justify-content: left;
+        width: 14rem;
+    }
+    .book-details{
+
+    }
+ }
+
+ @media(min-width:800px){
+
+ }
+
+ @media(min-width:1024px){
+
+ }*/

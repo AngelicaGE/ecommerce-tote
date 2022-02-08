@@ -39,7 +39,7 @@ const Navbar = ({name, clickOnMenu}) => {
                 </ul>
 
                 <div className='logo'>
-                    <h1>{name}</h1>
+                    <h1><Link to="/" className='logo-link'>{name}</Link> </h1>
                 </div>
 
                 <ul className='user-pages' >

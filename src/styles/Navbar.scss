@@ -20,10 +20,6 @@
     width: 33%;
 }
 
-.sandwich-menu, .tote-pages, .user-pages{
-    //background-color: red;
-}
-
 .logo{
     //background-color: blue;
     text-align: center;
@@ -62,8 +58,10 @@
     text-decoration: underline;
 }
 
-.logo h1{
-    font-size: 2.5em;
+.logo-link{
+    font-size: 1.2em;
+    text-decoration: none;  
+    color:black;
 }
 
 .user-page img{
@@ -80,6 +78,9 @@
     .user, .whishlist{
         display: none;
     }
+    .logo-link{
+        font-size: small;
+    }
  }
 
  @media(min-width:800px){
@@ -88,6 +89,9 @@
     }
     .user, .whishlist{
         display: inline-block;
+    }
+    .logo-link{
+        font-size: medium;
     }
  }
 
@@ -101,7 +105,9 @@
     .user, .whishlist{
         display: inline-block;
     }
-
+    .logo-link{
+        font-size: large;
+    }
  }
 
  
