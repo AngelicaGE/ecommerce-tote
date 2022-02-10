@@ -1,22 +1,17 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Link, NavLink} from 'react-router-dom'
 // con navlink podemos usar estilos customisados
 import '../styles/Navbar.scss'
 import SandwichMenu from '../containers/SandwichMenu.jsx'
-
 import searchIcon from '../assets/icons/search.png'
 import searchIconSmall from '../assets/icons/search-small.png'
 import userIcon from '../assets/icons/user.png'
 import wishlistIcon from '../assets/icons/heart.png'
 import wishlistSelectedIcon from '../assets/icons/heart-fill.png'
 import CarWidget from '../containers/CarWidget'
+import { allCategories } from '../helpers/promises'
 
 const Navbar = ({name, clickOnMenu}) => {
-
-    const activeStyle = {
-        color: 'red'
-    }
-
     return (
         <div className='Navbar'>    
                 <div className='main-navbar'>
@@ -25,7 +20,16 @@ const Navbar = ({name, clickOnMenu}) => {
                 </div>
                 <ul className='tote-pages' >
                     <li className='tote-page'>
-                        <NavLink to="dfghj" style={({isActive}) => isActive? activeStyle: undefined}>Shop</NavLink>
+                        <input list="categories" placeholder='Categories'/>
+                        <datalist id='categories'>
+                            {allCategories.map((cat) =>(
+                                <NavLink to={`/category/${cat}`} onClick={()=> console.log("click")} key={cat}>
+                                    <option value={cat} >
+                                    </option>
+                                </NavLink>
+
+                            ))}
+                        </datalist>
                     </li>
                     <li className='tote-page'>
                         <NavLink to="fghj" className={({isActive}) => (isActive? 'activeClass': '')}>New arrivals</NavLink>
@@ -34,7 +38,9 @@ const Navbar = ({name, clickOnMenu}) => {
                         <a href='#'>Sale</a>
                     </li>
                     <li className='tote-page'>
-                        <a href='#'>About</a>
+                        <NavLink to="/about" className={({isActive}) => isActive? 'activeClass': ''}>
+                            About
+                        </NavLink>                    
                     </li>
                 </ul>
 

@@ -33,3 +33,12 @@ export function getCategories(categories){
         }
     });
 } 
+
+export function getAllCategories(){
+    return new Promise((resolve, reject) => {
+        console.log('in the promise getCategories');
+        resolve(["Physics", "Science", "Young Adult Nonfiction"])
+    });
+} 
+
+export const allCategories = ["Physics", "Science", "Young Adult Nonfiction"]
