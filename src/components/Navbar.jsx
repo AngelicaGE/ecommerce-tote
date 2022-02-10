@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import {Link, NavLink} from 'react-router-dom'
+import React, {useState, useEffect} from 'react'
+import {Link, NavLink } from 'react-router-dom'
 // con navlink podemos usar estilos customisados
 import '../styles/Navbar.scss'
 import SandwichMenu from '../containers/SandwichMenu.jsx'
@@ -9,7 +9,6 @@ import userIcon from '../assets/icons/user.png'
 import wishlistIcon from '../assets/icons/heart.png'
 import wishlistSelectedIcon from '../assets/icons/heart-fill.png'
 import CarWidget from '../containers/CarWidget'
-import { allCategories } from '../helpers/promises'
 
 const Navbar = ({name, clickOnMenu}) => {
     return (
@@ -19,18 +18,6 @@ const Navbar = ({name, clickOnMenu}) => {
                     <SandwichMenu isSelected={false}/>
                 </div>
                 <ul className='tote-pages' >
-                    <li className='tote-page'>
-                        <input list="categories" placeholder='Categories'/>
-                        <datalist id='categories'>
-                            {allCategories.map((cat) =>(
-                                <NavLink to={`/category/${cat}`} onClick={()=> console.log("click")} key={cat}>
-                                    <option value={cat} >
-                                    </option>
-                                </NavLink>
-
-                            ))}
-                        </datalist>
-                    </li>
                     <li className='tote-page'>
                         <NavLink to="fghj" className={({isActive}) => (isActive? 'activeClass': '')}>New arrivals</NavLink>
                     </li>
@@ -50,10 +37,12 @@ const Navbar = ({name, clickOnMenu}) => {
 
                 <ul className='user-pages' >
                     <li className='user-page search'>
-                        <picture>
-                            <source media="(min-width:800px)" srcSet={searchIcon}></source>
-                            <img alt='search icon' src={searchIconSmall}/>
-                        </picture>
+                        <NavLink to="/search">
+                            <picture>
+                                <source media="(min-width:800px)" srcSet={searchIcon}></source>
+                                <img alt='search icon' src={searchIconSmall}/>
+                            </picture>
+                        </NavLink>
                     </li>
                     <li className='user-page user'>
                         <img alt='user icon' src={userIcon}/>

@@ -1,25 +1,27 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import { useParams } from "react-router-dom";
 import useGetProducts from '../hooks/useGetProducts';
 import ProductList from './ProductList';
 
-const ProductsContainerWithHook = ({category, maxResults}) => {
-    // can only query 40 results per page
-    const API = `https://www.googleapis.com/books/v1/volumes?q=${category}+subject&filter=paid-ebooks&maxResults=${maxResults}`; //'https://www.googleapis.com/books/v1/volumes?q=all&maxResults=40';
+const SearchProductsContainer = ({message='', maxResults=40}) => {
+    const { id } = useParams();
+    const [API, setAPI] = useState(`https://www.googleapis.com/books/v1/volumes?q=${id}+subject&filter=paid-ebooks&maxResults=${maxResults}`)
 
     const {products, loading, error} = useGetProducts(API);
 
     return (
         <div>
-            <h1>{category}</h1>
+            <h1>{message} {id}</h1>
             {
                 loading? <h1>LOADING</h1>: ''
             }
+            <p>{error}</p>
             <ProductList products={products} hookAPI={true}></ProductList>
         </div>
     );
 };
 
-export default ProductsContainerWithHook;
+export default SearchProductsContainer;
 
 
 /**

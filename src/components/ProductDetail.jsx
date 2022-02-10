@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import '../styles/ProductDetail.scss'
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 //PROMETO MEJORAR LOS ETSILOS DE ESTE COMPONENT PARA LA SIGUIENTE ENTREGA :(
 
 const ProductDetail = ({product, categories, stock}) => {
@@ -44,9 +44,9 @@ const ProductDetail = ({product, categories, stock}) => {
         {
           categories?
           categories.map((category) => (
-            <div key={category} className="category">
+            <NavLink to={`/category/${category}`} key={category} className="category">
               {category}
-            </div>
+            </NavLink>
           )): ''
         }
       </div>
