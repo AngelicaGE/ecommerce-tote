@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import '../styles/ProductDetail.scss'
 import {NavLink} from 'react-router-dom'
-//PROMETO MEJORAR LOS ETSILOS DE ESTE COMPONENT PARA LA SIGUIENTE ENTREGA :(
+import ItemCount from '../containers/ItemCount';
 
 const ProductDetail = ({product, categories, stock}) => {
   const details = product.volumeInfo;
@@ -10,10 +10,12 @@ const ProductDetail = ({product, categories, stock}) => {
   const [amount, setAmount] = useState(1)
 
   const addItem = () => {
+    console.log("one more");
     setAmount(amount + 1);
   };
 
   const removeItem = () => {
+    console.log("one less");
     setAmount(amount - 1);
   };
 
@@ -116,11 +118,7 @@ const ProductDetail = ({product, categories, stock}) => {
           {
             (sale.saleability == "FOR_SALE" && stock)?
             <div className='book-sale-group'>
-              <div>
-                <button disabled={amount<=1} onClick={()=>removeItem()}> - </button>
-                <p>{amount}</p>
-                <button disabled={amount>=stock} onClick={()=>addItem()}> + </button>
-              </div>
+              <ItemCount amount={amount} stock={stock} onAdd={addItem} onRemove={removeItem}></ItemCount>
             </div> : ''
           }
           {
