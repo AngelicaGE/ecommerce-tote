@@ -5,6 +5,9 @@
     max-width: var(--max-size);
     margin: auto;
     padding: var(--sm);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 .authors p{
     font-style: italic;
@@ -32,9 +35,6 @@ section .book-synopsis{
 .book-sale-group p,
 .title, .subtitle{
     display: inline-block;
-}
-.dets-info{
-    display: flex;
 }
 .book-sale-info{
     display: flex;
@@ -76,16 +76,27 @@ section .book-synopsis{
         margin: 0.2rem;
         border-radius: 25px;
     }
-
-    .book-image{
-        display: flex;
-        justify-content: left;
-        width: 14rem;
-    }
     p{
         font-size: medium;
     }
-
+    .dets-info{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        height: auto; /*para que crezca con relacion al contenido*/
+    }
+    .book-image, .book-details{
+        max-width: 50%;
+    }
+    .book-main-info, .book-sale-info, .book-synopsis{
+        width: 100%;
+    }
+    .dets-info .book-synopsis{
+        display: none;
+    }
+    .book-details{
+        padding-left: 3rem;
+    }
  }
 
  @media(min-width:800px){
@@ -94,6 +105,21 @@ section .book-synopsis{
     }
     .category{
         font-size: small;
+    }
+    .dets-info{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        height: auto; /*para que crezca con relacion al contenido*/
+    }
+    .book-image, .book-details{
+        width: 50%;
+    }
+    .book-main-info, .book-sale-info, .book-synopsis{
+        width: 100%;
+    }
+    .dets-info .book-synopsis{
+        display: none;
     }
  }
 
@@ -104,4 +130,27 @@ section .book-synopsis{
     .category{
         font-size: medium;
     }
+    .dets-info{
+        display: flex;
+        flex-wrap: wrap;
+        width: 75%;        
+    }
+    .book-image, .book-details{
+        width: 50%;
+    }
+    .book-synopsis{
+        width: 100%;
+    }
+    .book-sale-info{
+       width: 25%;       
+   }
+   .book-synopsis{
+       padding-right: 3rem;
+   }
+   .ProductDetails .book-synopsis{
+       display: none;
+   }
+   .dets-info .book-synopsis{
+       display:inline-block;
+   }
  }
