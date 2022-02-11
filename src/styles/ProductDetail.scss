@@ -1,15 +1,26 @@
+@import '_vars';
+
 .ProductDetails{
-    background-color:azure;
     margin: 1rem;
     max-width: var(--max-size);
     margin: auto;
+    padding: var(--sm);
 }
-.main-info h3, .main-info h4 {
- display: inline-block;
+.authors p{
+    font-style: italic;
+}
+section{
+    margin-bottom: 2rem;
+}
+section .book-synopsis{
+    margin-bottom: 0;
+}
+.categories{
+    margin-top: 1rem;
 }
 .category{
     display: inline-block;
-    background-color: rgb(156, 95, 213);
+    background-color: var(--lemon-curry);
     text-decoration: none;
     color: black;
 }
@@ -17,10 +28,6 @@
     font-weight: bold;
     font-size: large;
 }
-/*
-section{
-    border: 1px solid black;
-}*/
 .book-details-group p, 
 .book-sale-group p,
 .title, .subtitle{
@@ -36,22 +43,40 @@ section{
 }
 .book-sale-group, 
 .book-details-group,
-.book-sale-info .sale-btn{
+.book-sale-info {
     margin: .8rem 0;
 }
 .book-sale-info{
-    background-color: antiquewhite;
+    background-color: var(--lemon-curry);
+    color: var(--black);
+}
+.sale-btn {
+    padding: 1rem;
+    border-radius: 25px;
+    color: var(--black);
+    border: 0.2rem solid var(--twilight-lavender);
+    margin: 0.2rem 0;
+    font-weight: bold;
+}
+.add-cart{
+    background-color: var(--misty-rose);
+    color: var(--twilight-lavender);
+}
+.buy-now{
+    background-color: var(--steel-teal);
+    color:var(--twilight-lavender);
+    margin-bottom: 0.6rem;
+    color: white;
 }
 
 @media(min-width:300px){
     .category{
         font-size: x-small;
         padding: 1rem 1rem;
+        margin: 0.2rem;
         border-radius: 25px;
     }
-    section{
-        margin: 1rem;
-    }
+
     .book-image{
         display: flex;
         justify-content: left;
@@ -60,16 +85,23 @@ section{
     p{
         font-size: medium;
     }
+
  }
 
  @media(min-width:800px){
     p{
         font-size: large;
     }
+    .category{
+        font-size: small;
+    }
  }
 
  @media(min-width:1024px){
     p{
         font-size: large;
+    }
+    .category{
+        font-size: medium;
     }
  }

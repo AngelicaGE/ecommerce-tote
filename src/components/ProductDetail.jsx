@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import '../styles/ProductDetail.scss'
 import {NavLink} from 'react-router-dom'
-import ItemCount from '../containers/ItemCount';
+import ItemCount from '../containers/ProductCount';
 
 const ProductDetail = ({product, categories, stock}) => {
   const details = product.volumeInfo;
@@ -39,7 +39,7 @@ const ProductDetail = ({product, categories, stock}) => {
           details.authors?
           details.authors.map((author) => (
             <p key={author}>{author}</p>
-          )): 'No author'
+          )): <p>No Author</p>
         }  
       </div>
       <div className="categories">
@@ -76,6 +76,12 @@ const ProductDetail = ({product, categories, stock}) => {
               <p>Pages:</p> <p>{details.pageCount}</p>
             </div>
 
+      </section>
+
+      <section className='book-synopsis'>
+        <p className='section-title'>Synopsis</p>
+        <br/>
+        <p dangerouslySetInnerHTML={{ __html: details.description}}></p>
       </section>
     </div>
 

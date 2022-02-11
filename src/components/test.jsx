@@ -21,9 +21,11 @@ const test = ({product, categories, stock}) => {
             synop
         </section>
     </div>
+
     <section className='buy'>
         buy
     </section>
+    
     <section className='synop'  >
             synop
     </section>

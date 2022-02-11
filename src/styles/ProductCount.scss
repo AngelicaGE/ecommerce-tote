@@ -1,0 +1,16 @@
+@import '_vars';
+
+.ItemCount button{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+}
+.ItemCount p{
+    margin: 0 1rem;
+}
+.ItemCount button{
+    background-color: var(--misty-rose);
+    border: 0.2rem solid var(--twilight-lavender);
+    color: var(--twilight-lavender);
+    font-weight: bolder;
+}
