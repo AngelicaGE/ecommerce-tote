@@ -2,12 +2,16 @@ import React, {useState} from 'react';
 import '../styles/ProductDetail.scss'
 import {NavLink} from 'react-router-dom'
 import ItemCount from '../containers/ProductCount';
+import Category from '../containers/Category';
 
 const ProductDetail = ({product, categories, stock}) => {
   const details = product.volumeInfo;
   const sale = product.saleInfo;
   const images = details.imageLinks;
   const [amount, setAmount] = useState(1)
+  const defaultCategories = 5;
+  const [seeAllCategories, setSeeAllCategories] = useState(defaultCategories)
+
 
   const addItem = () => {
     console.log("one more");
@@ -18,6 +22,17 @@ const ProductDetail = ({product, categories, stock}) => {
     console.log("one less");
     setAmount(amount - 1);
   };
+
+  const clickOnSeeMoreCats = () => {
+    console.log('seeAllCategories')
+    console.log(categories)
+    if(seeAllCategories < categories.length){
+      setSeeAllCategories(categories.length);
+    }else{
+      setSeeAllCategories(defaultCategories);
+    }
+    console.log(seeAllCategories)
+  }
 
 
   return (
@@ -45,11 +60,25 @@ const ProductDetail = ({product, categories, stock}) => {
       <div className="categories">
         {
           categories?
-          categories.map((category) => (
+          categories.filter((category, idx) => idx < seeAllCategories).map((category) => (
             <NavLink to={`/category/${category}`} key={category} className="category">
-              {category}
+              <Category category={category}></Category>
             </NavLink>
-          )): ''
+          )) 
+          : ''
+        }
+        {
+          categories?
+          <div className='see-all'>
+            <p onClick={()=> clickOnSeeMoreCats()}>
+             {
+                (categories.length > seeAllCategories)? 'See all...' 
+                : (categories.length <= seeAllCategories && seeAllCategories > defaultCategories)?'See less...'
+                : (categories.length == seeAllCategories && seeAllCategories != defaultCategories)? 'See less...'
+                :''
+             }
+            </p>
+          </div>:''
         }
       </div>
     </section>

@@ -1,15 +1,12 @@
 @import '_vars';
-/*
-300 120x120
-800 230.66x230.66
-1024 228x228
-*/
+
 .ProductItem{
     display:inline-block;
     width: 12rem;
     text-align: center;
     margin: 1rem 0;
     padding-top: 1rem;
+    font-family: var(--main-font);
 }
 .ProductItem:hover{
     cursor: pointer;
@@ -33,9 +30,6 @@
 }
 .name{
     font-weight: 400;
-}
-.name, .price{
-    font-family: system-ui;
 }
 
 @media(min-width:300px){

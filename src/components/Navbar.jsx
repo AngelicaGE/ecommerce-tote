@@ -11,6 +11,7 @@ import wishlistSelectedIcon from '../assets/icons/heart-fill.png'
 import CarWidget from '../containers/CarWidget'
 
 const Navbar = ({name, clickOnMenu}) => {
+
     return (
         <div className='Navbar'>    
                 <div className='main-navbar'>

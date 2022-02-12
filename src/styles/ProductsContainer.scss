@@ -1,0 +1,21 @@
+@import '_vars';
+.ProductsContainer{
+    font-family: var(--main-font);
+    max-width: 1280px;
+    margin: auto;
+}
+.category-title{
+    margin: 0 0.5rem;
+    padding: var(--sm);
+}
+.category-title div{
+    min-width: 8rem;
+    text-align: center;
+    font-size: larger;
+}
+.see-more{
+    padding: var(--sm);
+    margin: 0 0.5rem;
+    text-align: right;
+
+}

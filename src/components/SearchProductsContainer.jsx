@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import '../styles/SearchProductsContainer.scss'
 import { useParams } from "react-router-dom";
 import useGetProducts from '../hooks/useGetProducts';
 import ProductList from './ProductList';
@@ -10,7 +11,7 @@ const SearchProductsContainer = ({message='', maxResults=40}) => {
     const {products, loading, error} = useGetProducts(API);
 
     return (
-        <div>
+        <div className='SearchProductsContainer'>
             <h1>{message} {id}</h1>
             {
                 loading? <h1>LOADING</h1>: ''
