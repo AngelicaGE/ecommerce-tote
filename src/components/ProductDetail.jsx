@@ -1,17 +1,19 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import '../styles/ProductDetail.scss'
 import {NavLink} from 'react-router-dom'
 import ItemCount from '../containers/ProductCount';
 import Category from '../containers/Category';
+import { CartContext } from '../context/CartContext';
 
 const ProductDetail = ({product, categories, stock}) => {
+  const defaultCategories = 5;
+  const [seeAllCategories, setSeeAllCategories] = useState(defaultCategories)
+  const [amount, setAmount] = useState(1)
+  const {addCartItem} = useContext(CartContext)
+
   const details = product.volumeInfo;
   const sale = product.saleInfo;
   const images = details.imageLinks;
-  const [amount, setAmount] = useState(1)
-  const defaultCategories = 5;
-  const [seeAllCategories, setSeeAllCategories] = useState(defaultCategories)
-
 
   const addItem = () => {
     console.log("one more");
@@ -22,6 +24,17 @@ const ProductDetail = ({product, categories, stock}) => {
     console.log("one less");
     setAmount(amount - 1);
   };
+
+  const handleAddToCart = () => {
+    console.log("****** ADDING THE PRODUCT ******")
+    console.log(product)
+    // delete product?.kind
+    addCartItem({
+      product,
+      amount
+    }); 
+  }
+
 
   const clickOnSeeMoreCats = () => {
     console.log('seeAllCategories')
@@ -160,7 +173,7 @@ const ProductDetail = ({product, categories, stock}) => {
                 (sale.saleability == "FOR_SALE")
                 ?
                 <>
-                  <button className='sale-btn add-cart'> Add to cart </button>
+                  <button onClick={()=>handleAddToCart()} className='sale-btn add-cart'> Add to cart </button>
                   <button className='sale-btn buy-now'> Buy it now </button>
                 </>
                   : (sale.saleability == "FREE")

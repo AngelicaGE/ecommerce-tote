@@ -1,14 +1,14 @@
 import books from '../data/books.js'
 export const getProducts = new Promise((resolve, reject) => {
     setTimeout(() => {
-        console.log('in the promise getProducts');
+        //console.log('in the promise getProducts');
         resolve(books)
     }, 2000);
 } );
 
 export function getCategories(categories){
     return new Promise((resolve, reject) => {
-        console.log('in the promise getCategories');
+        //console.log('in the promise getCategories');
         if (categories && categories.length > 0) {
             let newCategories = [];
             // loop through every category
@@ -36,7 +36,7 @@ export function getCategories(categories){
 
 export function getAllCategories(){
     return new Promise((resolve, reject) => {
-        console.log('in the promise getCategories');
+        //console.log('in the promise getCategories');
         resolve(["Physics", "Science", "Young Adult Nonfiction"])
     });
 } 

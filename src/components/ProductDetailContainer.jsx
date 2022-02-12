@@ -19,10 +19,10 @@ const ProductDetailContainer = () => {
           const res = await getCategories(product.volumeInfo.categories);
           setCategories(res)
         }catch(error){
-          console.log(error)
+          //console.log(error)
           setCategories(product.volumeInfo.categories)
         }finally{
-          console.log("finished consuming getCategories promise")
+          //console.log("finished consuming getCategories promise")
         }
       // assign stock
       // since API res does not include a stock value I create one with algorithm

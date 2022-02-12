@@ -11,10 +11,10 @@ const useGetProduct =  (API) => {
         const data = await response.json();
         setProduct(data);
       }catch(error){
-        console.log(error)
+        //console.log(error)
         setError(`ERROR ${error.message}`)
       } finally{
-        console.log("finished consuming api useGetProduct");
+        //console.log("finished consuming api useGetProduct");
         setLoading(false);
       }
     }, []);

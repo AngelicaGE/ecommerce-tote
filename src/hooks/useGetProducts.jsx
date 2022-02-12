@@ -12,10 +12,10 @@ const useGetProducts =  (API) => {
         console.log(data)
         setProducts(data.items);
       }catch(error){
-        console.log(error)
+        //console.log(error)
         setError(`ERROR ${error.message}`)
       } finally{
-        console.log("finished consuming api GET BOOKS")
+        //console.log("finished consuming api GET BOOKS")
         setLoading(false);
       }
     }, []);
