@@ -1,10 +1,13 @@
 import './styles/global.css'
 import Paths from './routes/Paths';
+import { CartProvider } from './context/CartContext';
 
 function App() {
   return (
     <div className="App"> 
-      <Paths></Paths>
+      <CartProvider>
+        <Paths></Paths>
+      </CartProvider>
     </div>
   );
 }
