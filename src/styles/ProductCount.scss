@@ -8,8 +8,16 @@
     margin: 0 1rem;
 }
 .ItemCount button{
-    background-color: var(--misty-rose);
-    border: 0.2rem solid var(--twilight-lavender);
-    color: var(--twilight-lavender);
+    background-color: var(--white);
+    border: 0.2rem solid var(--slack-purple);
+    color: var(--slack-purple);
     font-weight: bolder;
+    cursor: pointer;
+}
+.ItemCount button:disabled{
+    background-color: rgb(216, 214, 214);
+    border:rgb(129, 129, 129) solid var(--black);
+    color: rgb(129, 129, 129);
+    font-weight: 100;
+    cursor: default;
 }

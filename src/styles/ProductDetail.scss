@@ -30,6 +30,12 @@ section{
     margin: .8rem 0;
     display: flex;
 }
+.ProductSaleInfo{
+    display: flex;
+    align-items: center;
+
+    flex-direction: column;
+}
 
 //BOOK MAIN INFO
 .book-main-info{
@@ -93,26 +99,34 @@ section{
     display: flex;
 }
 .book-sale-info{
-    background-color: var(--lemon-curry);
-    color: var(--black);
+    background-color: var(--slack-yellow);
+    border: 1px solid var(--lemon-curry);
+    color: var(--slack-purple);
+    font-weight: 600;
 }
 .sale-btn {
     padding: 1rem;
     border-radius: 25px;
-    color: var(--black);
-    border: 0.2rem solid var(--twilight-lavender);
     margin: 0.2rem 0;
     font-weight: bold;
+    cursor: pointer;
 }
 .add-cart{
-    background-color: var(--misty-rose);
+    background-color: var(--white);
     color: var(--twilight-lavender);
+    border: 1px solid var(--lemon-curry);
+    color:var(--lemon-curry)
 }
 .buy-now{
-    background-color: var(--steel-teal);
-    color:var(--twilight-lavender);
+    background-color: var(--slack-purple);
+    border: 1px solid var(--slack-purple);
+    color:var(--white);
     margin-bottom: 0.6rem;
-    color: white;
+}
+.buy-now:hover{
+    background-color: var(--white);
+    color: var(--slack-purple);
+
 }
 
 // SYNOPSIS

@@ -1,8 +1,9 @@
 import React, {useContext, useState} from 'react';
 import '../styles/ProductDetail.scss'
 import {NavLink} from 'react-router-dom'
-import ItemCount from '../containers/ProductCount';
 import { CartContext } from '../context/CartContext';
+import ItemCount from '../containers/ProductCount';
+import ProductSaleInfo from '../containers/ProductSaleInfo';
 
 const ProductDetail = ({product, categories, stock}) => {
   const defaultCategories = 5;
@@ -104,74 +105,24 @@ const ProductDetail = ({product, categories, stock}) => {
     <section className='book-details'>
       <p className='section-title'>Book Details</p>
       <div className='book-details-group'>
-        <p>Publisher: </p> <p>{details.publisher}</p>
+        <p>Publisher: {details.publisher? details.publisher: ' No publisher'}</p>
       </div>
       <div className='book-details-group'>
-        <p>Year:</p> <p>{details.publishedDate}</p>
+        <p>Year: {details.publishedDate? details.publishedDate: ' No year'}</p>
       </div>
       <div className='book-details-group'>
-        <p>Language:</p> <p>{details.language}</p>
+        <p>Language: {details.language? details.language: 'No lang'}</p>
       </div>
       <div className='book-details-group'>
-        <p>Pages:</p> <p>{details.pageCount}</p>
+        <p>Pages: {details.pageCount? details.pageCount: ' Unknown'}</p>
       </div>
     </section>
 
     <section className='book-sale-info'>
-      <div className='book-sale-group'>
-            {
-              (sale.saleability == "FOR_SALE")
-              ?
-                <>
-                  <p>Price: </p>
-                  <p> ${sale.listPrice.amount} {sale.listPrice.currencyCode}</p>
-                </>
-              : (sale.saleability == "FREE")
-              ?
-                <>
-                  <p>Price: </p>
-                  <p> FREE</p>
-                </>
-                :
-                <p>Not for sale, sorry :/</p> 
-              }
-      </div>
-
-      <div className='book-sale-group'> 
-          {
-              (sale.saleability == "FOR_SALE" && stock)
-              ?
-                <>
-                  <p>Units in stock: </p>
-                  <p> {stock}</p>
-                </>  
-              : (sale.saleability == "FREE")
-              ?
-                ''            
-                :
-                <p>Not for sale, sorry :/</p> 
-              }
-      </div>
-
-          {
-            (sale.saleability == "FOR_SALE" && stock)?
-            <div className='book-sale-group'>
-              <ItemCount className="ItemCount" amount={amount} stock={stock} onAdd={addItem} onRemove={removeItem}></ItemCount>
-            </div> : ''
-          }
-          {
-                (sale.saleability == "FOR_SALE")
-                ?
-                <>
-                  <button onClick={()=>handleAddToCart()} className='sale-btn add-cart'> Add to cart </button>
-                  <button className='sale-btn buy-now'> Buy it now </button>
-                </>
-                  : (sale.saleability == "FREE")
-                ?
-                  <a href={sale.buyLink} target="_blank">Get it now</a>
-                :
-                  <p>Not for sale, sorry :/</p> 
-            }
+      <ProductSaleInfo sale ={sale} stock={stock} amount={amount}
+                        addItem={addItem} removeItem={removeItem}
+                        handleaddToCart={handleAddToCart} className="ProductSaleInfo">                
+      </ProductSaleInfo>
     </section>
     </div>
 
