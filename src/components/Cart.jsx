@@ -10,7 +10,12 @@ const Cart = () => {
         Info del Cart COntext 
         {
             cartItems.map((cartItem) => ( 
-                <p>{cartItem.product.id}</p> 
+                <>
+                    <p>{cartItem.product.volumeInfo.title}: {cartItem.product.id}</p> 
+
+                    <hr />
+                </>
+
             ))
         }
     </div>

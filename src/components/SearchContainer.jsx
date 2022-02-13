@@ -20,11 +20,9 @@ const SearchContainer = () => {
   return (
     <div className='SearchContainer'>
         <div className='search-content'>
-            <div className='btn-back'>
-                <button onClick={() => navigate(-1)}>
+            <button className='btn-back' onClick={() => navigate(-1)}>
                     Go back
-                </button>
-            </div>
+            </button>
             <div className='search-bar'>
                 <input list="categories" onChange={(event) => setSearch(event.target.value)} placeholder='Category, Author, Title...'/>
                 <datalist id='categories'>
@@ -33,7 +31,7 @@ const SearchContainer = () => {
                         </option>
                     ))}
                 </datalist>
-                <button onClick={()=> redirectToSearch()}>
+                <button className='btn-search' onClick={()=> redirectToSearch()}>
                     Search
                 </button>
             </div>

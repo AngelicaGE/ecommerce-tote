@@ -7,7 +7,8 @@ const Product = ({hookAPI, id, name, saleability, price, imagePath}) => {
     return(
         <div className='ProductItem' onMouseEnter={() => setselected(true)} onMouseLeave={() => setselected(false)}>
                 <picture>
-                    <img src={imagePath.thumbnail} alt={'producto ' + name} className={selected? 'selected':''}/>
+                    
+                    <img src={imagePath?.thumbnail} alt={'producto ' + name} className={selected? 'selected':''}/>
                 </picture>
                 <p className='name'>{name}</p>
                 {

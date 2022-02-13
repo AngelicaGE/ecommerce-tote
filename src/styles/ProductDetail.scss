@@ -1,5 +1,5 @@
 @import '_vars';
-
+// GENERAL
 .ProductDetails{
     margin: 1rem;
     max-width: var(--max-size);
@@ -9,43 +9,88 @@
     flex-direction: row;
     flex-wrap: wrap;
     font-family: var(--main-font);
-}
-.authors p{
-    font-style: italic;
+    max-width: 1280px;
 }
 section{
     margin-bottom: 2rem;
-}
-section .book-synopsis{
-    margin-bottom: 0;
-}
-.categories{
-    margin-top: 1rem;
-}
-.category{
-    display: inline-block;
-    background-color: var(--lemon-curry);
-    text-decoration: none;
-    color: black;
 }
 .section-title{
     font-weight: bold;
     font-size: large;
 }
-.book-details-group p, 
 .book-sale-group p,
-.title, .subtitle{
-    display: inline-block;
-}
 .book-sale-info{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .book-sale-group, 
-.book-details-group,
-.book-sale-info {
+.book-details-group
+{
     margin: .8rem 0;
+    display: flex;
+}
+
+//BOOK MAIN INFO
+.book-main-info{
+    text-align: center;
+    width: 100%;
+}
+.authors p{
+    font-style: italic;
+    display: inline-block;
+}
+.title, .subtitle{
+    display: inline-block;
+}
+
+//BOOK DETAILS
+.book-details-group p{
+    display: inline-block;
+    align-items:flex-start;
+}
+
+// CATEGORIES
+.book-categories{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.categories{
+    margin-top: 1rem;
+}
+.category{
+    display: inline-block;
+    background-color: var(--slack-pink);
+    border: 1px solid  var(--slack-pink);
+    color: var(--white);
+    text-decoration: none;
+}
+.category:hover{
+    background-color: var(--white);
+    border: 1px solid  var(--slack-pink);
+    color: var(--slack-pink);
+}
+.see-all{
+    width: fit-content;
+    display: flex;
+    align-items: flex-end;
+    cursor: pointer;
+    font-weight: 500;
+}
+.see-all:hover{
+    color: gray;
+}
+
+//BOOK IMAGE
+.book-image{
+    width: fit-content;
+}
+
+// BOOK SALE INFO
+.ItemCount{
+    display: flex;
 }
 .book-sale-info{
     background-color: var(--lemon-curry);
@@ -70,7 +115,24 @@ section .book-synopsis{
     color: white;
 }
 
+// SYNOPSIS
+section .book-synopsis{
+    margin-bottom: 0;
+    text-align: justify;
+    width: 100%;
+}
+section .book-synopsis p{
+    text-align: justify;
+}
+.group{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
 @media(min-width:300px){
+    //CATEGORY
     .category{
         font-size: x-small;
         padding: 1rem 1rem;
@@ -80,6 +142,7 @@ section .book-synopsis{
     .see-all p{
         font-size: small;
     }
+
     p{
         font-size: medium;
     }
@@ -89,26 +152,24 @@ section .book-synopsis{
         flex-wrap: wrap;
         height: auto; /*para que crezca con relacion al contenido*/
     }
-    .book-image, .book-details{
-        max-width: 50%;
-    }
-    .book-main-info, .book-sale-info, .book-synopsis{
+    .book-sale-info{
         width: 100%;
     }
-    .dets-info .book-synopsis{
-        display: none;
+    .book-details{
+        max-width: 50%;
     }
     .book-details{
-        padding-left: 3rem;
+        padding-left: 1rem;
     }
  }
 
- @media(min-width:800px){
-    p{
-        font-size: large;
-    }
+ @media(min-width:700px){
+    // CATEGORY
     .category{
         font-size: small;
+    }
+    p{
+        font-size: large;
     }
     .dets-info{
         width: 100%;
@@ -116,45 +177,32 @@ section .book-synopsis{
         flex-wrap: wrap;
         height: auto; /*para que crezca con relacion al contenido*/
     }
-    .book-image, .book-details{
+    .book-sale-info{
         width: 50%;
     }
-    .book-main-info, .book-sale-info, .book-synopsis{
-        width: 100%;
+    .book-details{
+        width: fit-content;
+        padding: 0 3rem;
     }
-    .dets-info .book-synopsis{
-        display: none;
+    .group {
+        flex-wrap: nowrap;
     }
  }
 
  @media(min-width:1024px){
+    //CATEGORY
     p{
         font-size: large;
-    }
-    .category{
-        font-size: medium;
     }
     .dets-info{
         display: flex;
         flex-wrap: wrap;
         width: 75%;        
     }
-    .book-image, .book-details{
+    .book-details{
         width: 50%;
     }
     .book-synopsis{
-        width: 100%;
+        padding-right: 3rem;
     }
-    .book-sale-info{
-       width: 25%;       
-   }
-   .book-synopsis{
-       padding-right: 3rem;
-   }
-   .ProductDetails .book-synopsis{
-       display: none;
-   }
-   .dets-info .book-synopsis{
-       display:inline-block;
-   }
  }

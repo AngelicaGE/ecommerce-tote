@@ -1,6 +1,8 @@
 @import '_vars';
 .Navbar {
-    background-color: var(--steel-teal);
+    background-color: var(--slack-purple);
+    font-family: var(--main-font);
+    ;
 }
 .main-navbar{
     display: flex;
@@ -15,15 +17,15 @@
 }
 .tote-pages, 
 .user-pages, 
-.sandwich-menu,
-.logo{
+.sandwich-menu
+{
     width: 33%;
 }
 
 .logo{
     //background-color: blue;
     text-align: center;
-    font-family: 'Sedgwick Ave', cursive;
+    font-family: 'Lobster', cursive;//'Sedgwick Ave', cursive;
 }
 
 .tote-pages, .user-pages, .sandwich-menu{
@@ -43,11 +45,11 @@
 
 .tote-page a{
     text-decoration: none;
-    color: black;
+    color: var(--black);
 }
 
 .tote-page a:hover{
-    color: gray;
+    color: var(--white);
 }
 
 .tote-page a:hover{
@@ -61,7 +63,7 @@
 .logo-link{
     font-size: 1.2em;
     text-decoration: none;  
-    color:black;
+    color:var(--white);
 }
 
 .user-page img{
@@ -79,7 +81,23 @@
         display: none;
     }
     .logo-link{
-        font-size: small;
+        font-size: large;
+    }
+    .logo{
+        width: -webkit-fill-available;
+    }
+ }
+ 
+
+ @media(min-width:375px) {
+    .logo{
+        max-width: 33%;
+    }
+ }
+
+ @media(min-width:600px){
+    .logo-link{
+        font-size: larger;
     }
  }
 
@@ -89,9 +107,6 @@
     }
     .user, .whishlist{
         display: inline-block;
-    }
-    .logo-link{
-        font-size: medium;
     }
  }
 
@@ -106,8 +121,9 @@
         display: inline-block;
     }
     .logo-link{
-        font-size: large;
+        font-size: xx-large;
     }
  }
+
 
  

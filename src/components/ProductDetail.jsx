@@ -2,7 +2,6 @@ import React, {useContext, useState} from 'react';
 import '../styles/ProductDetail.scss'
 import {NavLink} from 'react-router-dom'
 import ItemCount from '../containers/ProductCount';
-import Category from '../containers/Category';
 import { CartContext } from '../context/CartContext';
 
 const ProductDetail = ({product, categories, stock}) => {
@@ -35,7 +34,6 @@ const ProductDetail = ({product, categories, stock}) => {
     }); 
   }
 
-
   const clickOnSeeMoreCats = () => {
     console.log('seeAllCategories')
     console.log(categories)
@@ -47,88 +45,80 @@ const ProductDetail = ({product, categories, stock}) => {
     console.log(seeAllCategories)
   }
 
-
   return (
   <div className='ProductDetails'>
     
     <section className='book-main-info'>
-      <div className='book-name'>
         {
           details.subtitle? 
-          <>
-            <p className='title'> <strong>{details.title}:</strong> {details.subtitle}</p>
-          </>
-          :
-          <p className='title'><strong>{details.title}</strong></p>
+          <><p className='title'> <strong>{details.title}</strong> <br/> {details.subtitle}</p> </>
+          : <p className='title'><strong>{details.title}</strong></p>
         }
-      </div>
       <div className='authors'>
         {
           details.authors?
-          details.authors.map((author) => (
+          <>
+            <p>By: </p> {details.authors.map((author) => (
             <p key={author}>{author}</p>
-          )): <p>No Author</p>
+          ))}
+          </>
+          : <p>No Author</p>
         }  
-      </div>
-      <div className="categories">
-        {
-          categories?
-          categories.filter((category, idx) => idx < seeAllCategories).map((category) => (
-            <NavLink to={`/category/${category}`} key={category} className="category">
-              <Category category={category}></Category>
-            </NavLink>
-          )) 
-          : ''
-        }
-        {
-          categories?
-          <div className='see-all'>
-            <p onClick={()=> clickOnSeeMoreCats()}>
-             {
-                (categories.length > seeAllCategories)? 'See all...' 
-                : (categories.length <= seeAllCategories && seeAllCategories > defaultCategories)?'See less...'
-                : (categories.length == seeAllCategories && seeAllCategories != defaultCategories)? 'See less...'
-                :''
-             }
-            </p>
-          </div>:''
-        }
       </div>
     </section>
 
-    <div className='dets-info'>  
-      <section className='book-image'>
-        <picture>
-          <img src={images.thumbnail} alt="picture of the book" />
-        </picture>
-      </section>
+    <section className='book-categories'>
+      <div className="categories">
+          {
+            categories?
+            categories.filter((category, idx) => idx < seeAllCategories).map((category) => (
+              <NavLink to={`/category/${category}`} key={category} className="category">
+                {category}
+              </NavLink>
+            )) 
+            : ''
+          }
+      </div>
+      {
+        categories?
+        <div className='see-all'>
+          <p onClick={()=> clickOnSeeMoreCats()}>
+          {
+            (categories.length > seeAllCategories)? 'See all...' 
+            : (categories.length <= seeAllCategories && seeAllCategories > defaultCategories)?'See less...'
+            : (categories.length == seeAllCategories && seeAllCategories != defaultCategories)? 'See less...'
+            :''
+          }
+          </p>
+        </div>:''
+      }
+    </section>
 
-      <section className='book-details'>
-            <p className='section-title'>Book Details</p>
-            <div className='book-details-group'>
-              <p>Publisher: </p> <p>{details.publisher}</p>
-            </div>
-            <div className='book-details-group'>
-              <p>Year:</p> <p>{details.publishedDate}</p>
-            </div>
-            <div className='book-details-group'>
-              <p>Language:</p> <p>{details.language}</p>
-            </div>
-            <div className='book-details-group'>
-              <p>Pages:</p> <p>{details.pageCount}</p>
-            </div>
+    <div className='group'>
+    <section className='book-image'>
+      <picture>
+       <img src={images.thumbnail} alt="picture of the book" />
+      </picture>
+    </section>
 
-      </section>
-
-      <section className='book-synopsis'>
-        <p className='section-title'>Synopsis</p>
-        <br/>
-        <p dangerouslySetInnerHTML={{ __html: details.description}}></p>
-      </section>
-    </div>
+    <section className='book-details'>
+      <p className='section-title'>Book Details</p>
+      <div className='book-details-group'>
+        <p>Publisher: </p> <p>{details.publisher}</p>
+      </div>
+      <div className='book-details-group'>
+        <p>Year:</p> <p>{details.publishedDate}</p>
+      </div>
+      <div className='book-details-group'>
+        <p>Language:</p> <p>{details.language}</p>
+      </div>
+      <div className='book-details-group'>
+        <p>Pages:</p> <p>{details.pageCount}</p>
+      </div>
+    </section>
 
     <section className='book-sale-info'>
-          <div className='book-sale-group'>
+      <div className='book-sale-group'>
             {
               (sale.saleability == "FOR_SALE")
               ?
@@ -145,9 +135,9 @@ const ProductDetail = ({product, categories, stock}) => {
                 :
                 <p>Not for sale, sorry :/</p> 
               }
-          </div>
+      </div>
 
-          <div className='book-sale-group'> 
+      <div className='book-sale-group'> 
           {
               (sale.saleability == "FOR_SALE" && stock)
               ?
@@ -161,12 +151,12 @@ const ProductDetail = ({product, categories, stock}) => {
                 :
                 <p>Not for sale, sorry :/</p> 
               }
-          </div>
+      </div>
 
           {
             (sale.saleability == "FOR_SALE" && stock)?
             <div className='book-sale-group'>
-              <ItemCount amount={amount} stock={stock} onAdd={addItem} onRemove={removeItem}></ItemCount>
+              <ItemCount className="ItemCount" amount={amount} stock={stock} onAdd={addItem} onRemove={removeItem}></ItemCount>
             </div> : ''
           }
           {
@@ -183,13 +173,13 @@ const ProductDetail = ({product, categories, stock}) => {
                   <p>Not for sale, sorry :/</p> 
             }
     </section>
+    </div>
 
     <section className='book-synopsis'>
       <p className='section-title'>Synopsis</p>
       <br/>
-      <p dangerouslySetInnerHTML={{ __html: details.description}}></p>
+      <p style={{textAlign: 'justify'}} dangerouslySetInnerHTML={{ __html: details.description}}></p>
     </section>
-
   </div>  
   );
 };
