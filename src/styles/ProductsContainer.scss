@@ -3,19 +3,41 @@
     font-family: var(--main-font);
     max-width: 1280px;
     margin: auto;
+    margin: 2rem 0;
 }
 .category-title{
     margin: 0 0.5rem;
-    padding: var(--sm);
-}
-.category-title div{
-    min-width: 8rem;
+    background-color: var(--slack-blue);
     text-align: center;
-    font-size: larger;
-}
-.see-more{
     padding: var(--sm);
+    border-radius: 25px;
+    color: var(--slack-purple);
+}
+.see-all{
+    padding: 0 var(--sm);
     margin: 0 0.5rem;
     text-align: right;
 
 }
+
+@media(min-width:300px){
+    .category-title{
+        font-size: large;
+    }
+    .see-all{
+        font-size: small;
+    }
+ }
+
+ @media(min-width:800px){
+    .category-title{
+        font-size: x-large;
+    }
+ }
+
+ @media(min-width:1024px){
+
+ }
+
+
+ 

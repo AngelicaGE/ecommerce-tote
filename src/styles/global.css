@@ -9,3 +9,11 @@
 html{
     font-size: 62.5%;
 }
+
+.see-all{
+    cursor: pointer;
+    font-weight: 500;
+}
+.see-all:hover{
+    color: gray;
+}
