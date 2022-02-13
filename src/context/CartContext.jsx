@@ -1,42 +1,30 @@
-import {useState, createContext } from "react";
+import {useState, createContext, useEffect } from "react";
 
 export const CartContext = createContext();
 
 export const CartProvider = ({children}) => {
     const [cartItems, setCartItems] = useState([]);
 
-    const addCartItem = (cartItem) => {
+    const addCartItem = (newCartItem) => {
         /*
-        // ESTA VALIDACION ME ESTA MARCANDO UN ERROR DE COMPILACION :( 
+        // ESTA VALIDACION ME MARCA ERROR UNDEFINED :( 
         //Validate Item is not duplicated
-        if(cartItems.some(({item}) => {item.id === cartItem.product.id})){
-            return;
-        }
+        if(cartItems.some(({item}) => item.product.id === cartItem.product.id)) return;
         */
-
         setCartItems(
             [
                 ...cartItems, 
-                cartItem
+                newCartItem
             ]
-        )
-        console.log("***** CART ITEMS ******")
-        console.log(cartItems)
-    
-/*
-        //Validate Item is not duplicated
-        if(cartItems.some(({item}) => {item.id === cartItem.product.id})){
-            return;
-        }
-*/
+        );
+        alert("Cart updated");
+
     };
 
     const removeCartItem = () => {
-
     };
 
     const updateCartItem = () => {
-
     };
 
     return (

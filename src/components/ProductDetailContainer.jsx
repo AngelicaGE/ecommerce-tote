@@ -19,7 +19,7 @@ const ProductDetailContainer = () => {
           const res = await getCategories(product.volumeInfo.categories);
           setCategories(res)
         }catch(error){
-          //console.log(error)
+          //git addconsole.log(error)
           setCategories(product.volumeInfo.categories)
         }finally{
           //console.log("finished consuming getCategories promise")

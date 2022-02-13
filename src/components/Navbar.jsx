@@ -5,7 +5,6 @@ import '../styles/Navbar.scss'
 import SandwichMenu from '../containers/SandwichMenu.jsx'
 import searchIcon from '../assets/icons/search.png'
 import searchIconSmall from '../assets/icons/search-small.png'
-import userIcon from '../assets/icons/user.png'
 import wishlistIcon from '../assets/icons/heart.png'
 import wishlistSelectedIcon from '../assets/icons/heart-fill.png'
 import CarWidget from '../containers/CarWidget'
@@ -45,14 +44,13 @@ const Navbar = ({name, clickOnMenu}) => {
                             </picture>
                         </NavLink>
                     </li>
-                    <li className='user-page user'>
-                        <img alt='user icon' src={userIcon}/>
-                    </li>
                     <li className='user-page whishlist'>
                         <img alt='wishlist icon' src={wishlistIcon}/>
                     </li>
                     <li className='user-page cart'>
-                        <CarWidget></CarWidget>
+                        <NavLink to="/cart">
+                            <CarWidget></CarWidget>
+                        </NavLink>
                     </li>
                 </ul>
                 </div>
