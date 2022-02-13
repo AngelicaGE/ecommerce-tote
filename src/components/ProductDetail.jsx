@@ -33,6 +33,7 @@ const ProductDetail = ({product, categories, stock}) => {
       product,
       amount
     }); 
+
   }
 
   const clickOnSeeMoreCats = () => {
@@ -121,7 +122,7 @@ const ProductDetail = ({product, categories, stock}) => {
     <section className='book-sale-info'>
       <ProductSaleInfo sale ={sale} stock={stock} amount={amount}
                         addItem={addItem} removeItem={removeItem}
-                        handleaddToCart={handleAddToCart} className="ProductSaleInfo">                
+                        handleAddToCart={handleAddToCart} className="ProductSaleInfo">                
       </ProductSaleInfo>
     </section>
     </div>

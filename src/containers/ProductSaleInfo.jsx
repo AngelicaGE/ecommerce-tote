@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom';
 import ItemCount from '../containers/ProductCount';
 
 const ProductSaleInfo = ({sale, stock, amount, addItem, removeItem, handleAddToCart}) => {
@@ -49,7 +50,7 @@ const ProductSaleInfo = ({sale, stock, amount, addItem, removeItem, handleAddToC
                 (sale.saleability == "FOR_SALE")
                 ?
                 <>
-                  <button className='sale-btn add-cart'onClick={()=>handleAddToCart()}> Add to cart </button>
+                  <NavLink to="/cart" className='sale-btn add-cart' onClick={()=>handleAddToCart()}> Add and go to cart </NavLink>
                   <button className='sale-btn buy-now'> Buy it now </button>
                 </>
                   : (sale.saleability == "FREE")
