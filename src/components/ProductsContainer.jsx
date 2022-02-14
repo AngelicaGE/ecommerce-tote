@@ -13,7 +13,7 @@ const ProductsContainer = ({category, message='', maxResults=40}) => {
         <div className='ProductsContainer'>
             <div className='category-title'>{category}</div>
             {
-                loading? <h1>LOADING</h1>: ''
+                loading? <h1>Loading...</h1>: ''
             }
             <p>{error}</p>
             <ProductList products={products} hookAPI={true}></ProductList>
