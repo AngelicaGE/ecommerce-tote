@@ -16,7 +16,10 @@ export const CartProvider = ({children}) => {
         alert("cart updated")
     };
 
-    const removeCartItem = () => {
+    const removeCartItem = (cartItemId) => {
+        setCartItems(
+            cartItems.filter((item) => item.id != cartItemId)
+        )
     };
 
     const updateCartItem = () => {
