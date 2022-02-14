@@ -17,6 +17,7 @@ const Cart = () => {
             cartItems.map((cartItem) => ( 
                 <div key={cartItem.id}>
                     <p>{cartItem.volumeInfo.title}: {cartItem.id}</p> 
+                    <p>Amount {cartItem.amount}</p>
                     <button onClick={() => handleClickOnRemove(cartItem.id)} >Remove from cart</button>
                     <hr />
                 </div>
