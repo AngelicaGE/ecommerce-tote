@@ -1,6 +1,6 @@
 import React from 'react';
-import cartIcon from '../assets/icons/bag.png'
-import cartIconSmall from '../assets/icons/bag-small.png'
+import cartIcon from '../assets/icons/bag-white-24.png'
+import cartIconSmall from '../assets/icons/bag-white-16.png'
 
 const CarWidget = () => {
   return (

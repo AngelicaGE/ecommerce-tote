@@ -10,12 +10,10 @@ const Cart = () => {
         Info del Cart COntext 
         {
             cartItems.map((cartItem) => ( 
-                <>
-                    <p>{cartItem.product.volumeInfo.title}: {cartItem.product.id}</p> 
-
+                <div key={cartItem.id}>
+                    <p>{cartItem.volumeInfo.title}: {cartItem.id}</p> 
                     <hr />
-                </>
-
+                </div>
             ))
         }
     </div>

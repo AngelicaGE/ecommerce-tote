@@ -6,25 +6,25 @@ export const CartProvider = ({children}) => {
     const [cartItems, setCartItems] = useState([]);
 
     const addCartItem = (newCartItem) => {
-        /*
-        // ESTA VALIDACION ME MARCA ERROR UNDEFINED :( 
-        //Validate Item is not duplicated
-        if(cartItems.some(({item}) => item.product.id === cartItem.product.id)) return;
-        */
-        setCartItems(
-            [
-                ...cartItems, 
-                newCartItem
-            ]
-        );
-        alert("Cart updated");
-
+        console.log("*** ADDING ITEM ***")
+        console.log(newCartItem)
+       if(productIsInCart(newCartItem.id)) {
+           alert("duplicate");
+           return;
+       }
+        setCartItems([...cartItems, newCartItem]);
+        alert("cart updated")
     };
 
     const removeCartItem = () => {
     };
 
     const updateCartItem = () => {
+    };
+
+    const productIsInCart = (cartItemId) => {
+        let isThere = cartItems.some(item => item.id === cartItemId);
+        return isThere;
     };
 
     return (

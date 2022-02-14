@@ -3,11 +3,11 @@ import {Link, NavLink } from 'react-router-dom'
 // con navlink podemos usar estilos customisados
 import '../styles/Navbar.scss'
 import SandwichMenu from '../containers/SandwichMenu.jsx'
-import searchIcon from '../assets/icons/search.png'
-import searchIconSmall from '../assets/icons/search-small.png'
-import wishlistIcon from '../assets/icons/heart.png'
-import wishlistSelectedIcon from '../assets/icons/heart-fill.png'
 import CarWidget from '../containers/CarWidget'
+import searchIcon from '../assets/icons/search-white-24.png'
+import searchIconSmall from '../assets/icons/search-white-16.png'
+import wishlistIcon from '../assets/icons/heart-empty-white-24.png'
+import wishlistSelectedIcon from '../assets/icons/heart-empty-white-24.png'
 
 const Navbar = ({name, clickOnMenu}) => {
 
@@ -22,7 +22,7 @@ const Navbar = ({name, clickOnMenu}) => {
                         <NavLink to="fghj" className={({isActive}) => (isActive? 'activeClass': '')}>New arrivals</NavLink>
                     </li>
                     <li className='tote-page'>
-                        <a href='#'>Sale</a>
+                        <NavLink to='fgj' className={({isActive}) => (isActive? 'activeClass': '')}>Sale</NavLink>
                     </li>
                     <li className='tote-page'>
                         <NavLink to="/about" className={({isActive}) => isActive? 'activeClass': ''}>

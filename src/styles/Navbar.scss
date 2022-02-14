@@ -12,9 +12,6 @@
     max-width: 1280px;
     margin: auto;
 }
-.activeClass{
-    font-weight: bold;
-}
 .tote-pages, 
 .user-pages, 
 .sandwich-menu
@@ -43,21 +40,22 @@
     font-size: 1.5em;
 }
 
-.tote-page a{
+.tote-pages a{
     text-decoration: none;
-    color: var(--black);
-}
-
-.tote-page a:hover{
     color: var(--white);
 }
 
 .tote-page a:hover{
+    color: var(--light-gray);
     text-decoration: underline;
 }
 
 .tote-page a:active{
     text-decoration: underline;
+}
+.activeClass{
+    color: var(--light-gray) !important;
+    text-decoration: underline !important;
 }
 
 .logo-link{

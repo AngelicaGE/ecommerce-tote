@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import '../styles/ProductDetail.scss'
 import {NavLink} from 'react-router-dom'
 import { CartContext } from '../context/CartContext';
@@ -9,30 +9,30 @@ const ProductDetail = ({product, categories, stock}) => {
   const defaultCategories = 5;
   const [seeAllCategories, setSeeAllCategories] = useState(defaultCategories)
   const [amount, setAmount] = useState(1)
-  const {addCartItem} = useContext(CartContext)
+  const [isInCart, setIsInCart] = useState(false);
+
+  const {addCartItem, productIsInCart} = useContext(CartContext)
 
   const details = product.volumeInfo;
   const sale = product.saleInfo;
   const images = details.imageLinks;
 
   const addItem = () => {
-    console.log("one more");
+    console.log("one more")
     setAmount(amount + 1);
   };
 
   const removeItem = () => {
-    console.log("one less");
+    console.log("one less")
     setAmount(amount - 1);
   };
 
   const handleAddToCart = () => {
     console.log("****** ADDING THE PRODUCT ******")
-    console.log(product)
+    const item = {...product, amount}
+    console.log(item)
     // delete product?.kind
-    addCartItem({
-      product,
-      amount
-    }); 
+    addCartItem(item); 
   }
 
   const clickOnSeeMoreCats = () => {
@@ -45,6 +45,16 @@ const ProductDetail = ({product, categories, stock}) => {
     }
     console.log(seeAllCategories)
   }
+
+  useEffect(() => {
+    try{
+      let res = productIsInCart(details.id);
+      setIsInCart(res);
+    }catch{
+      console.log("error")
+    }
+  }, [])
+  
 
   return (
   <div className='ProductDetails'>
@@ -121,7 +131,7 @@ const ProductDetail = ({product, categories, stock}) => {
     <section className='book-sale-info'>
       <ProductSaleInfo sale ={sale} stock={stock} amount={amount}
                         addItem={addItem} removeItem={removeItem}
-                        handleaddToCart={handleAddToCart} className="ProductSaleInfo">                
+                        handleAddToCart={handleAddToCart} className="ProductSaleInfo">                
       </ProductSaleInfo>
     </section>
     </div>

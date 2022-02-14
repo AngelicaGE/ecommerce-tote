@@ -8,7 +8,7 @@
   
   .bar1, .bar2, .bar3 {
     height: 0.5rem;
-    background-color: var(--black);
+    background-color: var(--white);
     margin: 0.6rem 0;
     transition: 0.4s;
   }
@@ -29,11 +29,6 @@
       width: 3.5rem;
       height: 3.6rem;
   }
-
-  .bar1, .bar2, .bar3 {
-    background-color: var(--black);
-  }
-
   
 @media(min-width:300px){
     .bar1, .bar2, .bar3 {

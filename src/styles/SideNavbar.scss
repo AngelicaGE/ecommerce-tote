@@ -1,5 +1,6 @@
+@import '_vars';
 .SideNavbar{
-    background-color: white;
+    background-color: var(--slack-purple);
     width: 100vw;
     height: 100vh;
     font-family: var(--main-font);
