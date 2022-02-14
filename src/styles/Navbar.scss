@@ -25,7 +25,7 @@
     font-family: 'Lobster', cursive;//'Sedgwick Ave', cursive;
 }
 
-.tote-pages, .user-pages, .sandwich-menu{
+.tote-pages, .user-pages, .sandwich-menu, .tote-pages-side{
     display: inline-block;
     font-size: var(--sm);
 }
@@ -40,7 +40,7 @@
     font-size: 1.5em;
 }
 
-.tote-pages a{
+.tote-pages a, .tote-pages-side a{
     text-decoration: none;
     color: var(--white);
 }
@@ -100,7 +100,7 @@
  }
 
  @media(min-width:800px){
-    .tote-pages, .user, .whishlist{
+    .tote-pages{
         display: none;
     }
     .user, .whishlist{
