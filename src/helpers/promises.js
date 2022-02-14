@@ -41,4 +41,4 @@ export function getAllCategories(){
     });
 } 
 
-export const allCategories = ["Physics", "Science", "Young Adult Nonfiction"]
+export const allCategories = ["Child", "Romance", "Science", "Young Adult Nonfiction"]

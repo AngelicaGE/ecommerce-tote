@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { CartContext } from '../context/CartContext'
 
 const Cart = () => {
-    const {cartItems, removeCartItem} = useContext(CartContext)
+    const {cartItems, removeCartItem, clearCart} = useContext(CartContext)
     console.log("***** CART ITEMS ******")
     console.log(cartItems)
 
@@ -10,9 +10,14 @@ const Cart = () => {
         removeCartItem(productId);
     }
 
+    const handleClickClear = () => {
+        console.log("click clear")
+        clearCart()
+    }
+
     return (
-    <div>
-        Info del Cart COntext 
+    <div className='Cart '>
+        <div className='cart-products'>
         {
             cartItems.map((cartItem) => ( 
                 <div key={cartItem.id}>
@@ -23,6 +28,10 @@ const Cart = () => {
                 </div>
             ))
         }
+        </div>
+        <div>
+            <button onClick={() => handleClickClear()}> Clear cart </button>
+        </div>
     </div>
   )
 }

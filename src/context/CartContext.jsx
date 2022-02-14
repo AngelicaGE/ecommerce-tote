@@ -17,12 +17,15 @@ export const CartProvider = ({children}) => {
     };
 
     const removeCartItem = (cartItemId) => {
-        setCartItems(
-            cartItems.filter((item) => item.id != cartItemId)
-        )
+        setCartItems(cartItems.filter((item) => item.id != cartItemId))
     };
 
     const updateCartItem = () => {
+    };
+
+    const clearCart = () => {
+        console.log("clear");
+        setCartItems([]);
     };
 
     const productIsInCart = (cartItemId) => {

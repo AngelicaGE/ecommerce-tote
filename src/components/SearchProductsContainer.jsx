@@ -3,6 +3,7 @@ import '../styles/SearchProductsContainer.scss'
 import { useParams } from "react-router-dom";
 import useGetProducts from '../hooks/useGetProducts';
 import ProductList from './ProductList';
+import { ScrollerTop } from '../containers/ScrollerTop';
 
 const SearchProductsContainer = ({message='', maxResults=40}) => {
     const { id } = useParams();
@@ -18,6 +19,9 @@ const SearchProductsContainer = ({message='', maxResults=40}) => {
             }
             <p>{error}</p>
             <ProductList products={products} hookAPI={true}></ProductList>
+            <div>
+                <ScrollerTop/>
+            </div>
         </div>
     );
 };
