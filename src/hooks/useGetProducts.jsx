@@ -9,7 +9,7 @@ const useGetProducts =  (API) => {
       try{
         const response = await fetch(API);
         const data = await response.json();
-        console.log(data)
+        //console.log(data)
         setProducts(data.items);
       }catch(error){
         //console.log(error)

@@ -40,7 +40,8 @@ export const CartProvider = ({children}) => {
                     addCartItem,
                     removeCartItem,
                     updateCartItem,
-                    clearCart
+                    clearCart,
+                    productIsInCart
                 }}>
             {children}
         </CartContext.Provider>

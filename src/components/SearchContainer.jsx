@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, memo} from 'react'
 import '../styles/SearchContainer.scss'
 import { useNavigate } from 'react-router-dom';
 import { allCategories } from '../helpers/promises';
@@ -40,4 +40,4 @@ const SearchContainer = () => {
   )
 }
 
-export default SearchContainer
+export default memo(SearchContainer)

@@ -123,6 +123,16 @@ section{
     color: var(--slack-purple);
 
 }
+.ProductSaleInfo button:disabled{
+    background-color: rgb(216, 214, 214);
+    border:rgb(129, 129, 129) solid var(--black);
+    color: rgb(129, 129, 129);
+    font-weight: 100;
+    cursor: default;
+}
+.ProductSaleInfo a{
+    margin-bottom: 1rem;
+}
 
 // SYNOPSIS
 section .book-synopsis{

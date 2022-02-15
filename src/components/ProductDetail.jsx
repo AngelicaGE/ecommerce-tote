@@ -33,6 +33,7 @@ const ProductDetail = ({product, categories, stock}) => {
     console.log(item)
     // delete product?.kind
     addCartItem(item); 
+    setIsInCart(true);
   }
 
   const clickOnSeeMoreCats = () => {
@@ -48,12 +49,12 @@ const ProductDetail = ({product, categories, stock}) => {
 
   useEffect(() => {
     try{
-      let res = productIsInCart(details.id);
+      let res = productIsInCart(product.id);
       setIsInCart(res);
-    }catch{
-      console.log("error")
+    }catch(error){
+      console.log(error);
     }
-  }, [])
+  }, [product])
   
 
   return (
@@ -131,7 +132,8 @@ const ProductDetail = ({product, categories, stock}) => {
     <section className='book-sale-info'>
       <ProductSaleInfo sale ={sale} stock={stock} amount={amount}
                         addItem={addItem} removeItem={removeItem}
-                        handleAddToCart={handleAddToCart} className="ProductSaleInfo">                
+                        handleAddToCart={handleAddToCart} 
+                        isInCart={isInCart} className="ProductSaleInfo">                
       </ProductSaleInfo>
     </section>
     </div>

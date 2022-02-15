@@ -1,7 +1,8 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom';
 import ItemCount from '../containers/ProductCount';
 
-const ProductSaleInfo = ({sale, stock, amount, addItem, removeItem, handleAddToCart}) => {
+const ProductSaleInfo = ({sale, stock, amount, addItem, removeItem, handleAddToCart, isInCart}) => {
   return (
     <div className='ProductSaleInfo'>
              <div className='book-sale-group'>
@@ -13,13 +14,8 @@ const ProductSaleInfo = ({sale, stock, amount, addItem, removeItem, handleAddToC
                   <p> ${sale.listPrice.amount} {sale.listPrice.currencyCode}</p>
                 </>
               : (sale.saleability == "FREE")
-              ?
-                <>
-                  <p>Price: </p>
-                  <p> FREE</p>
-                </>
-                :
-                <p>Not for sale, sorry :/</p> 
+              ? <p>Price: FREE</p>
+              : <p>Not for sale, sorry :/</p> 
               }
       </div>
 
@@ -32,10 +28,8 @@ const ProductSaleInfo = ({sale, stock, amount, addItem, removeItem, handleAddToC
                   <p> {stock}</p>
                 </>  
               : (sale.saleability == "FREE")
-              ?
-                ''            
-                :
-                <p>Not for sale, sorry :/</p> 
+              ? ''            
+              : <p>Not for sale, sorry :/</p> 
               }
       </div>
 
@@ -49,15 +43,14 @@ const ProductSaleInfo = ({sale, stock, amount, addItem, removeItem, handleAddToC
                 (sale.saleability == "FOR_SALE")
                 ?
                 <>
-                  <button className='sale-btn add-cart'onClick={()=>handleAddToCart()}> Add to cart </button>
+                  <button className='sale-btn add-cart'onClick={()=>handleAddToCart()} disabled={isInCart}> Add to cart </button>
                   <button className='sale-btn buy-now'> Buy it now </button>
                 </>
-                  : (sale.saleability == "FREE")
-                ?
-                  <a href={sale.buyLink} target="_blank">Get it now</a>
-                :
-                  <p>Not for sale, sorry :/</p> 
+                : (sale.saleability == "FREE")
+                ? <a href={sale.buyLink} target="_blank">Get it now</a>
+                : <p>Not for sale, sorry :/</p> 
             }
+            <NavLink to="/cart">See in cart</NavLink>
     </div>
   )
 }
