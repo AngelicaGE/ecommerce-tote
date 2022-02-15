@@ -1,5 +1,7 @@
 import React, { useContext } from 'react'
+import '../styles/Cart.scss'
 import { CartContext } from '../context/CartContext'
+import {NavLink } from 'react-router-dom'
 
 const Cart = () => {
     const {cartItems, removeCartItem, clearCart} = useContext(CartContext)
@@ -13,6 +15,14 @@ const Cart = () => {
     const handleClickClear = () => {
         console.log("click clear")
         clearCart()
+    }
+
+    if(cartItems.length == 0){
+        return (<div className='CartEmpty'>
+            <p className='oops'>Opps, your cart is empty at the moment.</p>
+            <p className='quotes'>“The more that you read, the more things you will know. The more you learn, the more places you’ll go.” — Dr. Seuss :)</p>
+            <NavLink to="/">Go explore</NavLink>
+        </div>)
     }
 
     return (
