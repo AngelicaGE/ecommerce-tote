@@ -29,7 +29,14 @@ const ProductDetail = ({product, categories, stock}) => {
 
   const handleAddToCart = () => {
     console.log("****** ADDING THE PRODUCT ******")
-    const item = {...product, amount}
+    // create new item with only properties needed for cart
+    const item = {"id": product.id, 
+                  "title": details.title,
+                  "subtitle": details.subtitle,
+                  "price": sale.listPrice.amount,
+                  "currency": sale.listPrice.currencyCode,
+                  "stock": stock,
+                  amount}
     console.log(item)
     // delete product?.kind
     addCartItem(item); 

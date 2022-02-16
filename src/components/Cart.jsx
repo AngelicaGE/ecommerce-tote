@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import '../styles/Cart.scss'
 import { CartContext } from '../context/CartContext'
 import {NavLink } from 'react-router-dom'
+import CartProduct from '../containers/CartProduct'
 
 const Cart = () => {
     const {cartItems, removeCartItem, clearCart} = useContext(CartContext)
@@ -27,20 +28,22 @@ const Cart = () => {
 
     return (
     <div className='Cart '>
+        <div>
+            <button onClick={() => handleClickClear()}> Clear cart </button>
+        </div>
         <div className='cart-products'>
         {
             cartItems.map((cartItem) => ( 
-                <div key={cartItem.id}>
-                    <p>{cartItem.volumeInfo.title}: {cartItem.id}</p> 
-                    <p>Amount {cartItem.amount}</p>
-                    <button onClick={() => handleClickOnRemove(cartItem.id)} >Remove from cart</button>
+                <>
+                    <CartProduct  
+                        key={cartItem.id}
+                        cartProduct={cartItem}
+                        handleClickOnRemove={handleClickOnRemove}
+                    ></CartProduct>
                     <hr />
-                </div>
+                </>
             ))
         }
-        </div>
-        <div>
-            <button onClick={() => handleClickClear()}> Clear cart </button>
         </div>
     </div>
   )
