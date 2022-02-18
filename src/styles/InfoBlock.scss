@@ -1,5 +1,5 @@
 .InfoBlock{
-    background-color: red;
+    //background-color: red;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,7 +18,7 @@
 }
 .InfoBlock img{
     max-width: 22rem;
-    border-radius: 50%;
+    //border-radius: 50%;
     display: inline-block;
     margin: 2rem 0;
 }
@@ -28,28 +28,35 @@
 .InfoBlock #ib-content-small{display: inline;}
 .InfoBlock #ib-content-big{display: none;}
 
-.InfoBlock .main-cont{ order:1 }
-.InfoBlock img{order: 2; width: 100%;}
+.main-cont-left, .main-cont-right { order:1; }
+.InfoBlock .img .left, .InfoBlock .img .right{order: 2; width: 100%;border-radius: 2%}
 .InfoBlock .ib-content{order: 3 ;}
-
 
  @media(min-width:700px){
     .InfoBlock{
         flex-direction: row;
     }
+    .main-cont-right { text-align: right;  order:1;  }
+    .InfoBlock .img .right{order: 2; width: 100%; }
 
-    .InfoBlock .main-cont{ order:2 }
-    .InfoBlock img{order: 1; width: 100%;}
+    .main-cont-left{ text-align: left; order:2;  }
+    .InfoBlock .img .left{order: 1; width: 100%;}
+
     .InfoBlock #ib-content-small{display: none;}
     .InfoBlock #ib-content-big{display: inline;}
-
+    .InfoBlock-right{
+        flex-direction: row-reverse;
+    }
     .InfoBlock img{
-        margin: 0 2rem 0 0 ;
+        width: 30%;
+        margin: 0 3rem ;
+    }
+    .InfoBlock .main-cont{
+        width: 70%;
     }
     .main-cont p{width: 100%;} 
-    .InfoBlock .ib-title, 
-    .InfoBlock .main-cont{
-        text-align: left;
+    .InfoBlock .ib-content{
+        text-align: inherit;
     }
  }
 
