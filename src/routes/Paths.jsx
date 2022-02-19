@@ -13,7 +13,7 @@ import Cart from '../components/Cart';
 const Paths = () => {
   return (
     <BrowserRouter>
-      <NavbarContainer name="Bazar de libros"/>
+      <NavbarContainer name="Bazarcito lector"/>
       <Routes >
         {/* Cambiar este por un Landing page jsx con multiples ProductsContainerWithHook*/}
         <Route path="/" element={<Landing/>}/>

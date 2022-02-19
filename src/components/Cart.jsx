@@ -28,10 +28,10 @@ const Cart = () => {
 
     return (
     <div className='Cart '>
-        <div>
-            <button onClick={() => handleClickClear()}> Clear cart </button>
-        </div>
         <div className='cart-products'>
+            <div className='cart-title'>
+                <p>My future books</p>
+            </div>
         {
             cartItems.map((cartItem) => ( 
                 <>
@@ -44,6 +44,11 @@ const Cart = () => {
                 </>
             ))
         }
+        </div>
+         <div className='btns-cont'>
+            <NavLink to="/" className='btn-shop cart-btn'> Continue shopping </NavLink>
+            <button className='btn-clear cart-btn' onClick={() => handleClickClear()}> Clear cart </button>
+            <button className='btn-complete cart-btn' onClick={() => handleClickClear()}> Complete order </button>
         </div>
     </div>
   )
