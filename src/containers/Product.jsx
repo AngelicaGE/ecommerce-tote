@@ -4,6 +4,7 @@ import '../styles/Product.scss'
 
 const Product = ({hookAPI, id, name, saleability, price, imagePath}) => {
     const [selected, setselected] = useState(false);
+
     return(
         <div className='ProductItem' onMouseEnter={() => setselected(true)} onMouseLeave={() => setselected(false)}>
                 <picture>
@@ -20,8 +21,7 @@ const Product = ({hookAPI, id, name, saleability, price, imagePath}) => {
                     <p className='price'>FREE</p>
                     :
                     <p className='price'>Not for sale</p>
-                }
-             
+                }             
                 <Link to={`/product/${id}`} id="ver-mas" className={selected? 'selected':'unselected'} type='button'>View details</Link>
         </div>
     );
