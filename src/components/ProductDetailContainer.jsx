@@ -19,14 +19,14 @@ const ProductDetailContainer = () => {
           const res = await getCategories(product.volumeInfo.categories);
           setCategories(res)
         }catch(error){
-          //git addconsole.log(error)
-          setCategories(product.volumeInfo.categories)
+          console.log(error)
+          //setCategories(product.volumeInfo.categories)
         }finally{
           //console.log("finished consuming getCategories promise")
         }
       // assign stock
       // since API res does not include a stock value I create one with algorithm
-      if(product.saleInfo.saleability == "FOR_SALE"){
+      if(product.saleInfo?.saleability == "FOR_SALE"){
         const seed = product.saleInfo.listPrice.amount
         const first = seed.toString().charAt(0);
         const second = seed.toString().charAt(1);

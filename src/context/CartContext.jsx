@@ -5,6 +5,11 @@ export const CartContext = createContext();
 export const CartProvider = ({children}) => {
     const [cartItems, setCartItems] = useState([]);
 
+    useEffect(() => {
+        console.log(cartItems)
+    }, [cartItems])
+    
+
     const addCartItem = (newCartItem) => {
         console.log("*** ADDING ITEM ***")
         console.log(newCartItem)
@@ -20,7 +25,25 @@ export const CartProvider = ({children}) => {
         setCartItems(cartItems.filter((item) => item.id != cartItemId))
     };
 
-    const updateCartItem = () => {
+    const updateCartItem = (cartItemId, newAmount) => {
+        console.log("updateCartItem")
+        // grab specific item
+        let item = cartItems.find((prod) => prod.id == cartItemId)
+        function  search(el){
+            return el.id === cartItemId;
+            }
+        let itemIndex= cartItems.findIndex(search);
+        if(item){
+            item.amount = newAmount;
+            // not sure how to update so workaround with temp copy of array
+            let cartItempsTemp = cartItems;
+            cartItempsTemp[itemIndex] = item;
+            console.log(cartItempsTemp)
+            // update actual state
+            setCartItems(cartItempsTemp);
+        }else{
+            console.log("not found: " + cartItemId)
+        }
     };
 
     const clearCart = () => {

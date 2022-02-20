@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import '../styles/Cart.scss'
 import { CartContext } from '../context/CartContext'
 import {NavLink } from 'react-router-dom'
@@ -6,17 +6,55 @@ import CartProduct from '../containers/CartProduct'
 import {completePurchase} from '../helpers/promises.js'
 
 const Cart = () => {
-    const {cartItems, removeCartItem, clearCart} = useContext(CartContext)
+    const {cartItems, removeCartItem, clearCart, updateCartItem} = useContext(CartContext)
     const [modalStyle, setModalStyle] = useState("hide")
+    const [orderdata, setorderdata] = useState({fname:'', fLastName:'', femail:'', total: 'NA', totalItems: ''})
     const [orderCompleted, setOrderCompleted] = useState(false);
     const [orderNumber, setOrderNumber] = useState();
-    const [orderdata, setorderdata] = useState({fname:'', fLastName:'', femail:''})
+    const [total, setTotal] = useState()
+
 
     console.log("***** CART ITEMS ******")
     console.log(cartItems)
 
+    useEffect(() => {
+        //TODO. why is this not getting called after onUpdateAmountItem is called?
+        console.log("use effect")
+        addAllPrices();
+        addAllItems();
+        console.log(orderdata)
+    }, [cartItems])
+
+    const addAllPrices = () => {
+        console.log("addAllPrices")
+        let totalTemp = 0;
+        for (let i = 0; i < cartItems.length; i++) {
+           totalTemp += (cartItems[i].amount * cartItems[i].price);
+        }
+        totalTemp = Math.round(totalTemp * 100) / 100;
+        console.log("total: $"+totalTemp);
+        setTotal(totalTemp);
+    }
+
+    const addAllItems = () => {
+        console.log("addAllItems")
+        let countTemp = 0;
+        for (let i = 0; i < cartItems.length; i++) {
+            countTemp += cartItems[i].amount;
+        }
+        console.log("total items: "+countTemp);
+        setorderdata({...orderdata, totalItems: countTemp});
+    }
+
     const handleClickOnRemove = (productId) =>{
         removeCartItem(productId);
+    }
+
+    const onUpdateAmountItem = (productId, amount ) =>{
+        // update item amount in context cartItems
+        updateCartItem(productId, amount);
+        addAllPrices();
+        addAllItems();    
     }
 
     const handleClickClear = () => {
@@ -86,17 +124,26 @@ const Cart = () => {
                         key={cartItem.id}
                         cartProduct={cartItem}
                         handleClickOnRemove={handleClickOnRemove}
+                        onUpdateAmountItem={onUpdateAmountItem}
                     ></CartProduct>
                     <hr />
                 </>
             ))
         }
         </div>
+        <div className='total-cont'>
+            <div><p>TOTAL ${total} MXN</p></div>
+            <div><p>{orderdata.totalItems} books</p></div>
+            <div><p>Free delivery</p></div>
+        </div>
         <div className='btns-cont'>
             <NavLink to="/" className='btn-shop cart-btn'> Continue shopping </NavLink>
             <button className='btn-clear cart-btn' onClick={() => handleClickClear()}> Clear cart </button>
             <button onClick={() => handleOpenModal()} className='btn-complete cart-btn'> Complete order </button>
         </div>
+
+
+
         {/**** MODAL****/}
         {/**** MODAL DISPLAY FUNCTIONALITY BASED ON W3S CODE: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal ****/}
         <div id="myModal" className={`modal ${modalStyle}`}>

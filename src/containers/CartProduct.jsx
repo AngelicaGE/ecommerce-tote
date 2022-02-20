@@ -1,18 +1,23 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import '../styles/CartProduct.scss'
 import ItemCount from './ProductCount'
 
-const CartProduct = ({cartProduct, handleClickOnRemove}) => {
+const CartProduct = ({cartProduct, handleClickOnRemove, onUpdateAmountItem}) => {
     const [amount, setAmount] = useState(cartProduct.amount)
 
     const onAdd = () => {
         console.log("one more...");
-        setAmount(amount +1);
-
+        let amountTemp = amount+1;
+        // update local value 'amount'
+        setAmount(amountTemp);
+        onUpdateAmountItem(cartProduct.id, amountTemp)
     }
     const onRemove = () =>{
         console.log("one less...")
-        setAmount(amount -1);
+        let amountTemp = amount-1;
+        // update local value 'amount'
+        setAmount(amountTemp);
+        onUpdateAmountItem(cartProduct.id, amountTemp)
     }
 
   return (
@@ -25,7 +30,8 @@ const CartProduct = ({cartProduct, handleClickOnRemove}) => {
 
         </div>
         <div className='counter-cont cont'>
-            <ItemCount className="ItemCount"
+            <ItemCount
+             className="ItemCount"
                 amount={amount}
                 stock={cartProduct.stock}
                 onAdd={onAdd}
@@ -35,7 +41,7 @@ const CartProduct = ({cartProduct, handleClickOnRemove}) => {
 
         </div>
         <div  id="total-cont" className='total-cont cont'>
-            <p> ${amount * cartProduct.price}{cartProduct.currency}</p>
+            <p> ${   amount * cartProduct.price}{cartProduct.currency}</p>
         </div>
         <div className='delete-cont cont'>
             <button id="remove-btn-txt" className='remmove-btn' onClick={() => handleClickOnRemove(cartProduct.id)}>Remove</button>
