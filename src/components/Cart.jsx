@@ -3,19 +3,15 @@ import '../styles/Cart.scss'
 import { CartContext } from '../context/CartContext'
 import {NavLink } from 'react-router-dom'
 import CartProduct from '../containers/CartProduct'
-import {completePurchase} from '../helpers/promises.js'
+import BuyModal from '../containers/BuyModal'
 
 const Cart = () => {
     const {cartItems, removeCartItem, clearCart, updateCartItem} = useContext(CartContext)
-    const [modalStyle, setModalStyle] = useState("hide")
-    const [orderdata, setorderdata] = useState({fname:'', fLastName:'', femail:'', total: 'NA', totalItems: ''})
-    const [orderCompleted, setOrderCompleted] = useState(false);
-    const [orderNumber, setOrderNumber] = useState();
     const [total, setTotal] = useState()
+    const [orderdata, setorderdata] = useState({fname:'', fLastName:'', femail:'', totalItems: ''})
+    const [modalStyle, setModalStyle] = useState("hide")
+    const [orderCompleted, setOrderCompleted] = useState(false);
 
-
-    console.log("***** CART ITEMS ******")
-    console.log(cartItems)
 
     useEffect(() => {
         //TODO. why is this not getting called after onUpdateAmountItem is called?
@@ -77,20 +73,7 @@ const Cart = () => {
             alert("Please fill out every input form")
             return;
         }
-        completePurchase.then((result) =>{
-            setOrderNumber(result)
-            console.log(result);
-        }).catch(()=>{
-            console.log("error");
-        }).finally(()=>{
-            console.log("finally")
-            setOrderCompleted(true)
-        })
-    }
-
-    const handleCloseConfirmation = () =>{
-        clearCart()
-        setModalStyle("hide");
+        setOrderCompleted(true)
     }
 
     const handleOpenModal = () => {
@@ -101,6 +84,11 @@ const Cart = () => {
     const handleCloseModal = () => {
         console.log("handleCloseModal");
         setModalStyle("hide")
+    }
+
+    const handleCloseConfirmation = () =>{
+        clearCart()
+        setModalStyle("hide");
     }
 
     if(cartItems.length == 0){
@@ -133,7 +121,7 @@ const Cart = () => {
         </div>
         <div className='total-cont'>
             <div><p>TOTAL ${total} MXN</p></div>
-            <div><p>{orderdata.totalItems} books</p></div>
+            <div><p>{orderdata.totalItems} book{orderdata.totalItems>1?'s':''}</p></div>
             <div><p>Free delivery</p></div>
         </div>
         <div className='btns-cont'>
@@ -142,56 +130,12 @@ const Cart = () => {
             <button onClick={() => handleOpenModal()} className='btn-complete cart-btn'> Complete order </button>
         </div>
 
-
-
         {/**** MODAL****/}
-        {/**** MODAL DISPLAY FUNCTIONALITY BASED ON W3S CODE: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal ****/}
-        <div id="myModal" className={`modal ${modalStyle}`}>
-            <div className="modal-content">
-                {
-                    !orderCompleted?
-                    <div className='closebtn'>
-                        <span onClick={()=>handleCloseModal()} className="close">&times;</span>
-                    </div>: ''
-                }
-                <div className='form'>
-                    <p>Almost done</p>
-                    <p className='instructions'>Please fill in all the fields</p>
-                    <br />
-                    <hr />
-                    <div className='form-group'>
-                        <label for="fname">First name:</label>
-                        <input type="text" id="fname" name="fname" onChange={(event)=>handleUserInput(event)} disabled={orderCompleted}/>
-                    </div>
-                    <div className='form-group'>
-                        <label for="flastname">Last name:</label>
-                        <input type="text" id="fLastName" name="fLastName" onChange={(event)=>handleUserInput(event)} disabled={orderCompleted}/>
-                    </div>
-                    <div className='form-group'>
-                        <label for="femail">Email:</label>
-                        <input type="email" id="femail" name="femail" onChange={(event)=>handleUserInput(event)} disabled={orderCompleted}/>
-                    </div>
-                    {
-                        !orderCompleted?
-                        <div className='form-complete'>
-                            <button className='cart-btn btn-complete' type="submit" onClick={(event)=>handleOnComplete(event)}>Complete purchase</button>
-                        </div>: ''
-                    }
-                </div>
-                {
-                    orderCompleted?
-                    <div className='message-complete'>
-                        <div className='message'>
-                            <p>Congratulations you have completed your order. Please take note of your purchase order: <strong>{orderNumber} </strong> 
-                            <br/> Happy reading :)</p>
-                        </div>
-                        <div className='form-complete'>
-                            <button id='btn-complete' className='cart-btn btn-complete' onClick={()=> handleCloseConfirmation()}>Close</button>
-                        </div>
-                    </div>: ''
-                }
-            </div>
-        </div>
+        <BuyModal
+                modalStyle={modalStyle} orderCompleted={orderCompleted} 
+                handleCloseModal={handleCloseModal} handleUserInput={handleUserInput} 
+                handleOnComplete={handleOnComplete} handleCloseConfirmation={handleCloseConfirmation}
+        ></BuyModal>
     </div>
     )
 } 

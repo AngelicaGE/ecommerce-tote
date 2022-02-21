@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom';
 import ItemCount from '../containers/ProductCount';
 
-const ProductSaleInfo = ({sale, stock, amount, addItem, removeItem, handleAddToCart, isInCart}) => {
+const ProductSaleInfo = ({sale, stock, amount, addItem, removeItem, handleAddToCart, isInCart, handleOpenModal}) => {
   return (
     <div className='ProductSaleInfo'>
              <div className='book-sale-group'>
@@ -44,7 +44,7 @@ const ProductSaleInfo = ({sale, stock, amount, addItem, removeItem, handleAddToC
                 ?
                 <>
                   <button className='sale-btn add-cart'onClick={()=>handleAddToCart()} disabled={isInCart}> Add to cart </button>
-                  <button className='sale-btn buy-now'> Buy it now </button>
+                  <button onClick={()=>handleOpenModal()} className='sale-btn buy-now'> Buy it now </button>
                 </>
                 : (sale.saleability == "FREE")
                 ? <a href={sale.buyLink} target="_blank">Get it now</a>

@@ -2,8 +2,10 @@ import React, {useContext, useState, useEffect} from 'react';
 import '../styles/ProductDetail.scss'
 import {NavLink} from 'react-router-dom'
 import { CartContext } from '../context/CartContext';
-import ItemCount from '../containers/ProductCount';
 import ProductSaleInfo from '../containers/ProductSaleInfo';
+import BuyModal from '../containers/BuyModal';
+import { useNavigate } from 'react-router-dom';
+
 
 const ProductDetail = ({product, categories, stock}) => {
   const defaultCategories = 5;
@@ -12,6 +14,12 @@ const ProductDetail = ({product, categories, stock}) => {
   const [isInCart, setIsInCart] = useState(false);
 
   const {addCartItem, productIsInCart} = useContext(CartContext)
+
+  // vars for modal
+  const [orderdata, setorderdata] = useState({fname:'', fLastName:'', femail:'', totalItems: ''})
+  const [modalStyle, setModalStyle] = useState("hide")
+  const [orderCompleted, setOrderCompleted] = useState(false);
+  // end vars for modal
 
   const details = product.volumeInfo;
   const sale = product.saleInfo;
@@ -53,6 +61,41 @@ const ProductDetail = ({product, categories, stock}) => {
     }
     console.log(seeAllCategories)
   }
+
+  // methods for modal
+  const handleUserInput = (event)=>{
+    const name = event.target.name;
+    const value = event.target.value;
+    let state = orderdata;
+    state[name] = value;
+    setorderdata(state);
+  }
+
+  const handleOnComplete = (event) => {
+      console.log(orderdata)
+      let validForm = true;
+      if (orderdata.fname == ''|| orderdata.flstname == '' || orderdata.femail == '') {
+          alert("Please fill out every input form")
+          return;
+      }
+      setOrderCompleted(true)
+  }
+
+  const handleOpenModal = () => {
+      console.log("handleOpenModal");
+      setModalStyle("show")
+  }
+
+  const handleCloseModal = () => {
+      console.log("handleCloseModal");
+      setModalStyle("hide")
+  }
+  let navigate = useNavigate();
+  const handleCloseConfirmation = () =>{
+      setModalStyle("hide");
+      navigate('/')
+  }
+  // end of methods for modal
 
   useEffect(() => {
     try{
@@ -140,7 +183,8 @@ const ProductDetail = ({product, categories, stock}) => {
       <ProductSaleInfo sale ={sale} stock={stock} amount={amount}
                         addItem={addItem} removeItem={removeItem}
                         handleAddToCart={handleAddToCart} 
-                        isInCart={isInCart} className="ProductSaleInfo">                
+                        isInCart={isInCart} handleOpenModal={handleOpenModal}
+                        className="ProductSaleInfo">                
       </ProductSaleInfo>
     </section>
     </div>
@@ -150,6 +194,13 @@ const ProductDetail = ({product, categories, stock}) => {
       <br/>
       <p style={{textAlign: 'justify'}} dangerouslySetInnerHTML={{ __html: details.description}}></p>
     </section>
+
+        {/**** MODAL****/}
+        <BuyModal
+                modalStyle={modalStyle} orderCompleted={orderCompleted} 
+                handleCloseModal={handleCloseModal} handleUserInput={handleUserInput} 
+                handleOnComplete={handleOnComplete} handleCloseConfirmation={handleCloseConfirmation}
+        ></BuyModal>
   </div>  
   );
 };

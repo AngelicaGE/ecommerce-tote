@@ -42,11 +42,3 @@ export function getAllCategories(){
 } 
 
 export const allCategories = ["Child", "Romance", "Science", "Young Adult Nonfiction"]
-
-export const completePurchase = new Promise((resolve, reject) => {
-    setTimeout(() => {
-        // Generate order number
-        let orderNum = Math.floor(Math.random() * 300) + 1234;
-        resolve(orderNum)
-    }, 2000);
-});
