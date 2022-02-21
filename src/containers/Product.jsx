@@ -8,7 +8,6 @@ const Product = ({ id, name, saleability, price, imagePath, freeLink}) => {
     return(
         <div className='ProductItem' onMouseEnter={() => setselected(true)} onMouseLeave={() => setselected(false)}>
                 <picture>
-                    
                     <img src={imagePath?.thumbnail} alt={'producto ' + name} className={selected? 'selected':''}/>
                 </picture>
                 <p className='name'>{name}</p>

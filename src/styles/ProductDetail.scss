@@ -95,7 +95,7 @@ section{
     display: flex;
 }
 .book-sale-info{
-    background-color: var(--slack-yellow);
+    background-color: #edb22a28;
     border: 1px solid var(--lemon-curry);
     color: var(--slack-purple);
     font-weight: 600;
@@ -104,13 +104,17 @@ section{
     text-decoration: none;
     padding: 1rem;
     border-radius: 25px;
-    margin: 0.2rem 0;
+    margin: 0.2rem 0.5rem;
     font-weight: bold;
     cursor: pointer;
 }
 .add-cart{
+    background-color: var(--slack-yellow);
+    border: 1px solid var(--slack-yellow);
+    color:white;
+}
+.add-cart:hover{
     background-color: var(--white);
-    color: var(--twilight-lavender);
     border: 1px solid var(--lemon-curry);
     color:var(--lemon-curry)
 }
@@ -134,6 +138,10 @@ section{
 }
 .ProductSaleInfo a{
     margin-bottom: 1rem;
+}
+.sale-btns{
+    display: flex;
+    flex-direction: row;
 }
 
 // SYNOPSIS

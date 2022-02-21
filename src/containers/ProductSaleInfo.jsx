@@ -36,15 +36,19 @@ const ProductSaleInfo = ({sale, stock, amount, addItem, removeItem, handleAddToC
           {
                 (sale.saleability == "FOR_SALE")
                 ?
-                <>
+                <div className='sale-btns'>
                   <button className='sale-btn add-cart'onClick={()=>handleAddToCart()} disabled={isInCart}> Add to cart </button>
                   <button onClick={()=>handleOpenModal()} className='sale-btn buy-now'> Buy it now </button>
-                </>
+                </div>
                 : (sale.saleability == "FREE")
                 ? <a href={sale.buyLink} className='sale-btn buy-now' target="_blank">Get it now</a>
                 : ''
             }
             { sale.saleability == "FOR_SALE"?<NavLink to="/cart">See in cart</NavLink>:'' }
+            <hr />
+            <hr />
+            <p>add to favs</p>
+            
     </div>
   )
 }

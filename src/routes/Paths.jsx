@@ -9,6 +9,7 @@ import SearchContainer from '../components/SearchContainer';
 import Landing from '../components/Landing';
 import ProductsContainer from '../components/ProductsContainer';
 import Cart from '../components/Cart';
+import NewArrivals from '../components/NewArrivals';
 
 const Paths = () => {
   return (
@@ -22,6 +23,7 @@ const Paths = () => {
         <Route path="/product/:id" element={<ProductDetailContainer/>}/>
         <Route path="/about" element={<About></About>}></Route>
         <Route path="/free" element={<SearchProductsContainer message='Free e-books' filter='full' maxResults={40}/>}></Route>
+        <Route path="/NewArrivals" element={<NewArrivals></NewArrivals>}></Route>
         <Route path="/search" element={<SearchContainer/>}></Route>
         <Route path="/cart" element={<Cart></Cart>} ></Route>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      "
         <Route path="*" element={<NotFound></NotFound>}></Route>
