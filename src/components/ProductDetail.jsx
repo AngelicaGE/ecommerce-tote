@@ -190,9 +190,10 @@ const ProductDetail = ({product, categories, stock}) => {
     </div>
 
     <section className='book-synopsis'>
-      <p className='section-title'>Synopsis</p>
+      {details.description? <p className='section-title'>Synopsis</p>:''}
       <br/>
       <p style={{textAlign: 'justify'}} dangerouslySetInnerHTML={{ __html: details.description}}></p>
+      
     </section>
 
         {/**** MODAL****/}

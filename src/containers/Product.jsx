@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { Link, NavLink } from "react-router-dom";
 import '../styles/Product.scss'
 
-const Product = ({hookAPI, id, name, saleability, price, imagePath}) => {
+const Product = ({ id, name, saleability, price, imagePath, freeLink}) => {
     const [selected, setselected] = useState(false);
 
     return(
@@ -21,8 +21,12 @@ const Product = ({hookAPI, id, name, saleability, price, imagePath}) => {
                     <p className='price'>FREE</p>
                     :
                     <p className='price'>Not for sale</p>
+                }
+                {
+                 (saleability == "FREE" && freeLink)?<a href={freeLink} target="_blank"id="ver-mas" className={selected? 'selected':'unselected'} type='button'>Get book</a>
+                 :<Link to={`/product/${id}`} id="ver-mas" className={selected? 'selected':'unselected'} type='button'>View details</Link>
+
                 }             
-                <Link to={`/product/${id}`} id="ver-mas" className={selected? 'selected':'unselected'} type='button'>View details</Link>
         </div>
     );
 };

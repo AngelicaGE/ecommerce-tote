@@ -10,8 +10,7 @@ const ProductSaleInfo = ({sale, stock, amount, addItem, removeItem, handleAddToC
               (sale.saleability == "FOR_SALE")
               ?
                 <>
-                  <p>Price: </p>
-                  <p> ${sale.listPrice.amount} {sale.listPrice.currencyCode}</p>
+                  <p>Price: </p> <p> ${sale.listPrice.amount} {sale.listPrice.currencyCode}</p>
                 </>
               : (sale.saleability == "FREE")
               ? <p>Price: FREE</p>
@@ -23,13 +22,8 @@ const ProductSaleInfo = ({sale, stock, amount, addItem, removeItem, handleAddToC
           {
               (sale.saleability == "FOR_SALE" && stock)
               ?
-                <>
-                  <p>Units in stock: </p>
-                  <p> {stock}</p>
-                </>  
-              : (sale.saleability == "FREE")
-              ? ''            
-              : <p>Not for sale, sorry :/</p> 
+                <><p>Units in stock: </p><p> {stock}</p></>  
+              : ''            
               }
       </div>
 
@@ -47,10 +41,10 @@ const ProductSaleInfo = ({sale, stock, amount, addItem, removeItem, handleAddToC
                   <button onClick={()=>handleOpenModal()} className='sale-btn buy-now'> Buy it now </button>
                 </>
                 : (sale.saleability == "FREE")
-                ? <a href={sale.buyLink} target="_blank">Get it now</a>
-                : <p>Not for sale, sorry :/</p> 
+                ? <a href={sale.buyLink} className='sale-btn buy-now' target="_blank">Get it now</a>
+                : ''
             }
-            <NavLink to="/cart">See in cart</NavLink>
+            { sale.saleability == "FOR_SALE"?<NavLink to="/cart">See in cart</NavLink>:'' }
     </div>
   )
 }

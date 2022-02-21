@@ -5,9 +5,9 @@ import useGetProducts from '../hooks/useGetProducts';
 import ProductList from './ProductList';
 import { ScrollerTop } from '../containers/ScrollerTop';
 
-const SearchProductsContainer = ({message='', maxResults=40}) => {
+const SearchProductsContainer = ({message='', filter='paid-ebooks', maxResults=40}) => {
     const { id } = useParams();
-    const [API, setAPI] = useState(`https://www.googleapis.com/books/v1/volumes?q=${id}+subject&filter=paid-ebooks&maxResults=${maxResults}`)
+    const [API, setAPI] = useState(`https://www.googleapis.com/books/v1/volumes?q=${id}+subject&filter=${filter}&maxResults=${maxResults}`)
 
     const {products, loading, error} = useGetProducts(API);
 
@@ -18,7 +18,7 @@ const SearchProductsContainer = ({message='', maxResults=40}) => {
                 loading? <h1>LOADING</h1>: ''
             }
             <p>{error}</p>
-            <ProductList products={products} hookAPI={true}></ProductList>
+            <ProductList products={products}></ProductList>
             <div>
                 <ScrollerTop/>
             </div>

@@ -22,7 +22,7 @@ const Navbar = ({name, clickOnMenu}) => {
                         <NavLink to="fghj" className={({isActive}) => (isActive? 'activeClass': '')}>New arrivals</NavLink>
                     </li>
                     <li className='tote-page'>
-                        <NavLink to='fgj' className={({isActive}) => (isActive? 'activeClass': '')}>Sale</NavLink>
+                        <NavLink to='/free' className={({isActive}) => (isActive? 'activeClass': '')}>Free</NavLink>
                     </li>
                     <li className='tote-page'>
                         <NavLink to="/about" className={({isActive}) => isActive? 'activeClass': ''}>

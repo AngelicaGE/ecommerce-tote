@@ -21,6 +21,7 @@ const Paths = () => {
         <Route path="/search/:id" element={<SearchProductsContainer message='Search: ' maxResults={40}/>}/>
         <Route path="/product/:id" element={<ProductDetailContainer/>}/>
         <Route path="/about" element={<About></About>}></Route>
+        <Route path="/free" element={<SearchProductsContainer message='Free e-books' filter='full' maxResults={40}/>}></Route>
         <Route path="/search" element={<SearchContainer/>}></Route>
         <Route path="/cart" element={<Cart></Cart>} ></Route>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      "
         <Route path="*" element={<NotFound></NotFound>}></Route>
