@@ -4,7 +4,7 @@ import { CartContext } from '../context/CartContext'
 import {NavLink } from 'react-router-dom'
 import CartProduct from '../containers/CartProduct'
 import BuyModal from '../containers/BuyModal'
-import {collection, addDoc, query, orderBy, doc, getDoc, getDocs, getFirestore} from "firebase/firestore"
+import {collection, addDoc, query, orderBy, doc, getDoc, getDocs, getFirestore, setDoc} from "firebase/firestore"
 
 const Cart = () => {
     const {cartItems, removeCartItem, clearCart, updateCartItem} = useContext(CartContext)
@@ -68,26 +68,22 @@ const Cart = () => {
         setorderdata(state);
     }
 
-    const handleOnComplete = (event) => {
+    const db = getFirestore();
+    const handleOnComplete =async () => {
         console.log(orderdata)
-        let validForm = true;
         if (orderdata.fname == ''|| orderdata.flstname == '' || orderdata.femail == '') {
             alert("Please fill out every input form")
             return;
         }
-
         const order = {
             orderdata,
             cartItems
         }
-
-        const db = getFirestore();
-
-        const ordersCollection = collection(db, "orders");
-        addDoc(ordersCollection, order).then((id) =>{
-            setOrderNumber(id)
-            setOrderCompleted(true)
-        })
+        
+        const docRef = await addDoc(collection(db, "orders"), order);
+        console.log(docRef.id)
+        setOrderNumber(docRef.id)
+        setOrderCompleted(true)
     }
 
     const handleOpenModal = () => {

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import InfoBlock from '../containers/InfoBlock';
-import selfie from '../assets/images/angie.jpeg'
 import {collection, query, orderBy, doc, getDoc, getDocs, getFirestore} from "firebase/firestore"
 
 const About = () => {
