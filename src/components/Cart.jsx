@@ -71,6 +71,7 @@ const Cart = () => {
     const db = getFirestore();
     const handleOnComplete =async () => {
         console.log(orderdata)
+        console.log(cartItems)
         if (orderdata.fname == ''|| orderdata.flstname == '' || orderdata.femail == '') {
             alert("Please fill out every input form")
             return;

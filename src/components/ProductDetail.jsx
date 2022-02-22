@@ -40,7 +40,7 @@ const ProductDetail = ({product, categories, stock}) => {
     // create new item with only properties needed for cart
     const item = {"id": product.id, 
                   "title": details.title,
-                  "subtitle": details.subtitle,
+                  "subtitle": details.subtitle? details.subtitle:'',
                   "price": sale.listPrice.amount,
                   "currency": sale.listPrice.currencyCode,
                   "stock": stock,
