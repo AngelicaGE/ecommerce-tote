@@ -4,11 +4,13 @@ import { CartContext } from '../context/CartContext'
 import {NavLink } from 'react-router-dom'
 import CartProduct from '../containers/CartProduct'
 import BuyModal from '../containers/BuyModal'
+import {collection, addDoc, query, orderBy, doc, getDoc, getDocs, getFirestore} from "firebase/firestore"
 
 const Cart = () => {
     const {cartItems, removeCartItem, clearCart, updateCartItem} = useContext(CartContext)
     const [total, setTotal] = useState()
     const [orderdata, setorderdata] = useState({fname:'', fLastName:'', femail:'', totalItems: ''})
+    const [orderNumber, setOrderNumber] = useState(null);
     const [modalStyle, setModalStyle] = useState("hide")
     const [orderCompleted, setOrderCompleted] = useState(false);
 
@@ -73,7 +75,19 @@ const Cart = () => {
             alert("Please fill out every input form")
             return;
         }
-        setOrderCompleted(true)
+
+        const order = {
+            orderdata,
+            cartItems
+        }
+
+        const db = getFirestore();
+
+        const ordersCollection = collection(db, "orders");
+        addDoc(ordersCollection, order).then((id) =>{
+            setOrderNumber(id)
+            setOrderCompleted(true)
+        })
     }
 
     const handleOpenModal = () => {
@@ -135,6 +149,7 @@ const Cart = () => {
                 modalStyle={modalStyle} orderCompleted={orderCompleted} 
                 handleCloseModal={handleCloseModal} handleUserInput={handleUserInput} 
                 handleOnComplete={handleOnComplete} handleCloseConfirmation={handleCloseConfirmation}
+                orderNumber={orderNumber}
         ></BuyModal>
     </div>
     )

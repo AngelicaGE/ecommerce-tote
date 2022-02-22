@@ -62,6 +62,10 @@ const ProductDetail = ({product, categories, stock}) => {
     console.log(seeAllCategories)
   }
 
+  const handleAddToFavs = ()=>{
+    
+  }
+
   // methods for modal
   const handleUserInput = (event)=>{
     const name = event.target.name;
@@ -97,6 +101,7 @@ const ProductDetail = ({product, categories, stock}) => {
   }
   // end of methods for modal
 
+
   useEffect(() => {
     try{
       let res = productIsInCart(product.id);
@@ -128,6 +133,8 @@ const ProductDetail = ({product, categories, stock}) => {
         }  
       </div>
     </section>
+
+        <button onClick={() => handleAddToFavs()}>Add to favorites</button>
 
     <section className='book-categories'>
       <div className="categories">

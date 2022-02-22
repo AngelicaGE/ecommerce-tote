@@ -3,7 +3,7 @@ import '../styles/BuyModal.scss'
 
 const BuyModal = ({
     modalStyle, orderCompleted, handleCloseModal, 
-    handleUserInput, handleOnComplete, handleCloseConfirmation}) => {
+    handleUserInput, handleOnComplete, handleCloseConfirmation, orderNumber="12345"}) => {
         
   return (
     <div id="myModal" className={`BuyModal modal ${modalStyle}`}>
@@ -43,7 +43,7 @@ const BuyModal = ({
                 orderCompleted?
                 <div className='message-complete'>
                     <div className='message'>
-                        <p>Congratulations you have completed your order. Please take note of your purchase order: <strong>{Math.floor(Math.random() * 300) + 1315996} </strong> 
+                        <p>Congratulations you have completed your order. Please take note of your purchase order: <strong>{orderNumber} </strong> 
                         <br/> Happy reading :)</p>
                     </div>
                     <div className='form-complete'>
