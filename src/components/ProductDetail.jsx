@@ -5,6 +5,7 @@ import { CartContext } from '../context/CartContext';
 import ProductSaleInfo from '../containers/ProductSaleInfo';
 import BuyModal from '../containers/BuyModal';
 import { useNavigate } from 'react-router-dom';
+import {collection, addDoc, query, orderBy, doc, getDoc, getDocs, getFirestore, setDoc} from "firebase/firestore"
 
 
 const ProductDetail = ({product, categories, stock}) => {
@@ -12,13 +13,13 @@ const ProductDetail = ({product, categories, stock}) => {
   const [seeAllCategories, setSeeAllCategories] = useState(defaultCategories)
   const [amount, setAmount] = useState(1)
   const [isInCart, setIsInCart] = useState(false);
+  const [orderdata, setorderdata] = useState({fname:'', fLastName:'', femail:'', totalItems: ''})
+
 
   const {addCartItem, productIsInCart} = useContext(CartContext)
 
   // vars for modal
-  const [orderdata, setorderdata] = useState({fname:'', fLastName:'', femail:'', totalItems: ''})
   const [modalStyle, setModalStyle] = useState("hide")
-  const [orderCompleted, setOrderCompleted] = useState(false);
   // end vars for modal
 
   const details = product.volumeInfo;
@@ -35,8 +36,7 @@ const ProductDetail = ({product, categories, stock}) => {
     setAmount(amount - 1);
   };
 
-  const handleAddToCart = () => {
-    console.log("****** ADDING THE PRODUCT ******")
+  const createItem = () => {
     // create new item with only properties needed for cart
     const item = {"id": product.id, 
                   "title": details.title,
@@ -45,6 +45,12 @@ const ProductDetail = ({product, categories, stock}) => {
                   "currency": sale.listPrice.currencyCode,
                   "stock": stock,
                   amount}
+    return item;
+  }
+  
+  const handleAddToCart = () => {
+    console.log("****** ADDING THE PRODUCT ******")
+    const item = createItem();
     console.log(item)
     // delete product?.kind
     addCartItem(item); 
@@ -67,33 +73,12 @@ const ProductDetail = ({product, categories, stock}) => {
   }
 
   // methods for modal
-  const handleUserInput = (event)=>{
-    const name = event.target.name;
-    const value = event.target.value;
-    let state = orderdata;
-    state[name] = value;
-    setorderdata(state);
-  }
-
-  const handleOnComplete = (event) => {
-      console.log(orderdata)
-      let validForm = true;
-      if (orderdata.fname == ''|| orderdata.flstname == '' || orderdata.femail == '') {
-          alert("Please fill out every input form")
-          return;
-      }
-      setOrderCompleted(true)
-  }
 
   const handleOpenModal = () => {
-      console.log("handleOpenModal");
-      setModalStyle("show")
-  }
+    console.log("handleOpenModal");
+    setModalStyle("show")
+}
 
-  const handleCloseModal = () => {
-      console.log("handleCloseModal");
-      setModalStyle("hide")
-  }
   let navigate = useNavigate();
   const handleCloseConfirmation = () =>{
       setModalStyle("hide");
@@ -205,9 +190,12 @@ const ProductDetail = ({product, categories, stock}) => {
 
         {/**** MODAL****/}
         <BuyModal
-                modalStyle={modalStyle} orderCompleted={orderCompleted} 
-                handleCloseModal={handleCloseModal} handleUserInput={handleUserInput} 
-                handleOnComplete={handleOnComplete} handleCloseConfirmation={handleCloseConfirmation}
+                modalStyle={modalStyle}
+                handleCloseConfirmation={handleCloseConfirmation}
+                products={createItem()}
+                orderdata={orderdata}
+                setorderdata={setorderdata}
+                setModalStyle={setModalStyle}
         ></BuyModal>
   </div>  
   );

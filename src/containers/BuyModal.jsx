@@ -1,13 +1,49 @@
-import React from 'react'
+import React, {useState} from 'react'
 import '../styles/BuyModal.scss'
+import {collection, addDoc, getFirestore} from "firebase/firestore"
 
-const BuyModal = ({
-    modalStyle, orderCompleted, handleCloseModal, 
-    handleUserInput, handleOnComplete, handleCloseConfirmation, orderNumber="12345"}) => {
+const BuyModal = ({ modalStyle, handleCloseConfirmation, products, orderdata, setorderdata, setModalStyle}) => {
+
+        const [orderCompleted, setOrderCompleted] = useState(false);
+        const [orderNumber, setOrderNumber] = useState(null);
+
+        const handleUserInput = (event)=>{
+            const name = event.target.name;
+            const value = event.target.value;
+            let state = orderdata;
+            state[name] = value;
+            setorderdata(state);
+          }
+        
+          const db = getFirestore();
+          const handleOnComplete = async () => {
+              console.log(orderdata)
+              console.log(products)
+        
+              if (orderdata.fname == ''|| orderdata.fLastName == '' || orderdata.femail == '') {
+                  alert("Please fill out every input form")
+                  return;
+              }
+              const order = {
+                orderdata,
+                products 
+            }
+        
+            const docRef = await addDoc(collection(db, "orders"), order);
+            console.log(docRef.id)
+            setOrderNumber(docRef.id)
+            setOrderCompleted(true)
+          }
+
+
+      
+        const handleCloseModal = () => {
+            console.log("handleCloseModal");
+            setModalStyle("hide")
+        }
         
   return (
     <div id="myModal" className={`BuyModal modal ${modalStyle}`}>
-    {/**** MODAL DISPLAY FUNCTIONALITY BASED ON W3S CODE: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal ****/}
         <div className="modal-content">
             {
                 !orderCompleted?
@@ -35,7 +71,7 @@ const BuyModal = ({
                 {
                     !orderCompleted?
                     <div className='form-complete'>
-                        <button className='cart-btn btn-complete' type="submit" onClick={(event)=>handleOnComplete(event)}>Complete purchase</button>
+                        <button className='cart-btn btn-complete' type="submit" onClick={()=>handleOnComplete()}>Complete purchase</button>
                     </div>: ''
                 }
             </div>

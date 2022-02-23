@@ -9,10 +9,9 @@ import {collection, addDoc, query, orderBy, doc, getDoc, getDocs, getFirestore, 
 const Cart = () => {
     const {cartItems, removeCartItem, clearCart, updateCartItem} = useContext(CartContext)
     const [total, setTotal] = useState()
-    const [orderdata, setorderdata] = useState({fname:'', fLastName:'', femail:'', totalItems: ''})
-    const [orderNumber, setOrderNumber] = useState(null);
     const [modalStyle, setModalStyle] = useState("hide")
-    const [orderCompleted, setOrderCompleted] = useState(false);
+    const [orderdata, setorderdata] = useState({fname:'', fLastName:'', femail:'', totalItems: ''})
+
 
 
     useEffect(() => {
@@ -59,44 +58,13 @@ const Cart = () => {
         console.log("click clear")
         clearCart()
     }
-
-    const handleUserInput = (event)=>{
-        const name = event.target.name;
-        const value = event.target.value;
-        let state = orderdata;
-        state[name] = value;
-        setorderdata(state);
-    }
-
-    const db = getFirestore();
-    const handleOnComplete =async () => {
-        console.log(orderdata)
-        console.log(cartItems)
-        
-        if (orderdata.fname == ''|| orderdata.flstname == '' || orderdata.femail == '') {
-            alert("Please fill out every input form")
-            return;
-        }
-        const order = {
-            orderdata,
-            cartItems
-        }
-        
-        const docRef = await addDoc(collection(db, "orders"), order);
-        console.log(docRef.id)
-        setOrderNumber(docRef.id)
-        setOrderCompleted(true)
-    }
-
     const handleOpenModal = () => {
         console.log("handleOpenModal");
         setModalStyle("show")
     }
+    // modal
 
-    const handleCloseModal = () => {
-        console.log("handleCloseModal");
-        setModalStyle("hide")
-    }
+
 
     const handleCloseConfirmation = () =>{
         clearCart()
@@ -144,10 +112,12 @@ const Cart = () => {
 
         {/**** MODAL****/}
         <BuyModal
-                modalStyle={modalStyle} orderCompleted={orderCompleted} 
-                handleCloseModal={handleCloseModal} handleUserInput={handleUserInput} 
-                handleOnComplete={handleOnComplete} handleCloseConfirmation={handleCloseConfirmation}
-                orderNumber={orderNumber}
+                modalStyle={modalStyle} 
+                handleCloseConfirmation={handleCloseConfirmation}
+                products={cartItems}
+                orderdata={orderdata}
+                setorderdata={setorderdata}
+                setModalStyle={setModalStyle}
         ></BuyModal>
     </div>
     )
