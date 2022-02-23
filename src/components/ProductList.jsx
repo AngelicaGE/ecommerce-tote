@@ -4,20 +4,19 @@ import useGetProducts from '../hooks/useGetProducts';
 import Product from '../containers/Product';
 import '../styles/ProductList.scss'
 
-const ProductList = ({products, hookAPI}) => {
+const ProductList = ({category, products}) => {
   return (
     <div className='ProductList'>
+      <h1>{category}</h1>
         <div className='products-container'>
             {
                 products.map(product => (
                       <Product 
-                        hookAPI={hookAPI}
                         id={product.id} 
                         key={product.id} 
-                        name={product.volumeInfo.title} 
-                        saleability = {product.saleInfo.saleability}
-                        price={product.saleInfo.listPrice} 
-                        imagePath={product.volumeInfo.imageLinks}>
+                        name={product.name} 
+                        price={product.price} 
+                        imagePath={product.imagePath}>
                       </Product>
                   ))
             }
