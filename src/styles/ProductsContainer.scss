@@ -10,7 +10,7 @@
     text-align: center;
     padding: var(--sm);
     border-radius: 25px;
-    color: var(--slack-purple);
+    color: white;//var(--slack-purple);
 }
 .see-all{
     padding: 0 var(--sm);
@@ -30,7 +30,7 @@
 
  @media(min-width:800px){
     .category-title{
-        font-size: x-large;
+        font-size: xx-large;
     }
  }
 
