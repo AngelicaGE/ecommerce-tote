@@ -45,7 +45,9 @@ const Navbar = ({name, clickOnMenu}) => {
                         </NavLink>
                     </li>
                     <li className='user-page whishlist'>
-                        <img alt='wishlist icon' src={wishlistIcon}/>
+                        <NavLink to ="/wishlist">
+                            <img alt='wishlist icon' src={wishlistIcon}/>
+                        </NavLink>
                     </li>
                     <li className='user-page cart'>
                         <NavLink to="/cart">

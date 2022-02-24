@@ -18,8 +18,8 @@ const SideNavbar = ({clickOnMenu}) => {
                         <NavLink to='/free' className={({isActive}) => (isActive? 'activeClass': '')}>Free</NavLink>
                     </li>
                     <li className='tote-page favs'>
-                        <NavLink to="/favs" className={({isActive}) => isActive? 'activeClass': ''}>
-                            My Favorities
+                        <NavLink to="/wishlist" className={({isActive}) => isActive? 'activeClass': ''}>
+                            Wishlist
                         </NavLink>                    
                     </li>
                     <li className='tote-page'>

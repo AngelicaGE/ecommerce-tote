@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { NavLink } from "react-router-dom";
 import ItemCount from "../containers/ProductCount";
 import HeartBorder from '../assets/icons/heart-empty-white-24.png'
 import HeartFull from '../assets/icons/heart-full-white-24.png'
 import useLocalStorage from "../hooks/useLocalStorage";
+
+const key = `likes`;
 
 const ProductSaleInfo = ({
   id,
@@ -16,10 +18,29 @@ const ProductSaleInfo = ({
   isInCart,
   handleOpenModal,
 }) => {
-  const key = `like-${id}`;
-  const [isLiked, setIsLiked] = useLocalStorage(key, false);
+  const [isLiked, setIsLiked] = useState()
+  const [likes, setLikes] = useLocalStorage(key, []);
+
+  useEffect(() => {
+    const likeIndex = likes.find(like => like === id);
+    if(likeIndex){
+      setIsLiked(true)
+    }else{
+      setIsLiked(false)
+    }
+  }, [likes])
+  
+
   const handleAddToFavs = () => {
-    setIsLiked(!isLiked);
+    const likeIndex = likes.find(like => like === id);
+    let newLikes;
+    if(likeIndex){
+      newLikes = [...likes];
+      newLikes = newLikes.filter(like => like !== id)
+    }else{
+      newLikes = [...likes, id];
+    }
+    setLikes(newLikes);
   };
 
   return (
