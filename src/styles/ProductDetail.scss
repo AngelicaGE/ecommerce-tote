@@ -143,6 +143,18 @@ section{
     display: flex;
     flex-direction: row;
 }
+.like-cont{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #edb22a28;//rgb(216, 214, 214);;
+    padding: 1.2rem;
+}
+.like-cont img, 
+.like-cont p{
+    margin-right: 1rem;
+    cursor: pointer;
+}
 
 // SYNOPSIS
 section .book-synopsis{
