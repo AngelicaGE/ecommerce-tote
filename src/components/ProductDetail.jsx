@@ -45,6 +45,8 @@ const ProductDetail = ({ product, categories, stock }) => {
       currency: sale.listPrice.currencyCode,
       stock: stock,
       amount,
+      imagePath: images.thumbnail,
+      author: details.authors[0]
     };
     return item;
   };

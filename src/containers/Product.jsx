@@ -23,7 +23,7 @@ const Product = ({ id, name, saleability, price, imagePath, freeLink}) => {
                 }
                 {
                  (saleability == "FREE" && freeLink)?<a href={freeLink} target="_blank"id="ver-mas" className={selected? 'selected':'unselected'} type='button'>Get book</a>
-                 :<Link to={`/product/${id}`} id="ver-mas" className={selected? 'selected':'unselected'} type='button'>View details</Link>
+                 :<Link to={`/product/${id}`} id="ver-mas" className={`view-details-btn ${selected? 'selected':'unselected'}`} type='button'>View details</Link>
 
                 }             
         </div>

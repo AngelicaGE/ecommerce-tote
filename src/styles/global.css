@@ -17,6 +17,16 @@ html{
 }
 
 
+.view-details-btn{
+    width: 100%;
+    background-color: black;
+    color: white;
+    display: inline-block;
+    border:2px;
+    padding: 1rem 0;    
+    text-decoration: none;
+}
+
 
 
 .see-all{
