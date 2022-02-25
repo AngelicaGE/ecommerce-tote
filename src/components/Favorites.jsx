@@ -11,7 +11,7 @@ const Favorites = () => {
       <h1>products in wishlist</h1><br /><br />
         {
           likes.map((prod) =>(
-            <h1>{prod}m</h1>
+            <h1>{prod.id}</h1>
           ))
         }
     </div>

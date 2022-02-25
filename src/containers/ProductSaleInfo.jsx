@@ -8,7 +8,7 @@ import useLocalStorage from "../hooks/useLocalStorage";
 const key = `likes`;
 
 const ProductSaleInfo = ({
-  id,
+  productInfo,
   sale,
   stock,
   amount,
@@ -22,7 +22,7 @@ const ProductSaleInfo = ({
   const [likes, setLikes] = useLocalStorage(key, []);
 
   useEffect(() => {
-    const likeIndex = likes.find(like => like === id);
+    const likeIndex = likes.find(like => like.id === productInfo.id);
     if(likeIndex){
       setIsLiked(true)
     }else{
@@ -32,14 +32,18 @@ const ProductSaleInfo = ({
   
 
   const handleAddToFavs = () => {
-    const likeIndex = likes.find(like => like === id);
+    //const likeIndex = likes.find(like => like === id);
+    const likeIndex = likes.find(like => like.id === productInfo.id);
     let newLikes;
     if(likeIndex){
       newLikes = [...likes];
-      newLikes = newLikes.filter(like => like !== id)
+      //newLikes = newLikes.filter(like => like !== id)
+      newLikes = newLikes.filter(like => like.id !== productInfo.id)
     }else{
-      newLikes = [...likes, id];
+      //newLikes = [...likes, id];
+      newLikes = [...likes, productInfo];
     }
+    console.log(newLikes);
     setLikes(newLikes);
   };
 

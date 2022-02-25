@@ -5,7 +5,6 @@ import { CartContext } from "../context/CartContext";
 import ProductSaleInfo from "../containers/ProductSaleInfo";
 import BuyModal from "../containers/BuyModal";
 import { useNavigate } from "react-router-dom";
-import useLocalStorage from "../hooks/useLocalStorage";
 
 const defaultCategories = 5;
 
@@ -186,7 +185,7 @@ const ProductDetail = ({ product, categories, stock }) => {
 
         <section className="book-sale-info">
           <ProductSaleInfo
-            id={product.id}
+            productInfo={createItem()}
             sale={sale}
             stock={stock}
             amount={amount}
