@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore} from "firebase/firestore"
-import { getAuth, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 
 
@@ -21,19 +21,7 @@ export const db = getFirestore();
 export const google_provider = new GoogleAuthProvider();
 export const auth = getAuth();
 
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-      const uid = user.uid;
-      console.log("user logged: " + uid)
-      // ...
-    } else {
-      // User is signed out
-      // ...
-      console.log("no user is logged")
-    }
-  });
+
 
 /*    signInWithPopup(auth, google_provider)
       .then((result) => {

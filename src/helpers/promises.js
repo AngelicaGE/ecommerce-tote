@@ -1,11 +1,3 @@
-import books from '../data/books.js'
-export const getProducts = new Promise((resolve, reject) => {
-    setTimeout(() => {
-        //console.log('in the promise getProducts');
-        resolve(books)
-    }, 2000);
-} );
-
 export function getCategories(categories){
     return new Promise((resolve, reject) => {
         //console.log('in the promise getCategories');

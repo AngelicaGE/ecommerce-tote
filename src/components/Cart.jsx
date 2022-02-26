@@ -12,8 +12,6 @@ const Cart = () => {
     const [modalStyle, setModalStyle] = useState("hide")
     const [orderdata, setorderdata] = useState({fname:'', fLastName:'', femail:'', totalItems: ''})
 
-
-
     useEffect(() => {
         //TODO. why is this not getting called after onUpdateAmountItem is called?
         console.log("use effect")

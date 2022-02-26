@@ -1,0 +1,48 @@
+.UserModal{
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 6.72rem;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+}
+.user-modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    right: 0;
+    top: 6rem;
+    display: flex;
+    flex-direction: column;
+    width: 35rem;
+    cursor: auto;
+  }
+  .welcome-message{
+      margin-top: 1rem;
+      margin-bottom: 0.8rem;
+  }
+  .log{
+      margin-top: 1rem;
+      color:red;
+  }
+  .user-info{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+  .welcome-message{
+      width: 100%;
+  }
+  .user-info img{
+      width: 5rem;
+      border-radius: 50%;
+  }
+  .user-email{
+      padding-top: 1rem;
+      padding-left: 0.3rem;
+  }
