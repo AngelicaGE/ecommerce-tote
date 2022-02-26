@@ -20,7 +20,7 @@ const BuyModal = ({ modalStyle, handleCloseConfirmation, products, orderdata, se
               console.log(orderdata)
               console.log(products)
         
-              if (orderdata.fname == ''|| orderdata.fLastName == '' || orderdata.femail == '') {
+              if (orderdata.fname === ''|| orderdata.fLastName === '' || orderdata.femail === '') {
                   alert("Please fill out every input form")
                   return;
               }

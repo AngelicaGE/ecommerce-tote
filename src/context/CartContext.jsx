@@ -1,4 +1,4 @@
-import {useState, createContext, useEffect } from "react";
+import {createContext, useEffect } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 const key = 'cart';
@@ -24,13 +24,13 @@ export const CartProvider = ({children}) => {
     };
 
     const removeCartItem = (cartItemId) => {
-        setCartItems(cartItems.filter((item) => item.id != cartItemId))
+        setCartItems(cartItems.filter((item) => item.id !== cartItemId))
     };
 
     const updateCartItem = (cartItemId, newAmount) => {
         console.log("updateCartItem")
         // grab specific item
-        let item = cartItems.find((prod) => prod.id == cartItemId)
+        let item = cartItems.find((prod) => prod.id === cartItemId)
         function  search(el){
             return el.id === cartItemId;
             }

@@ -145,8 +145,8 @@ const ProductDetail = ({ product, categories, stock }) => {
                 : categories.length <= seeAllCategories &&
                   seeAllCategories > defaultCategories
                 ? "See less..."
-                : categories.length == seeAllCategories &&
-                  seeAllCategories != defaultCategories
+                : categories.length === seeAllCategories &&
+                  seeAllCategories !== defaultCategories
                 ? "See less..."
                 : ""}
             </p>

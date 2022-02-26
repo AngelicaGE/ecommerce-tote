@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react'
+import React, {useState} from 'react'
 import '../styles/CartProduct.scss'
 import ItemCount from './ProductCount'
 
@@ -26,8 +26,7 @@ const CartProduct = ({cartProduct, handleClickOnRemove, onUpdateAmountItem}) => 
             <p className='title'>{cartProduct.title}</p> 
            {/*<p className="subtitle">{cartProduct.subtitle}</p>*/}
             <p id='price-without-total' className='price'>${cartProduct.price} <strong>x</strong> {amount}</p>
-            <p id='price-with-total' className='price'>${cartProduct.price} <strong>x</strong> {amount} = ${cartProduct.price * amount}{cartProduct.currency}</p>
-
+            <p id='price-with-total' className='price'>${cartProduct.price} <strong>x</strong> {amount} = ${Math.round((cartProduct.price * amount) *100)/100}{cartProduct.currency}</p>
         </div>
         <div className='counter-cont cont'>
             <ItemCount
@@ -41,7 +40,7 @@ const CartProduct = ({cartProduct, handleClickOnRemove, onUpdateAmountItem}) => 
 
         </div>
         <div  id="total-cont" className='total-cont cont'>
-            <p> ${   amount * cartProduct.price}{cartProduct.currency}</p>
+            <p> ${ (Math.round((amount * cartProduct.price)) * 100) / 100}{cartProduct.currency}</p>
         </div>
         <div className='delete-cont cont'>
             <button id="remove-btn-txt" className='remmove-btn' onClick={() => handleClickOnRemove(cartProduct.id)}>Remove</button>

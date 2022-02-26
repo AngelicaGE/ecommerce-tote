@@ -4,7 +4,7 @@ import { CartContext } from '../context/CartContext'
 import {NavLink } from 'react-router-dom'
 import CartProduct from '../containers/CartProduct'
 import BuyModal from '../containers/BuyModal'
-import {collection, addDoc, query, orderBy, doc, getDoc, getDocs, getFirestore, setDoc} from "firebase/firestore"
+//import {collection, addDoc, query, orderBy, doc, getDoc, getDocs, getFirestore, setDoc} from "firebase/firestore"
 
 const Cart = () => {
     const {cartItems, removeCartItem, clearCart, updateCartItem} = useContext(CartContext)
@@ -71,7 +71,7 @@ const Cart = () => {
         setModalStyle("hide");
     }
 
-    if(cartItems.length == 0){
+    if(cartItems.length === 0){
         return (<div className='CartEmpty'>
             <p className='oops'>Oops, your cart is empty at the moment.</p>
             <p className='quotes'>“The more that you read, the more things you will know. The more you learn, the more places you’ll go.” — Dr. Seuss :)</p>
