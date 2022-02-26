@@ -55,7 +55,6 @@ const ProductDetail = ({ product, categories, stock }) => {
     console.log("****** ADDING THE PRODUCT ******");
     const item = createItem();
     console.log(item);
-    // delete product?.kind
     addCartItem(item);
     setIsInCart(true);
   };

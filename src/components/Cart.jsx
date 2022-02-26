@@ -87,15 +87,14 @@ const Cart = () => {
             </div>
         {
             cartItems.map((cartItem) => ( 
-                <>
+                <div key={cartItem.id}>
                     <CartProduct  
-                        key={cartItem.id}
                         cartProduct={cartItem}
                         handleClickOnRemove={handleClickOnRemove}
                         onUpdateAmountItem={onUpdateAmountItem}
                     ></CartProduct>
                     <hr />
-                </>
+                </div>
             ))
         }
         </div>

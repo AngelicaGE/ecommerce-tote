@@ -48,9 +48,6 @@ const CartProduct = ({cartProduct, handleClickOnRemove, onUpdateAmountItem}) => 
             <button id="remove-btn-x" className='remmove-btn' onClick={() => handleClickOnRemove(cartProduct.id)}>X</button>
 
         </div>
-        <div className='last'>
-            <hr />
-        </div>
     </div>
   )
 }

@@ -57,15 +57,15 @@ const BuyModal = ({ modalStyle, handleCloseConfirmation, products, orderdata, se
                 <br />
                 <hr />
                 <div className='form-group'>
-                    <label for="fname">First name:</label>
+                    <label htmlFor="fname">First name:</label>
                     <input type="text" id="fname" name="fname" onChange={(event)=>handleUserInput(event)} disabled={orderCompleted}/>
                 </div>
                 <div className='form-group'>
-                    <label for="flastname">Last name:</label>
+                    <label htmlFor="flastname">Last name:</label>
                     <input type="text" id="fLastName" name="fLastName" onChange={(event)=>handleUserInput(event)} disabled={orderCompleted}/>
                 </div>
                 <div className='form-group'>
-                    <label for="femail">Email:</label>
+                    <label htmlFor="femail">Email:</label>
                     <input type="email" id="femail" name="femail" onChange={(event)=>handleUserInput(event)} disabled={orderCompleted}/>
                 </div>
                 {
