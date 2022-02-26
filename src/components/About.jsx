@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import InfoBlock from '../containers/InfoBlock';
+import {db} from '../firebase/firebase.js'
 import {collection, query, orderBy, doc, getDoc, getDocs, getFirestore} from "firebase/firestore"
 
 const About = () => {
@@ -7,7 +8,6 @@ const About = () => {
 
   useEffect( () =>  {
     console.log("hola")
-    const db = getFirestore();
     let tmpArray = [];
     getDocs(query(collection(db, 'bloque'), orderBy('order'))).then((querySnapshot)=>{
       querySnapshot.forEach((doc) => {
