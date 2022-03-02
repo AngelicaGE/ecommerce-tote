@@ -1,11 +1,16 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import { NavLink } from "react-router-dom";
+import { UserContext } from '../context/UserContext'
 import ItemCount from "../containers/ProductCount";
 import HeartBorder from '../assets/icons/heart-empty-white-24.png'
 import HeartFull from '../assets/icons/heart-full-white-24.png'
 import useLocalStorage from "../hooks/useLocalStorage";
+import {collection, addDoc} from "firebase/firestore"
+import { db, auth } from "../firebase/firebase";
+
 
 const key = `likes`;
+const likesDocument = "likes";
 
 const ProductSaleInfo = ({
   productInfo,
@@ -18,33 +23,55 @@ const ProductSaleInfo = ({
   isInCart,
   handleOpenModal,
 }) => {
+  const {user, addtoUserFavs, isInUserFavs,removeUserFavsFromDetails} = useContext(UserContext)
   const [isLiked, setIsLiked] = useState()
-  const [likes, setLikes] = useLocalStorage(key, []);
+  const [localLikes, setLocalLikes] = useLocalStorage(key, []);
+  const [userLikes, setUserLikes] = useState();
 
   useEffect(() => {
-    const likeIndex = likes.find(like => like.id === productInfo.id);
-    if(likeIndex){
-      setIsLiked(true)
-    }else{
-      setIsLiked(false)
-    }
-  }, [likes])
+    /*
+      if(user){
+      
+        console.log("find out if this book is liked in the db likes table for this user");
+        console.log(user)
+        try {
+          isInUserFavs(productInfo.id, setIsLiked)
+        } catch (error) {
+          console.log(error)
+        }
+        console.log(isLiked)
+      }else{
+        console.log("find out if this book is liked inside localStorage");
+        const likeIndex = await localLikes.find(like => like.id === productInfo.id);
+        if(likeIndex){
+          setIsLiked(true)
+        }else{
+          setIsLiked(false)
+        }
+      }*/
+  }, [])
   
 
-  const handleAddToFavs = () => {
-    //const likeIndex = likes.find(like => like === id);
-    const likeIndex = likes.find(like => like.id === productInfo.id);
-    let newLikes;
-    if(likeIndex){
-      newLikes = [...likes];
-      //newLikes = newLikes.filter(like => like !== id)
-      newLikes = newLikes.filter(like => like.id !== productInfo.id)
+  const handleAddToFavs = async () => {
+    if(user){
+      console.log("add liked book to user");
+      if(isLiked){
+        removeUserFavsFromDetails(productInfo.id, setIsLiked);
+      }else{
+        addtoUserFavs(productInfo, setIsLiked);
+      }
     }else{
-      //newLikes = [...likes, id];
-      newLikes = [...likes, productInfo];
+      console.log("add liked book to localStorage");
+      let newLikes;
+      if(isLiked){
+        newLikes = [...localLikes];
+        newLikes = newLikes.filter(like => like.id !== productInfo.id)
+      }else{
+        newLikes = [...localLikes, productInfo];
+      }
+      console.log(newLikes);
+      setLocalLikes(newLikes);
     }
-    console.log(newLikes);
-    setLikes(newLikes);
   };
 
   return (

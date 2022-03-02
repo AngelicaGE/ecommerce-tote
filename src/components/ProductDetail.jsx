@@ -5,6 +5,8 @@ import { CartContext } from "../context/CartContext";
 import ProductSaleInfo from "../containers/ProductSaleInfo";
 import BuyModal from "../containers/BuyModal";
 import { useNavigate } from "react-router-dom";
+import {  onAuthStateChanged} from "firebase/auth";
+import { auth} from '../firebase/firebase'
 
 const defaultCategories = 5;
 
@@ -84,13 +86,15 @@ const ProductDetail = ({ product, categories, stock }) => {
   // end of methods for modal
 
   useEffect(() => {
-    try {
-      console.log(product)
+    console.log(product)
+    onAuthStateChanged(auth,  (userAuth) => {
+        console.log(userAuth)
+        if(userAuth){
+          
+        }
+      })
       let res = productIsInCart(product.id);
       setIsInCart(res);
-    } catch (error) {
-      console.log(error);
-    }
   }, [product]);
 
   return (

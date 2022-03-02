@@ -1,12 +1,20 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import '../styles/UserModal.scss'
-import { UserContext } from '../context/UserContext'
 import { auth, google_provider } from '../firebase/firebase'
-import { GoogleAuthProvider, signInWithPopup, signOut} from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged} from "firebase/auth";
 
-const UserModal = ({modalStyle, setModalStyle}) => {
-  const {user} = useContext(UserContext)
 
+const UserModal = ({modalStyle, setModalStyle, user, setUser}) => {
+
+  useEffect(() => {
+    console.log(auth.currentUser)
+    onAuthStateChanged(auth,  (userAuth) => {
+      console.log(userAuth)
+      setUser(userAuth)
+    })
+  }, [])
+  
 
   const handleCloseModal = (event) => {
     event.stopPropagation();
@@ -39,12 +47,18 @@ const UserModal = ({modalStyle, setModalStyle}) => {
     });
  }
 
+ //go back to home because it doesnt re render page after sign out
+ let navigate = useNavigate();
  const handleSignOut =()=> {
     signOut(auth).then(() => {
         console.log("signed out succeeded")
       }).catch((error) => {
         console.log(error)
+      }).finally ( () =>{
+        navigate("/");
+        setModalStyle("hide")
       });
+
  }
 
   return (
@@ -52,7 +66,7 @@ const UserModal = ({modalStyle, setModalStyle}) => {
       <div className='user-modal-content' onClick={(event) => event.stopPropagation()}>
         <p><strong>My Account</strong></p>
         {
-          user?
+          auth.currentUser?
           <div className='user-info'>
             <p className='welcome-message'>Welcome {user.displayName}!</p>
             <img src={user.photoURL} alt="user profile pgoto"></img>
@@ -63,7 +77,7 @@ const UserModal = ({modalStyle, setModalStyle}) => {
         <hr />
           <li className='user-page user'>
             {
-              user?<p className='log' onClick={handleSignOut}>Sign-out</p>
+              auth.currentUser?<p className='log' onClick={handleSignOut}>Sign-out</p>
               :<p className='log' onClick={handleSignIn}>Sign-in</p>
             }
           </li>

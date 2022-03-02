@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import '../styles/BuyModal.scss'
-import {collection, addDoc, getFirestore} from "firebase/firestore"
+import {collection, addDoc} from "firebase/firestore"
+import { db } from "../firebase/firebase";
 
 const BuyModal = ({ modalStyle, handleCloseConfirmation, products, orderdata, setorderdata, setModalStyle}) => {
 
@@ -15,7 +16,6 @@ const BuyModal = ({ modalStyle, handleCloseConfirmation, products, orderdata, se
             setorderdata(state);
           }
         
-          const db = getFirestore();
           const handleOnComplete = async () => {
               console.log(orderdata)
               console.log(products)

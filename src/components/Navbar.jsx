@@ -13,7 +13,7 @@ import { UserContext } from '../context/UserContext'
 
 const Navbar = ({name, clickOnMenu}) => {
     const [modalStyle, setModalStyle] = useState("hide")
-    const {user} = useContext(UserContext)
+    const [user, setUser] = useState(null)
 
      const handleClickUser = () => {
          if(modalStyle == "show"){
@@ -32,10 +32,10 @@ const Navbar = ({name, clickOnMenu}) => {
                 </div>
                 <ul className='tote-pages' >
                     <li className='tote-page'>
-                        <NavLink to="/NewArrivals" className={({isActive}) => (isActive? 'activeClass': '')}>New arrivals</NavLink>
+                        <NavLink to="/NewArrivals" className={({isActive}) => (isActive? 'activeClass': '')}>New arrivals</NavLink> |
                     </li>
                     <li className='tote-page'>
-                        <NavLink to='/free' className={({isActive}) => (isActive? 'activeClass': '')}>Free</NavLink>
+                        <NavLink to='/free' className={({isActive}) => (isActive? 'activeClass': '')}>Free</NavLink> |
                     </li>
                     <li className='tote-page'>
                         <NavLink to="/about" className={({isActive}) => isActive? 'activeClass': ''}>
@@ -62,6 +62,8 @@ const Navbar = ({name, clickOnMenu}) => {
                         <UserModal
                             modalStyle={modalStyle}
                             setModalStyle={setModalStyle}
+                            user={user}
+                            setUser={setUser}
                         ></UserModal>
                     </li>
                     <li className='user-page whishlist'>
