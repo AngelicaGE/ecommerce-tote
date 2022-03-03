@@ -5,9 +5,8 @@ import ItemCount from "../containers/ProductCount";
 import HeartBorder from '../assets/icons/heart-empty-white-24.png'
 import HeartFull from '../assets/icons/heart-full-white-24.png'
 import useLocalStorage from "../hooks/useLocalStorage";
-import {collection, addDoc} from "firebase/firestore"
-import { db, auth } from "../firebase/firebase";
-
+import { auth } from "../firebase/firebase";
+import {  onAuthStateChanged} from "firebase/auth";
 
 const key = `likes`;
 const likesDocument = "likes";
@@ -23,12 +22,22 @@ const ProductSaleInfo = ({
   isInCart,
   handleOpenModal,
 }) => {
-  const {user, addtoUserFavs, isInUserFavs,removeUserFavsFromDetails} = useContext(UserContext)
+  const {addtoUserFavs, setIsUserFavs,removeUserFavsFromDetails} = useContext(UserContext)
   const [isLiked, setIsLiked] = useState()
   const [localLikes, setLocalLikes] = useLocalStorage(key, []);
-  const [userLikes, setUserLikes] = useState();
+  const [userId, setuserId] = useState(null);
 
   useEffect(() => {
+    onAuthStateChanged(auth,  (userAuth) => {
+      console.log(userAuth)
+      if(userAuth){
+        setuserId(userAuth.uid)
+        setIsUserFavs(productInfo.id, userAuth.uid).then(liked=>{
+          console.log(liked)  
+          setIsLiked(liked)
+        })
+      }
+    })
     /*
       if(user){
       
@@ -53,12 +62,16 @@ const ProductSaleInfo = ({
   
 
   const handleAddToFavs = async () => {
-    if(user){
+    if(userId){
       console.log("add liked book to user");
       if(isLiked){
-        removeUserFavsFromDetails(productInfo.id, setIsLiked);
+        removeUserFavsFromDetails(productInfo.id, userId).then(()=>{
+          setIsLiked(false);
+        })
       }else{
-        addtoUserFavs(productInfo, setIsLiked);
+        addtoUserFavs(productInfo, userId).then(() => {
+          setIsLiked(true);
+        })
       }
     }else{
       console.log("add liked book to localStorage");

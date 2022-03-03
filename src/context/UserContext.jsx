@@ -6,7 +6,7 @@ import {db, auth} from '../firebase/firebase.js'
 import {collection, query, orderBy, doc, where, addDoc, deleteDoc, getDocs, getFirestore} from "firebase/firestore"
 
 export const UserContext = createContext();
-const likesDocument ="likes";
+const likesCollection ="likes";
 
 export const UserProvider = ({children}) => {
    
@@ -30,36 +30,38 @@ export const UserProvider = ({children}) => {
         })
     }
 
-    const addtoUserFavs = async (productInfo, useruid, setIsLiked) => {
+    const addtoUserFavs = async (productInfo, useruid) => {
         console.log("*** ADDING LIKED ***")
         const likeInfo ={productInfo, useruid}
-        const docRef = await addDoc(collection(db, likesDocument), likeInfo);
+        const docRef = await addDoc(collection(db, likesCollection), likeInfo);
         console.log("Add book to user favs: " + docRef.id)
-        setIsLiked(true)
     };
 
-    const removeUserFavsFromDetails = async (bookId, useruid, setIsLiked) => {
+    const removeUserFavsFromDetails = async (bookId, useruid) => {
         console.log("*** REMOVING LIKED ***")
-        let itemCollection = collection(db, likesDocument);
+        let itemCollection = collection(db, likesCollection);
         let q = query(itemCollection,where("useruid", "==", useruid))
         let res = await getDocs(q)
         let docId = 0;
+        // search for this book entry id in loked collection
         res.docs.map(doc => {
             if(doc.data().productInfo.id ===bookId) {
                 console.log("book is liked")
                 console.log(doc.id)
                 docId=doc.id;
-                //console.log(doc.data())
             }
         })
+        // if it was found, delete it from collection
         if(docId !== 0){
-         await deleteDoc(doc(db, likesDocument, docId));
-         isInUserFavs(bookId, setIsLiked)
+            res = await deleteDoc(doc(db, likesCollection, docId));
         }
+        return res;
     };
 
-    const isInUserFavs = async (bookId, useruid, setIsLiked) => {
-            let itemCollection = collection(db, likesDocument);
+    const setIsUserFavs = async (bookId, useruid) => {
+            console.log(bookId)
+            console.log(useruid)
+            let itemCollection = collection(db, likesCollection);
             let q = query(itemCollection,where("useruid", "==", useruid))
             let res = await getDocs(q)
             let isLiked = false;
@@ -69,7 +71,7 @@ export const UserProvider = ({children}) => {
                     isLiked = true;
                 }
             })
-            setIsLiked(isLiked);
+            return isLiked;
     };
 
 
@@ -140,7 +142,7 @@ export const UserProvider = ({children}) => {
         <UserContext.Provider 
             value={{
                 getAllForUser,
-                isInUserFavs,
+                setIsUserFavs,
                 addtoUserFavs,
                 removeUserFavsFromDetails
                 }}>

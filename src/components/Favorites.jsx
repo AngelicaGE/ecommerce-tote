@@ -7,26 +7,23 @@ import { NavLink } from 'react-router-dom';
 import {  onAuthStateChanged} from "firebase/auth";
 import { auth} from '../firebase/firebase'
 
-
-
-
 const key = `likes`;
 const likesDocument ="likes";
 
 const Favorites = () => {
-  const {getAllForUser} = useContext(UserContext)
+  const {getAllForUser, removeUserFavsFromDetails} = useContext(UserContext)
   const [modalStyle, setModalStyle] = useState("hide")
   const [modalProduct, setModalProduct] = useState();
   const [localLikes, setLocalLikes] = useLocalStorage(key, []);
   const [userLikes, setUserLikes] = useState([]);
-  const [isuserLogged, setIsUserLogged] = useState(false);
+  const [userId, setUserId] = useState(null);
 
 
   useEffect(() => {
     onAuthStateChanged(auth,  (userAuth) => {
       console.log(userAuth)
       if(userAuth){
-        setIsUserLogged(true)
+        setUserId(userAuth.uid)
         console.log("Getting likes from user " );
         getAllForUser(likesDocument, userAuth.uid, setUserLikes);
       }
@@ -39,7 +36,21 @@ const Favorites = () => {
     setModalStyle("show")
 }
 
-if((!isuserLogged && localLikes.length == 0) || (isuserLogged && userLikes.length ==0)){
+const handleRemoveFromfavs = (productId) => {
+  if (userId) {
+    removeUserFavsFromDetails(productId, userId);
+    let newLikes = [...userLikes];
+    newLikes = newLikes.filter(like => like.productInfo.id !== productId)
+    setUserLikes(newLikes);
+  } else {
+    let newLikes = [...localLikes];
+    newLikes = newLikes.filter(like => like.id !== productId)
+    setLocalLikes(newLikes);
+  }
+};
+
+
+if((!userId && localLikes.length == 0) || (userId && userLikes.length ==0)){
   return (<div className='CartEmpty'>
       <p className='oops'>Your wishlist is empty at the moment.</p>
       <p className='quotes'>It costs nothing to wish :)</p>
@@ -53,7 +64,7 @@ if((!isuserLogged && localLikes.length == 0) || (isuserLogged && userLikes.lengt
         <h1>Books in the wishlist</h1>
       </div>
         {
-          isuserLogged? (
+          userId? (
             userLikes.map((prod) =>(
               <div key={`fav-${prod.productInfo.id}`} className='fav-cont' onClick={() => handleOpenModal(prod.productInfo)}>
                 <div className='fav-img-cont'>
@@ -77,7 +88,7 @@ if((!isuserLogged && localLikes.length == 0) || (isuserLogged && userLikes.lengt
         }
         {
           modalProduct?
-          <FavsModal modalStyle={modalStyle} setModalStyle={setModalStyle} likes={localLikes} setLikes={setLocalLikes} product={modalProduct}></FavsModal>
+          <FavsModal modalStyle={modalStyle} setModalStyle={setModalStyle} handleRemoveFromfavs={handleRemoveFromfavs} product={modalProduct}></FavsModal>
           : ''
         }
     </div>
