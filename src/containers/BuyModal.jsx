@@ -8,6 +8,7 @@ const BuyModal = ({ modalStyle, handleCloseConfirmation, products, orderdata, se
         const [orderCompleted, setOrderCompleted] = useState(false);
         const [orderNumber, setOrderNumber] = useState(null);
 
+        console.log(products)
         const handleUserInput = (event)=>{
             const name = event.target.name;
             const value = event.target.value;

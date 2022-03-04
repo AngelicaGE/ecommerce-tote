@@ -8,9 +8,8 @@ import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged} from 
 const UserModal = ({modalStyle, setModalStyle, user, setUser}) => {
 
   useEffect(() => {
-    console.log(auth.currentUser)
     onAuthStateChanged(auth,  (userAuth) => {
-      console.log(userAuth)
+      //console.log(userAuth)
       setUser(userAuth)
     })
   }, [])

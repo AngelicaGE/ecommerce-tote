@@ -66,7 +66,8 @@ export const CartProvider = ({children}) => {
                     removeCartItem,
                     updateCartItem,
                     clearCart,
-                    productIsInCart
+                    productIsInCart,
+                    setCartItems
                 }}>
             {children}
         </CartContext.Provider>

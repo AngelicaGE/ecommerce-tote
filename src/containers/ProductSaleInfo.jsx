@@ -5,11 +5,10 @@ import ItemCount from "../containers/ProductCount";
 import HeartBorder from '../assets/icons/heart-empty-white-24.png'
 import HeartFull from '../assets/icons/heart-full-white-24.png'
 import useLocalStorage from "../hooks/useLocalStorage";
-import { auth } from "../firebase/firebase";
 import {  onAuthStateChanged} from "firebase/auth";
+import { auth} from '../firebase/firebase'
 
 const key = `likes`;
-const likesDocument = "likes";
 
 const ProductSaleInfo = ({
   productInfo,
@@ -20,44 +19,28 @@ const ProductSaleInfo = ({
   removeItem,
   handleAddToCart,
   isInCart,
-  handleOpenModal,
+  handleOpenModal
 }) => {
-  const {addtoUserFavs, setIsUserFavs,removeUserFavsFromDetails} = useContext(UserContext)
+  const {addtoUserFavs, isInUserFavs,removeUserFavsFromDetails} = useContext(UserContext)
   const [isLiked, setIsLiked] = useState()
   const [localLikes, setLocalLikes] = useLocalStorage(key, []);
   const [userId, setuserId] = useState(null);
 
   useEffect(() => {
     onAuthStateChanged(auth,  (userAuth) => {
-      console.log(userAuth)
       if(userAuth){
         setuserId(userAuth.uid)
-        setIsUserFavs(productInfo.id, userAuth.uid).then(liked=>{
+        console.log("find out if this book is liked inside user firebase");
+        isInUserFavs(productInfo.id, userAuth.uid).then(liked=>{
           console.log(liked)  
           setIsLiked(liked)
         })
-      }
-    })
-    /*
-      if(user){
-      
-        console.log("find out if this book is liked in the db likes table for this user");
-        console.log(user)
-        try {
-          isInUserFavs(productInfo.id, setIsLiked)
-        } catch (error) {
-          console.log(error)
-        }
-        console.log(isLiked)
       }else{
         console.log("find out if this book is liked inside localStorage");
-        const likeIndex = await localLikes.find(like => like.id === productInfo.id);
-        if(likeIndex){
-          setIsLiked(true)
-        }else{
-          setIsLiked(false)
-        }
-      }*/
+        const likeIndex = localLikes.find(like => like.id === productInfo.id);
+        likeIndex? setIsLiked(true): setIsLiked(false);
+      }
+    })
   }, [])
   
 
@@ -65,13 +48,9 @@ const ProductSaleInfo = ({
     if(userId){
       console.log("add liked book to user");
       if(isLiked){
-        removeUserFavsFromDetails(productInfo.id, userId).then(()=>{
-          setIsLiked(false);
-        })
+        removeUserFavsFromDetails(productInfo.id, userId)
       }else{
-        addtoUserFavs(productInfo, userId).then(() => {
-          setIsLiked(true);
-        })
+        addtoUserFavs(productInfo, userId)
       }
     }else{
       console.log("add liked book to localStorage");
@@ -85,6 +64,7 @@ const ProductSaleInfo = ({
       console.log(newLikes);
       setLocalLikes(newLikes);
     }
+    setIsLiked(!isLiked)
   };
 
   return (
@@ -135,17 +115,13 @@ const ProductSaleInfo = ({
             <button
               className="sale-btn add-cart"
               onClick={() => handleAddToCart()}
-              disabled={isInCart}
-            >
-              {" "}
-              Add to cart{" "}
+              disabled={isInCart}>
+              Add to cart
             </button>
             <button
               onClick={() => handleOpenModal()}
-              className="sale-btn buy-now"
-            >
-              {" "}
-              Buy it now{" "}
+              className="sale-btn buy-now">
+              Buy it now
             </button>
           </div>
         ) : sale.saleability == "FREE" ? (

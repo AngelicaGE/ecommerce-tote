@@ -1,30 +1,58 @@
 import React, { useState, useEffect, useContext } from 'react'
 import '../styles/Cart.scss'
 import { CartContext } from '../context/CartContext'
+import { UserContext } from '../context/UserContext'
 import {NavLink } from 'react-router-dom'
 import CartProduct from '../containers/CartProduct'
 import BuyModal from '../containers/BuyModal'
-//import {collection, addDoc, query, orderBy, doc, getDoc, getDocs, getFirestore, setDoc} from "firebase/firestore"
+import {  onAuthStateChanged} from "firebase/auth";
+import { auth} from '../firebase/firebase'
+
+const ordersDocument ="cart";
 
 const Cart = () => {
     const {cartItems, removeCartItem, clearCart, updateCartItem} = useContext(CartContext)
+    const {getAllForUser, removeFromUserCart, updateItemFromcart,clearUserCart} = useContext(UserContext)
+    const [userCart, setUserCart] = useState([])
     const [total, setTotal] = useState()
     const [modalStyle, setModalStyle] = useState("hide")
     const [orderdata, setorderdata] = useState({fname:'', fLastName:'', femail:'', totalItems: ''})
+    const [userId, setUserId] = useState(null);
 
     useEffect(() => {
-        //TODO. why is this not getting called after onUpdateAmountItem is called?
-        console.log("use effect")
+        onAuthStateChanged(auth,  (userAuth) => {
+            if(userAuth){
+              setUserId(userAuth.uid)
+              console.log("Getting orders from user " );
+              setUserCartFromFirebase(userAuth.uid);
+            }
+        })
+    }, [])
+
+    useEffect(() =>{
+        setAllTotals();
+    }, [cartItems, userCart])
+
+    const setAllTotals = () => {
         addAllPrices();
         addAllItems();
-        console.log(orderdata)
-    }, [cartItems])
+    }
+
+    const setUserCartFromFirebase = (userAuthId) =>{
+        getAllForUser(ordersDocument, userAuthId).then((items) =>{
+            console.log(items)
+            if(items){
+              setUserCart(items)
+            }
+        })
+    }
 
     const addAllPrices = () => {
         console.log("addAllPrices")
         let totalTemp = 0;
-        for (let i = 0; i < cartItems.length; i++) {
-           totalTemp += (cartItems[i].amount * cartItems[i].price);
+        let array = userId? userCart: cartItems;
+        for (let i = 0; i < array.length; i++) {
+           totalTemp +=  userId? (array[i].item.amount * array[i].item.price): (array[i].amount * array[i].price);
         }
         totalTemp = Math.round(totalTemp * 100) / 100;
         console.log("total: $"+totalTemp);
@@ -34,27 +62,51 @@ const Cart = () => {
     const addAllItems = () => {
         console.log("addAllItems")
         let countTemp = 0;
-        for (let i = 0; i < cartItems.length; i++) {
-            countTemp += cartItems[i].amount;
+        let array = userId? userCart: cartItems;
+        for (let i = 0; i < array.length; i++) {
+            countTemp += userId? array[i].item.amount :array[i].amount;
         }
         console.log("total items: "+countTemp);
         setorderdata({...orderdata, totalItems: countTemp});
     }
 
     const handleClickOnRemove = (productId) =>{
-        removeCartItem(productId);
+        if(userId){
+            removeFromUserCart(productId, userId).then(() =>{
+                setUserCartFromFirebase(userId);
+            });
+        }else{
+            removeCartItem(productId);
+        }
     }
 
     const onUpdateAmountItem = (productId, amount ) =>{
         // update item amount in context cartItems
-        updateCartItem(productId, amount);
+        if(userId){
+            let item = userCart.find((prod) => prod.item.id === productId)
+            function  search(el){
+                return el.item.id === productId;
+                }
+            if(item){
+                item.item.amount = amount;
+                updateItemFromcart(item, userId)
+            }
+        }else{
+            updateCartItem(productId, amount);
+        }
         addAllPrices();
         addAllItems();    
     }
 
     const handleClickClear = () => {
         console.log("click clear")
-        clearCart()
+        if(userId){
+            clearUserCart(userId);
+            setUserCart([]);
+        }else{
+            clearCart();
+        }
+
     }
     const handleOpenModal = () => {
         console.log("handleOpenModal");
@@ -62,14 +114,12 @@ const Cart = () => {
     }
     // modal
 
-
-
     const handleCloseConfirmation = () =>{
         clearCart()
         setModalStyle("hide");
     }
 
-    if(cartItems.length === 0){
+    if( (!userId && cartItems.length === 0) || (userId && userCart.length === 0)){
         return (<div className='CartEmpty'>
             <p className='oops'>Oops, your cart is empty at the moment.</p>
             <p className='quotes'>“The more that you read, the more things you will know. The more you learn, the more places you’ll go.” — Dr. Seuss :)</p>
@@ -84,7 +134,19 @@ const Cart = () => {
                 <p>My future books</p>
             </div>
         {
-            cartItems.map((cartItem) => ( 
+            userId? 
+                userCart.map((cartItem) => ( 
+                <div key={cartItem.item.id}>
+                    <CartProduct  
+                        cartProduct={cartItem.item}
+                        handleClickOnRemove={handleClickOnRemove}
+                        onUpdateAmountItem={onUpdateAmountItem}
+                    ></CartProduct>
+                    <hr />
+                </div>
+            ))
+            :
+                cartItems.map((cartItem) => ( 
                 <div key={cartItem.id}>
                     <CartProduct  
                         cartProduct={cartItem}
@@ -111,7 +173,7 @@ const Cart = () => {
         <BuyModal
                 modalStyle={modalStyle} 
                 handleCloseConfirmation={handleCloseConfirmation}
-                products={cartItems}
+                products={userId? userCart: cartItems}
                 orderdata={orderdata}
                 setorderdata={setorderdata}
                 setModalStyle={setModalStyle}

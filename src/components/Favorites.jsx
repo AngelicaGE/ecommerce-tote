@@ -25,7 +25,9 @@ const Favorites = () => {
       if(userAuth){
         setUserId(userAuth.uid)
         console.log("Getting likes from user " );
-        getAllForUser(likesDocument, userAuth.uid, setUserLikes);
+        getAllForUser(likesDocument, userAuth.uid).then((items) =>{
+          setUserLikes(items);
+        });
       }
     })
   }, [])

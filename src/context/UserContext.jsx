@@ -3,33 +3,30 @@ import {createContext, useEffect } from "react";
 import { useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import {db, auth} from '../firebase/firebase.js'
-import {collection, query, orderBy, doc, where, addDoc, deleteDoc, getDocs, getFirestore} from "firebase/firestore"
+import {collection, query, orderBy, setDoc, doc, where, addDoc, deleteDoc, getDocs, getFirestore} from "firebase/firestore"
 
 export const UserContext = createContext();
 const likesCollection ="likes";
+const cartCollection ="cart";
 
 export const UserProvider = ({children}) => {
    
-    const getAllForUser = (collectionName, useruid, setStateMethod) => {
+    //its a promise
+    const getAllForUser = async (collectionName, useruid) => {
         let tmpArray = [];
         const itemCollection = collection(db, collectionName);
         const q = query(itemCollection,where("useruid", "==",useruid))
-        console.log("getAllForUser")
-        getDocs(q).then((snapshot) => {
-            console.log("then")
-          console.log(snapshot.docs)
-            snapshot.docs.map(doc => {
-              tmpArray = [...tmpArray, {"id": doc.id, ...doc.data()}];
+        console.log("getAllForUser");
+        let res = await getDocs(q);
+        if(res){
+            res.docs.map(doc => {
+                tmpArray = [...tmpArray, {"id": doc.id, ...doc.data()}];
             })
-            console.log(tmpArray)
-        }).catch((e)=>{
-            console.log("error")
-            console.log(e)
-        }).finally(()=>{
-            setStateMethod(tmpArray);
-        })
+        }
+        return tmpArray;
     }
 
+    //its a promise
     const addtoUserFavs = async (productInfo, useruid) => {
         console.log("*** ADDING LIKED ***")
         const likeInfo ={productInfo, useruid}
@@ -37,6 +34,7 @@ export const UserProvider = ({children}) => {
         console.log("Add book to user favs: " + docRef.id)
     };
 
+    //its a promise
     const removeUserFavsFromDetails = async (bookId, useruid) => {
         console.log("*** REMOVING LIKED ***")
         let itemCollection = collection(db, likesCollection);
@@ -58,9 +56,7 @@ export const UserProvider = ({children}) => {
         return res;
     };
 
-    const setIsUserFavs = async (bookId, useruid) => {
-            console.log(bookId)
-            console.log(useruid)
+    const isInUserFavs = async (bookId, useruid) => {
             let itemCollection = collection(db, likesCollection);
             let q = query(itemCollection,where("useruid", "==", useruid))
             let res = await getDocs(q)
@@ -74,77 +70,75 @@ export const UserProvider = ({children}) => {
             return isLiked;
     };
 
-
-
-
-    /*onAuthStateChanged(auth, async (userAuth) => {
-    
-        if (userAuth) {
-            //if(userAuth == user.user) return;
-          // User is signed in, see docs for a list of available properties: https://firebase.google.com/docs/reference/js/firebase.User
-
-/*            //likes
-            let likesArray = [];
-            let itemCollection = collection(db, "likes");
-            let q = query(itemCollection,where("useruid", "==", user.uid))
-            let res = await getDocs(q)
-            console.log("then")
-            res.docs.map(doc => {
-                likesArray = [...likesArray, {"id": doc.id, ...doc.data()}];
-            })
-            console.log(likesArray)
-
-
-        //cart
-        let cartArray = [];
-        itemCollection = collection(db, "cart");
-        q = query(itemCollection,where("useruid", "==", user.uid))
-        getDocs(q).then((snapshot) => {
-            console.log("then")
-            snapshot.docs.map(doc => {
-                cartArray = [...cartArray, {"id": doc.id, ...doc.data()}];
-            })
-        }).catch((e)=>{
-            console.log("error")
-            console.log(e)
-        }).finally(()=>{
-            //console.log("getAllCart")
-          console.log(cartArray)
+    const isInUserCart = async (itemId, useruid) => {
+        let itemCollection = collection(db, cartCollection);
+        let q = query(itemCollection,where("useruid", "==", useruid))
+        let res = await getDocs(q)
+        let isLiked = false;
+        res.docs.map(doc => {
+            if(doc.data().item.id ===itemId) {
+                console.log("book is in cart")
+                isLiked = true;
+            }
         })
+        return isLiked;
+};
 
+    const addToUserCart = async (item, useruid)=>{
+        console.log("*** PUSH TO FIREBASE ***")
+        const cartItem ={item, useruid}
+        const docRef = await addDoc(collection(db, cartCollection), cartItem);
+        console.log("Add item to user cart: " + docRef.id)
+    }
 
-          //setUser([user, likesArray, cartArray])
-          // clear likes[] and cart[] so if there is something saved on localStorage it doesnt get printed
-          //localStorage.clear()
-          let newUser={
-              user: user,
-              likes: likesArray
-              //cart: cartArray
-          }
-          console.log(newUser)
-          if(user.likes !== newUser.likes){
-            console.log("its dif")
-            console.log(user)
-            console.log(newUser)
-            
-          }else{
-            console.log("its same")
-
-          } 
-          setUser(userAuth)
-        } else {
-          console.log("no user is logged")
-          setUser(userAuth);
+    const removeFromUserCart = async (itemId, useruid) => {
+        console.log("*** REMOVING FROM CART ***")
+        let itemCollection = collection(db, cartCollection);
+        let q = query(itemCollection,where("useruid", "==", useruid))
+        let res = await getDocs(q)
+        let docId = 0;
+        // search for this book entry id in loked collection
+        res.docs.map(doc => {
+            if(doc.data().item.id === itemId) {
+                console.log("book is in cart")
+                console.log(doc.id)
+                docId=doc.id;
+            }
+        })
+        // if it was found, delete it from collection
+        if(docId !== 0){
+            res = await deleteDoc(doc(db, cartCollection, docId));
         }
-      });*/
+        return res;
+    };
+
+    // update the amount of books order of a specific title
+    const updateItemFromcart = async (itemUpdated, userId) => {
+        await setDoc(doc(db, cartCollection, itemUpdated.id), {item: itemUpdated.item, useruid:userId});
+    }
+
+    const clearUserCart = async (userId) => {
+        const itemCollection = collection(db, cartCollection);
+        const q = query(itemCollection,where("useruid", "==",userId))
+        let res = await getDocs(q);
+        res.docs.map(docRef => {
+             deleteDoc(docRef.ref);
+        })
+    }
+
 
     return (
         <UserContext.Provider 
             value={{
                 getAllForUser,
-                setIsUserFavs,
+                isInUserFavs,
                 addtoUserFavs,
-                removeUserFavsFromDetails
+                removeUserFavsFromDetails,
+                addToUserCart,
+                isInUserCart,
+                removeFromUserCart,
+                updateItemFromcart,
+                clearUserCart
                 }}>
             {children}
         </UserContext.Provider>

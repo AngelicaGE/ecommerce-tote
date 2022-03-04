@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import "../styles/ProductDetail.scss";
 import { NavLink } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
+import { UserContext } from '../context/UserContext'
 import ProductSaleInfo from "../containers/ProductSaleInfo";
 import BuyModal from "../containers/BuyModal";
 import { useNavigate } from "react-router-dom";
@@ -21,21 +22,18 @@ const ProductDetail = ({ product, categories, stock }) => {
     totalItems: "",
   });
   const { addCartItem, productIsInCart } = useContext(CartContext);
+  const {addToUserCart, isInUserCart} = useContext(UserContext)
+
   const [modalStyle, setModalStyle] = useState("hide");
+  const [userId, setuserId] = useState(null);
 
   const details = product.volumeInfo;
   const sale = product.saleInfo;
   const images = details.imageLinks;
 
-  const addItem = () => {
-    console.log("one more");
-    setAmount(amount + 1);
-  };
+  const addItem = () => {setAmount(amount + 1);};
 
-  const removeItem = () => {
-    console.log("one less");
-    setAmount(amount - 1);
-  };
+  const removeItem = () => {setAmount(amount - 1);};
 
   const createItem = () => {
     // create new item with only properties needed for cart
@@ -57,8 +55,16 @@ const ProductDetail = ({ product, categories, stock }) => {
     console.log("****** ADDING THE PRODUCT ******");
     const item = createItem();
     console.log(item);
-    addCartItem(item);
-    setIsInCart(true);
+    if(userId){
+      addToUserCart(item, userId).then(res=>{
+        alert("Cart updated")
+        isInUserCart(res);
+      })
+    }else{
+      addCartItem(item).then(()=>{
+        setIsInCart(true);
+      })
+    }
   };
 
   const clickOnSeeMoreCats = () => {
@@ -90,11 +96,15 @@ const ProductDetail = ({ product, categories, stock }) => {
     onAuthStateChanged(auth,  (userAuth) => {
         console.log(userAuth)
         if(userAuth){
-          
+          setuserId(userAuth.uid);
+          isInUserCart(product.id, userAuth.uid).then(res =>{
+            setIsInCart(res);
+          });
+        }else{
+          let res = productIsInCart(product.id);
+          setIsInCart(res);
         }
       })
-      let res = productIsInCart(product.id);
-      setIsInCart(res);
   }, [product]);
 
   return (
@@ -200,6 +210,7 @@ const ProductDetail = ({ product, categories, stock }) => {
             isInCart={isInCart}
             handleOpenModal={handleOpenModal}
             className="ProductSaleInfo"
+            userId={userId}
           ></ProductSaleInfo>
         </section>
       </div>
