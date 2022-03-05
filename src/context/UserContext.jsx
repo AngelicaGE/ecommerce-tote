@@ -2,15 +2,18 @@
 import {createContext, useEffect } from "react";
 import { useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import {db, auth} from '../firebase/firebase.js'
+import {db} from '../firebase/firebase.js'
 import {collection, query, orderBy, setDoc, doc, where, addDoc, deleteDoc, getDocs, getFirestore} from "firebase/firestore"
+import {auth} from '../firebase/firebase.js'
 
 export const UserContext = createContext();
 const likesCollection ="likes";
 const cartCollection ="cart";
 
 export const UserProvider = ({children}) => {
-   
+    const [cartItemsAmount, setCartItemsAmount] = useState(0)
+    const [userId, setUserId] = useState(null)
+
     //its a promise
     const getAllForUser = async (collectionName, useruid) => {
         let tmpArray = [];
@@ -24,6 +27,15 @@ export const UserProvider = ({children}) => {
             })
         }
         return tmpArray;
+    }
+
+    const getCartItemsAmount = async (useruid) =>{
+        const itemCollection = collection(db, cartCollection);
+        const q = query(itemCollection,where("useruid", "==",useruid))
+        let res = await getDocs(q);
+        console.log(res.size, " items in user's cart")
+        setCartItemsAmount(res.size)
+        return res.size;
     }
 
     //its a promise
@@ -89,6 +101,7 @@ export const UserProvider = ({children}) => {
         const cartItem ={item, useruid}
         const docRef = await addDoc(collection(db, cartCollection), cartItem);
         console.log("Add item to user cart: " + docRef.id)
+        getCartItemsAmount(useruid)
     }
 
     const removeFromUserCart = async (itemId, useruid) => {
@@ -109,6 +122,7 @@ export const UserProvider = ({children}) => {
         if(docId !== 0){
             res = await deleteDoc(doc(db, cartCollection, docId));
         }
+        getCartItemsAmount(useruid)
         return res;
     };
 
@@ -124,7 +138,21 @@ export const UserProvider = ({children}) => {
         res.docs.map(docRef => {
              deleteDoc(docRef.ref);
         })  
+        getCartItemsAmount(userId);
     }
+
+    useEffect(() => {
+        onAuthStateChanged(auth,  (userAuth) => {
+            console.log("USE EFFECT CAR WIDGET")
+            if(userAuth){
+                setUserId(userAuth.uid)
+                getCartItemsAmount(userAuth.uid)
+            }else{
+                setUserId(null)
+            }
+          })
+    }, [])
+    
 
 
     return (
@@ -138,7 +166,9 @@ export const UserProvider = ({children}) => {
                 isInUserCart,
                 removeFromUserCart,
                 updateItemFromcart,
-                clearUserCart
+                clearUserCart,
+                cartItemsAmount,
+                userId
                 }}>
             {children}
         </UserContext.Provider>

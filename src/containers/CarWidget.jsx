@@ -1,10 +1,27 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import cartIcon from '../assets/icons/bag-white-24.png'
 import cartIconSmall from '../assets/icons/bag-white-16.png'
 import { CartContext } from '../context/CartContext'
+import { UserContext } from '../context/UserContext';
+import { onAuthStateChanged } from "firebase/auth";
+import {auth} from '../firebase/firebase.js'
+
 
 const CarWidget = () => {
 const {cartItems} = useContext(CartContext)
+const {cartItemsAmount, userId} = useContext(UserContext)
+const [isCartActive, setIsCartActive] = useState(false)
+
+useEffect(() => {
+  console.log("*** USE EFFECT WIDGET ***", userId)
+  if(userId != null){
+    setIsCartActive(cartItemsAmount>0)
+  }else{
+
+    setIsCartActive(cartItems.length>0)
+  }
+}, [cartItems, cartItemsAmount])
+
 
   return (
       <div className='CarWidget'>
@@ -13,7 +30,7 @@ const {cartItems} = useContext(CartContext)
             <img alt='cart icon' src={cartIconSmall}/>
         </picture>
         {
-            cartItems.length > 0 ? <div className='point'></div> : ''
+            isCartActive? <div className='point'></div> : ''
         }
         
       </div>
