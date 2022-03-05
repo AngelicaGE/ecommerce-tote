@@ -57,8 +57,8 @@ const ProductDetail = ({ product, categories, stock }) => {
     console.log(item);
     if(userId){
       addToUserCart(item, userId).then(res=>{
-        alert("Cart updated")
-        isInUserCart(res);
+        alert("Cart updated", res);
+        setIsInCart(true);
       })
     }else{
       addCartItem(item).then(()=>{
@@ -98,6 +98,7 @@ const ProductDetail = ({ product, categories, stock }) => {
         if(userAuth){
           setuserId(userAuth.uid);
           isInUserCart(product.id, userAuth.uid).then(res =>{
+            console.log(res);
             setIsInCart(res);
           });
         }else{

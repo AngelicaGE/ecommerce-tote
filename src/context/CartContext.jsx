@@ -12,7 +12,7 @@ export const CartProvider = ({children}) => {
     }, [cartItems])
     
 
-    const addCartItem = (newCartItem) => {
+    const addCartItem = async (newCartItem) => {
         console.log("*** ADDING ITEM ***")
         console.log(newCartItem)
        if(productIsInCart(newCartItem.id)) {

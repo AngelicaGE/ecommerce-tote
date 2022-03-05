@@ -77,7 +77,7 @@ export const UserProvider = ({children}) => {
         let isLiked = false;
         res.docs.map(doc => {
             if(doc.data().item.id ===itemId) {
-                console.log("book is in cart")
+                console.log("book is in cart", doc.data().item)
                 isLiked = true;
             }
         })
@@ -123,7 +123,7 @@ export const UserProvider = ({children}) => {
         let res = await getDocs(q);
         res.docs.map(docRef => {
              deleteDoc(docRef.ref);
-        })
+        })  
     }
 
 
