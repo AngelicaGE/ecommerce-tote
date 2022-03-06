@@ -1,12 +1,18 @@
 import React, {useState} from 'react';
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import '../styles/Product.scss'
+import { useNavigate } from "react-router-dom";
 
 const Product = ({ id, name, saleability, price, imagePath, freeLink}) => {
     const [selected, setselected] = useState(false);
 
+    let navigate = useNavigate();
+    const navToDetails = ()=>{
+        navigate(`/product/${id}`);
+    }
+
     return(
-        <div className='ProductItem' onMouseEnter={() => setselected(true)} onMouseLeave={() => setselected(false)}>
+        <div className='ProductItem' onMouseEnter={() => setselected(true)} onMouseLeave={() => setselected(false)} onClick={()=>navToDetails()}>
                 <picture>
                     <img src={imagePath?.thumbnail} alt={'producto ' + name} className={selected? 'selected':''}/>
                 </picture>

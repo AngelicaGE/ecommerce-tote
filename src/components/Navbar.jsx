@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react'
+import React, {useState, useContext} from 'react'
 import {Link, NavLink } from 'react-router-dom'
 import '../styles/Navbar.scss'
 import SandwichMenu from '../containers/SandwichMenu.jsx'
@@ -6,7 +6,6 @@ import CarWidget from '../containers/CarWidget'
 import searchIcon from '../assets/icons/search-white-24.png'
 import searchIconSmall from '../assets/icons/search-white-16.png'
 import wishlistIcon from '../assets/icons/heart-empty-white-24.png'
-import wishlistSelectedIcon from '../assets/icons/heart-empty-white-24.png'
 import userIcon from '../assets/icons/user-white-24.png'
 import UserModal from '../containers/UserModal'
 import { UserContext } from '../context/UserContext';
@@ -14,17 +13,13 @@ import { UserContext } from '../context/UserContext';
 
 const Navbar = ({name, clickOnMenu}) => {
     const [modalStyle, setModalStyle] = useState("hide")
-    //const [user, setUser] = useState(null)
-    const {userId, user} = useContext(UserContext)
+    const { user} = useContext(UserContext)
     const [isMouseOnUser, setisMouseOnUser] = useState(false)
 
 
      const handleClickUser = (val, msg="") => {
          setisMouseOnUser(val)       
      }
-
-     
-     
 
     return (
         <div className='Navbar'>    

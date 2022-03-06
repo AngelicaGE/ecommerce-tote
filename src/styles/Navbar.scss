@@ -43,7 +43,9 @@
     text-decoration: none;
     color: var(--white);
 }
-
+.tote-pages a{
+    margin: 0 1rem;
+}
 .tote-page a:hover{
     color: var(--light-gray);
     text-decoration: underline;
