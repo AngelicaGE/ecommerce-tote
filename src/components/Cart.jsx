@@ -22,12 +22,16 @@ const Cart = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        console.log(isLoading)
         onAuthStateChanged(auth,  (userAuth) => {
             if(userAuth){
               setUserId(userAuth.uid)
               console.log("Getting orders from user " );
-              setUserCartFromFirebase(userAuth.uid);
-              setIsLoading(false);
+              setUserCartFromFirebase(userAuth.uid).then(()=>{
+                  setTimeout(function () {
+                    setIsLoading(false);
+                }, 1000);
+              });
             }else{
                 setIsLoading(false)
             }
@@ -35,6 +39,7 @@ const Cart = () => {
     }, [])
 
     useEffect(() =>{
+        console.log(isLoading)
         setAllTotals();
     }, [cartItems, userCart])
 
@@ -43,7 +48,7 @@ const Cart = () => {
         addAllItems();
     }
 
-    const setUserCartFromFirebase = (userAuthId) =>{
+    const setUserCartFromFirebase = async (userAuthId) =>{
         getAllForUser(ordersDocument, userAuthId).then((items) =>{
             console.log(items)
             if(items){

@@ -46,7 +46,7 @@ const Navbar = ({name, clickOnMenu}) => {
                 </div>
 
                 <ul className='user-pages'>
-                    <li className='user-page search'  onClick={()=> handleClickUser(false, "search")}>
+                    <li className='user-page search'  onClick={()=> handleClickUser(false, "search")} onMouseEnter={()=> handleClickUser(false, "search")}>
                         <NavLink to="/search">
                             <picture>
                                 <source media="(min-width:800px)" srcSet={searchIcon}></source>
@@ -55,7 +55,7 @@ const Navbar = ({name, clickOnMenu}) => {
                         </NavLink>
                     </li>
                     <li className='user-page user'>
-                        <img  onClick={()=> handleClickUser(!isMouseOnUser, "img")} onMouseEnter={()=> handleClickUser(true, "img")}  width="24px" id='user-icon' src={user? user.photoURL :userIcon} alt="user icon" />
+                        <img  onClick={()=> handleClickUser(!isMouseOnUser, "img")} onMouseEnter={()=> handleClickUser(true, "img")} width="24px" id='user-icon' src={user? user.photoURL :userIcon} alt="user icon" />
                         <UserModal  
                             modalStyle={isMouseOnUser? "show":"hide"}
                             setModalStyle={setModalStyle}
@@ -64,7 +64,7 @@ const Navbar = ({name, clickOnMenu}) => {
                             handleClickUser={handleClickUser}
                         ></UserModal>
                     </li>
-                    <li className='user-page whishlist'  onClick={()=> handleClickUser(false, "wish")}>
+                    <li className='user-page whishlist'  onClick={()=> handleClickUser(false, "wish")}  onMouseEnter={()=> handleClickUser(false, "wish")} >
                         <NavLink to ="/wishlist" className={({isActive}) => isActive? 'activeClass': ''}>
                             <img alt='wishlist icon' src={wishlistIcon}/>
                         </NavLink>

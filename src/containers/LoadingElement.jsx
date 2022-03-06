@@ -5,7 +5,7 @@ import '../styles/LoadingElement.scss'
 const LoadingElement = () => {
   return (
     <div className='LoadingElement'>
-        <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
     </div>
   )
 }

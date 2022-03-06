@@ -1,13 +1,13 @@
-import {useState} from 'react';
 import Navbar from './Navbar';
 import SideNavbar from './SideNavbar';
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const NavbarContainer = ({name}) => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useLocalStorage("menuOpen", false);
     
     const clickOnMenu = () => {
         setIsMenuOpen(!isMenuOpen);
-        console.log("isMenuOpen: " + isMenuOpen);
+        console.log("isMenuOpen: " + !isMenuOpen);
     }
   return (
   <div>

@@ -33,4 +33,4 @@ export function getAllCategories(){
     });
 } 
 
-export const allCategories = ["Child", "Romance", "Science", "Young Adult Nonfiction"]
+export const allCategories = [ "Romance", "Science", "Young Adult Nonfiction", "Finance"]
