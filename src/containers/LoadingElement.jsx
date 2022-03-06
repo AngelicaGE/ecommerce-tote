@@ -1,3 +1,4 @@
+// Taken from: https://loading.io/css/
 import React from 'react'
 import '../styles/LoadingElement.scss'
 
