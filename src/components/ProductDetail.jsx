@@ -25,7 +25,6 @@ const ProductDetail = ({ product, categories, stock }) => {
   const images = details.imageLinks;
 
   const addItem = () => {setAmount(amount + 1);};
-
   const removeItem = () => {setAmount(amount - 1);};
 
   const createItem = () => {
@@ -79,7 +78,6 @@ const ProductDetail = ({ product, categories, stock }) => {
   // end of methods for modal
 
   useEffect(() => {
-    console.log(product)
     onAuthStateChanged(auth,  (userAuth) => {
         console.log(userAuth)
         if(userAuth){
@@ -161,7 +159,7 @@ const ProductDetail = ({ product, categories, stock }) => {
       <div className="group">
         <section className="book-image">
           <picture>
-            <img src={images.thumbnail} alt="picture of the book" />
+            <img src={images.thumbnail} alt={`Book ${details.title}`}/>
           </picture>
         </section>
 

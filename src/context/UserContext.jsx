@@ -3,7 +3,7 @@ import {createContext, useEffect } from "react";
 import { useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import {db} from '../firebase/firebase.js'
-import {collection, query, orderBy, setDoc, doc, where, addDoc, deleteDoc, getDocs, getFirestore} from "firebase/firestore"
+import {collection, query, setDoc, doc, where, addDoc, deleteDoc, getDocs} from "firebase/firestore"
 import {auth} from '../firebase/firebase.js'
 
 export const UserContext = createContext();
@@ -23,9 +23,9 @@ export const UserProvider = ({children}) => {
         console.log("getAllForUser");
         let res = await getDocs(q);
         if(res){
-            res.docs.map(doc => {
-                tmpArray = [...tmpArray, {"id": doc.id, ...doc.data()}];
-            })
+            res.docs.map(doc => (
+                tmpArray = [...tmpArray, {"id": doc.id, ...doc.data()}]
+            ))
         }
         return tmpArray;
     }
@@ -55,7 +55,7 @@ export const UserProvider = ({children}) => {
         let res = await getDocs(q)
         let docId = 0;
         // search for this book entry id in loked collection
-        res.docs.map(doc => {
+        res.docs.forEach(doc => {
             if(doc.data().productInfo.id ===bookId) {
                 console.log("book is liked")
                 console.log(doc.id)
@@ -74,7 +74,7 @@ export const UserProvider = ({children}) => {
             let q = query(itemCollection,where("useruid", "==", useruid))
             let res = await getDocs(q)
             let isLiked = false;
-            res.docs.map(doc => {
+            res.docs.forEach(doc => {
                 if(doc.data().productInfo.id ===bookId) {
                     console.log("book is liked")
                     isLiked = true;
@@ -88,7 +88,7 @@ export const UserProvider = ({children}) => {
         let q = query(itemCollection,where("useruid", "==", useruid))
         let res = await getDocs(q)
         let isLiked = false;
-        res.docs.map(doc => {
+        res.docs.forEach(doc => {
             if(doc.data().item.id ===itemId) {
                 console.log("book is in cart", doc.data().item)
                 isLiked = true;
@@ -112,10 +112,8 @@ export const UserProvider = ({children}) => {
         let res = await getDocs(q)
         let docId = 0;
         // search for this book entry id in loked collection
-        res.docs.map(doc => {
+        res.docs.forEach(doc => {
             if(doc.data().item.id === itemId) {
-                console.log("book is in cart")
-                console.log(doc.id)
                 docId=doc.id;
             }
         })
@@ -136,9 +134,9 @@ export const UserProvider = ({children}) => {
         const itemCollection = collection(db, cartCollection);
         const q = query(itemCollection,where("useruid", "==",userId))
         let res = await getDocs(q);
-        res.docs.map(docRef => {
-             deleteDoc(docRef.ref);
-        })  
+        res.docs.map(docRef => (
+             deleteDoc(docRef.ref)
+        ))  
         getCartItemsAmount(userId);
     }
 

@@ -36,7 +36,6 @@ const inputsUser = {
     fconfirmEmail: ""
 }
 
-
 const BuyModal = ({
   modalStyle,
   products,
@@ -63,11 +62,9 @@ const BuyModal = ({
     }, [user])
 
   const validateForm = () =>{
-    console.log(formFieldsInputs)
     let isValid = true
     console.log(formFieldsInputs.fconfirmEmail)
     if((formFieldsInputs.fconfirmEmail)  && (formFieldsInputs.femail !== formFieldsInputs.fconfirmEmail)){
-        console.log(formFieldsInputs)    
         isValid = false;
         setErrorMessage("Email confirmation must match")
     }
@@ -97,7 +94,6 @@ const BuyModal = ({
     }
 
     const docRef = await addDoc(collection(db, "orders"), order);
-    console.log(docRef.id);
     setOrderNumber(docRef.id);
     setOrderCompleted(true);
     setFormFieldsInputs(inputsUser)
@@ -109,7 +105,6 @@ const BuyModal = ({
   };
 
   const handleCloseModal = () => {
-    console.log("handleCloseModal");
     setModalStyle("hide");
     setFormFieldsInputs(inputsUser)
   };
@@ -122,7 +117,6 @@ const BuyModal = ({
   };
 
   const onChange = (event) => {
-      console.log(formFieldsInputs)
     setFormFieldsInputs({ ...formFieldsInputs, [event.target.name]: event.target.value });
   };
 
