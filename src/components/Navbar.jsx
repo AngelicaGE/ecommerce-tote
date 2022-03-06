@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 import {Link, NavLink } from 'react-router-dom'
 import '../styles/Navbar.scss'
 import SandwichMenu from '../containers/SandwichMenu.jsx'
@@ -9,20 +9,22 @@ import wishlistIcon from '../assets/icons/heart-empty-white-24.png'
 import wishlistSelectedIcon from '../assets/icons/heart-empty-white-24.png'
 import userIcon from '../assets/icons/user-white-24.png'
 import UserModal from '../containers/UserModal'
-import { UserContext } from '../context/UserContext'
+import { UserContext } from '../context/UserContext';
+
 
 const Navbar = ({name, clickOnMenu}) => {
     const [modalStyle, setModalStyle] = useState("hide")
-    const [user, setUser] = useState(null)
+    //const [user, setUser] = useState(null)
+    const {userId, user} = useContext(UserContext)
+    const [isMouseOnUser, setisMouseOnUser] = useState(false)
 
-     const handleClickUser = () => {
-         if(modalStyle == "show"){
-            setModalStyle("hide")
-         }else{
-            setModalStyle("show")
-         }
 
+     const handleClickUser = (val, msg="") => {
+         setisMouseOnUser(val)       
      }
+
+     
+     
 
     return (
         <div className='Navbar'>    
@@ -30,7 +32,7 @@ const Navbar = ({name, clickOnMenu}) => {
                 <div className='sandwich-menu hide-in-laptop' onClick={clickOnMenu}>
                     <SandwichMenu isSelected={false}/>
                 </div>
-                <ul className='tote-pages' >
+                <ul className='tote-pages' onClick={()=> handleClickUser(false, "ul")}>
                     <li className='tote-page'>
                         <NavLink to="/NewArrivals" className={({isActive}) => (isActive? 'activeClass': '')}>New arrivals</NavLink> |
                     </li>
@@ -44,12 +46,12 @@ const Navbar = ({name, clickOnMenu}) => {
                     </li>
                 </ul>
 
-                <div className='logo'>
+                <div className='logo' onClick={()=> handleClickUser(false, "div")}>
                     <h1><Link to="/" className='logo-link'>{name}</Link> </h1>
                 </div>
 
-                <ul className='user-pages' >
-                    <li className='user-page search'>
+                <ul className='user-pages'>
+                    <li className='user-page search'  onClick={()=> handleClickUser(false, "search")}>
                         <NavLink to="/search">
                             <picture>
                                 <source media="(min-width:800px)" srcSet={searchIcon}></source>
@@ -58,20 +60,21 @@ const Navbar = ({name, clickOnMenu}) => {
                         </NavLink>
                     </li>
                     <li className='user-page user'>
-                        <img onClick={handleClickUser} width="24px" id='user-icon' src={user? user.photoURL :userIcon} alt="user icon" />
-                        <UserModal
-                            modalStyle={modalStyle}
+                        <img  onClick={()=> handleClickUser(!isMouseOnUser, "img")} onMouseEnter={()=> handleClickUser(true, "img")}  width="24px" id='user-icon' src={user? user.photoURL :userIcon} alt="user icon" />
+                        <UserModal  
+                            modalStyle={isMouseOnUser? "show":"hide"}
                             setModalStyle={setModalStyle}
                             user={user}
-                            setUser={setUser}
+                           // setUser={setUser}
+                            handleClickUser={handleClickUser}
                         ></UserModal>
                     </li>
-                    <li className='user-page whishlist'>
-                        <NavLink to ="/wishlist">
+                    <li className='user-page whishlist'  onClick={()=> handleClickUser(false, "wish")}>
+                        <NavLink to ="/wishlist" className={({isActive}) => isActive? 'activeClass': ''}>
                             <img alt='wishlist icon' src={wishlistIcon}/>
                         </NavLink>
                     </li>
-                    <li className='user-page cart'>
+                    <li className='user-page cart'  onClick={()=> handleClickUser(false, "cart")}>
                         <NavLink to="/cart">
                             <CarWidget></CarWidget>
                         </NavLink>

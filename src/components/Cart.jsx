@@ -7,6 +7,7 @@ import CartProduct from '../containers/CartProduct'
 import BuyModal from '../containers/BuyModal'
 import {  onAuthStateChanged} from "firebase/auth";
 import { auth} from '../firebase/firebase'
+import LoadingElement from '../containers/LoadingElement';
 
 const ordersDocument ="cart";
 
@@ -18,6 +19,7 @@ const Cart = () => {
     const [modalStyle, setModalStyle] = useState("hide")
     const [orderdata, setorderdata] = useState({fname:'', fLastName:'', femail:'', totalItems: ''})
     const [userId, setUserId] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         onAuthStateChanged(auth,  (userAuth) => {
@@ -25,6 +27,9 @@ const Cart = () => {
               setUserId(userAuth.uid)
               console.log("Getting orders from user " );
               setUserCartFromFirebase(userAuth.uid);
+              setIsLoading(false);
+            }else{
+                setIsLoading(false)
             }
         })
     }, [])
@@ -119,13 +124,19 @@ const Cart = () => {
         setModalStyle("hide");
     }
 
-    if( (!userId && cartItems.length === 0) || (userId && userCart.length === 0)){
+    if (isLoading) {
+        return (
+          <div className='loading'>
+            <LoadingElement></LoadingElement>
+          </div>
+        )
+    } else if( (!userId && cartItems.length === 0) || (userId && userCart.length === 0)){
         return (<div className='CartEmpty'>
             <p className='oops'>Oops, your cart is empty at the moment.</p>
             <p className='quotes'>“The more that you read, the more things you will know. The more you learn, the more places you’ll go.” — Dr. Seuss :)</p>
             <NavLink to="/">Go explore</NavLink>
         </div>)
-    }
+    }else {
 
     return (
     <div className='Cart '>
@@ -180,6 +191,7 @@ const Cart = () => {
         ></BuyModal>
     </div>
     )
+    }
 } 
 
 export default Cart

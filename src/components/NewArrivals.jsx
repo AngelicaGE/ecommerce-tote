@@ -4,7 +4,8 @@ import '../styles/NewArrivals.scss'
 const NewArrivals = () => {
   return (
     <div className="NewArrivals">
-      New Arrivals
+      <br /><br /><br />
+      <h1>BONITA LANDING</h1>
     </div>
     )
 }

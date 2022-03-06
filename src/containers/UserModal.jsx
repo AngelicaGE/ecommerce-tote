@@ -5,14 +5,16 @@ import { useNavigate } from "react-router-dom";
 import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged} from "firebase/auth";
 
 
-const UserModal = ({modalStyle, setModalStyle, user, setUser}) => {
+const UserModal = ({modalStyle, setModalStyle, user, handleClickUser}) => {
 
   useEffect(() => {
-    onAuthStateChanged(auth,  (userAuth) => {
-      //console.log(userAuth)
-      setUser(userAuth)
-    })
-  }, [])
+    console.log(user)
+    const onScroll = () =>  handleClickUser(false, "scroll");
+    // clean up code
+    window.removeEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [user])
   
 
   const handleCloseModal = (event) => {
@@ -61,11 +63,11 @@ const UserModal = ({modalStyle, setModalStyle, user, setUser}) => {
  }
 
   return (
-    <div onClick={handleCloseModal} className={`UserModal ${modalStyle}`}>
-      <div className='user-modal-content' onClick={(event) => event.stopPropagation()}>
+    <div onClick={handleCloseModal} className={`UserModal ${modalStyle}`} >
+      <div className='user-modal-content' onClick={(event) => event.stopPropagation()} onMouseEnter={()=> handleClickUser(true, "modal")} onMouseLeave={() => handleClickUser(false, "modal")}> 
         <p><strong>My Account</strong></p>
         {
-          auth.currentUser?
+          user?
           <div className='user-info'>
             <p className='welcome-message'>Welcome {user.displayName}!</p>
             <img src={user.photoURL} alt="user profile pgoto"></img>

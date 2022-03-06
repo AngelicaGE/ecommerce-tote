@@ -10,7 +10,7 @@ const Landing = () => {
         {
             allCategories.map(cat => (
                 // TODO change better key
-                <ProductsContainer key={`cat${cat}`} category={cat} maxResults={10}/>
+                <ProductsContainer key={`cat${cat}`} category={cat} maxResults={5} seeAll={false}/>
             ))
         }
         <div>

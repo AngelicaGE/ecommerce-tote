@@ -6,6 +6,7 @@ import FavsModal from '../containers/FavsModal';
 import { NavLink } from 'react-router-dom';
 import {  onAuthStateChanged} from "firebase/auth";
 import { auth} from '../firebase/firebase'
+import LoadingElement from '../containers/LoadingElement';
 
 const key = `likes`;
 const likesDocument ="likes";
@@ -17,6 +18,7 @@ const Favorites = () => {
   const [localLikes, setLocalLikes] = useLocalStorage(key, []);
   const [userLikes, setUserLikes] = useState([]);
   const [userId, setUserId] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
 
   useEffect(() => {
@@ -27,7 +29,12 @@ const Favorites = () => {
         console.log("Getting likes from user " );
         getAllForUser(likesDocument, userAuth.uid).then((items) =>{
           setUserLikes(items);
+          setTimeout(function () {
+            setIsLoading(false)
+        }, 1000);
         });
+      }else{
+        setIsLoading(false)
       }
     })
   }, [])
@@ -50,6 +57,14 @@ const handleRemoveFromfavs = (productId) => {
     setLocalLikes(newLikes);
   }
 };
+
+if (isLoading) {
+    return (
+      <div className='loading'>
+        <LoadingElement></LoadingElement>
+      </div>
+    )
+}
 
 
 if((!userId && localLikes.length == 0) || (userId && userLikes.length ==0)){

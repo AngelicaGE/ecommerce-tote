@@ -146,6 +146,7 @@ export const UserProvider = ({children}) => {
             if(userAuth){
                 setUserId(userAuth.uid)
                 setUser(userAuth)
+                console.log(userAuth)
                 getCartItemsAmount(userAuth.uid)
             }else{
                 setUserId(null)

@@ -12,7 +12,7 @@ const SideNavbar = ({clickOnMenu}) => {
             <SandwichMenu className="SandwichMenu" isSelected={true}/>
             <ul className='tote-pages-side' >
                     <li className='tote-page'>
-                        <NavLink to="fghj" className={({isActive}) => (isActive? 'activeClass': '')}>New arrivals</NavLink>
+                        <NavLink to="/NewArrivals" className={({isActive}) => (isActive? 'activeClass': '')}>New arrivals</NavLink>
                     </li>
                     <li className='tote-page'>
                         <NavLink to='/free' className={({isActive}) => (isActive? 'activeClass': '')}>Free</NavLink>

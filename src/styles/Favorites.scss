@@ -58,6 +58,15 @@
 .prod-details .price{
     margin: 2rem 0;
 }
+
+
+ // LOADER SPINNER
+ .loading{
+     height: 70vh;
+     margin: auto;
+ }
+
+
 @media(min-width:300px){
     .FavsModal img {
         display: none;
