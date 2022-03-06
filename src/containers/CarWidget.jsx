@@ -10,7 +10,7 @@ const {cartItemsAmount, userId} = useContext(UserContext)
 const [isCartActive, setIsCartActive] = useState(false)
 
 useEffect(() => {
-  console.log("*** USE EFFECT WIDGET ***", userId)
+  //console.log("*** USE EFFECT WIDGET ***", userId)
   if(userId != null){
     setIsCartActive(cartItemsAmount>0)
   }else{

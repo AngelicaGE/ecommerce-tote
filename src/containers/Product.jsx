@@ -8,7 +8,9 @@ const Product = ({ id, name, saleability, price, imagePath, freeLink}) => {
 
     let navigate = useNavigate();
     const navToDetails = ()=>{
-        navigate(`/product/${id}`);
+        if(saleability !== "FREE"){
+            navigate(`/product/${id}`);
+        }
     }
 
     return(

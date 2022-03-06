@@ -34,7 +34,7 @@ export const UserProvider = ({children}) => {
         const itemCollection = collection(db, cartCollection);
         const q = query(itemCollection,where("useruid", "==",useruid))
         let res = await getDocs(q);
-        console.log(res.size, " items in user's cart")
+        //console.log(res.size, " items in user's cart")
         setCartItemsAmount(res.size)
         return res.size;
     }

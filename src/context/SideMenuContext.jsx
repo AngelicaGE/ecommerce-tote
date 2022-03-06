@@ -1,12 +1,10 @@
-import {createContext, useEffect } from "react";
-import useLocalStorage from "../hooks/useLocalStorage";
+import {createContext, useState } from "react";
 
-const key = 'menuOpen';
-export const CartContext = createContext();
+export const SideMenuContext = createContext();
 
 
-export const SideMenuContext = ({children}) => {
-    const [isMenuOpen, setIsMenuOpen] = useLocalStorage(key, false);
+export const SideMenuProvider = ({children}) => {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 
     const updateMenuState = async (state) => {
@@ -15,7 +13,7 @@ export const SideMenuContext = ({children}) => {
 
     return (
         <SideMenuContext.Provider 
-            value={{ isMenuOpen}}>
+            value={{ isMenuOpen, updateMenuState}}>
             {children}
         </SideMenuContext.Provider>
     );

@@ -1,12 +1,14 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import '../styles/ScrollerTop.scss'
 import arrow from '../assets/icons/arrow-up.png'
+import { SideMenuContext } from '../context/SideMenuContext'
 
 export const ScrollerTop = () => {
-    const [elementStyle, setElementStyle] = useState("hide")
+    const {isMenuOpen} = useContext(SideMenuContext)
+    const [elementStyle, setElementStyle] = useState();
+
     useEffect(() => {
-        console.log("from scroller ", isMenuOpen)
-        isMenuOpen?setElementStyle("hide"): setElementStyle("show")
+        isMenuOpen? setElementStyle("hide"): setElementStyle("show");
     }, [isMenuOpen])
     
 

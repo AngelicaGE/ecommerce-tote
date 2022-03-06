@@ -1,12 +1,14 @@
+import React, {useEffect, useState, useContext} from 'react'
 import Navbar from './Navbar';
 import SideNavbar from './SideNavbar';
-import useLocalStorage from "../hooks/useLocalStorage";
+import { SideMenuContext } from '../context/SideMenuContext'
 
 const NavbarContainer = ({name}) => {
-    const [isMenuOpen, setIsMenuOpen] = useLocalStorage("menuOpen", false);
+  const {isMenuOpen, updateMenuState} = useContext(SideMenuContext)
+
     
     const clickOnMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
+      updateMenuState(!isMenuOpen);
         console.log("isMenuOpen: " + !isMenuOpen);
     }
   return (

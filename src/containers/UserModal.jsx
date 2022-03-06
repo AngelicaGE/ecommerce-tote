@@ -8,7 +8,7 @@ import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged} from 
 const UserModal = ({modalStyle, setModalStyle, user, handleClickUser}) => {
 
   useEffect(() => {
-    console.log(user)
+    //console.log(user)
     const onScroll = () =>  handleClickUser(false, "scroll");
     // clean up code
     window.removeEventListener('scroll', onScroll);

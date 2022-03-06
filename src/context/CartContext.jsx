@@ -8,7 +8,7 @@ export const CartProvider = ({children}) => {
     const [cartItems, setCartItems] = useLocalStorage(key, []);
 
     useEffect(() => {
-        console.log(cartItems)
+        //console.log(cartItems)
     }, [cartItems])
     
 

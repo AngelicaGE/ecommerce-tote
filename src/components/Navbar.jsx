@@ -29,7 +29,7 @@ const Navbar = ({name, clickOnMenu}) => {
                 </div>
                 <ul className='tote-pages' onClick={()=> handleClickUser(false, "ul")}>
                     <li className='tote-page'>
-                        <NavLink to="/NewArrivals" className={({isActive}) => (isActive? 'activeClass': '')}>New arrivals</NavLink> |
+                        <NavLink to="/NewArrivals" className={({isActive}) => (isActive? 'activeClass': '')}>Our Picks</NavLink> |
                     </li>
                     <li className='tote-page'>
                         <NavLink to='/free' className={({isActive}) => (isActive? 'activeClass': '')}>Free</NavLink> |
