@@ -13,6 +13,7 @@ const cartCollection ="cart";
 export const UserProvider = ({children}) => {
     const [cartItemsAmount, setCartItemsAmount] = useState(0)
     const [userId, setUserId] = useState(null)
+    const [user, setUser] = useState(null)
 
     //its a promise
     const getAllForUser = async (collectionName, useruid) => {
@@ -146,9 +147,11 @@ export const UserProvider = ({children}) => {
             console.log("USE EFFECT CAR WIDGET")
             if(userAuth){
                 setUserId(userAuth.uid)
+                setUser(userAuth)
                 getCartItemsAmount(userAuth.uid)
             }else{
                 setUserId(null)
+                setUser(null)
             }
           })
     }, [])
@@ -168,7 +171,8 @@ export const UserProvider = ({children}) => {
                 updateItemFromcart,
                 clearUserCart,
                 cartItemsAmount,
-                userId
+                userId,
+                user
                 }}>
             {children}
         </UserContext.Provider>

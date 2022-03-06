@@ -5,7 +5,6 @@ import { CartContext } from "../context/CartContext";
 import { UserContext } from '../context/UserContext'
 import ProductSaleInfo from "../containers/ProductSaleInfo";
 import BuyModal from "../containers/BuyModal";
-import { useNavigate } from "react-router-dom";
 import {  onAuthStateChanged} from "firebase/auth";
 import { auth} from '../firebase/firebase'
 
@@ -15,12 +14,6 @@ const ProductDetail = ({ product, categories, stock }) => {
   const [seeAllCategories, setSeeAllCategories] = useState(defaultCategories);
   const [amount, setAmount] = useState(1);
   const [isInCart, setIsInCart] = useState(false);
-  const [orderdata, setorderdata] = useState({
-    fname: "",
-    fLastName: "",
-    femail: "",
-    totalItems: "",
-  });
   const { addCartItem, productIsInCart } = useContext(CartContext);
   const {addToUserCart, isInUserCart} = useContext(UserContext)
 
@@ -82,12 +75,6 @@ const ProductDetail = ({ product, categories, stock }) => {
   const handleOpenModal = () => {
     console.log("handleOpenModal");
     setModalStyle("show");
-  };
-
-  let navigate = useNavigate();
-  const handleCloseConfirmation = () => {
-    setModalStyle("hide");
-    navigate("/");
   };
   // end of methods for modal
 
@@ -228,10 +215,7 @@ const ProductDetail = ({ product, categories, stock }) => {
       {/**** MODAL****/}
       <BuyModal
         modalStyle={modalStyle}
-        handleCloseConfirmation={handleCloseConfirmation}
         products={createItem()}
-        orderdata={orderdata}
-        setorderdata={setorderdata}
         setModalStyle={setModalStyle}
       ></BuyModal>
     </div>

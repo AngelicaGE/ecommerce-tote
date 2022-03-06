@@ -3,9 +3,6 @@ import cartIcon from '../assets/icons/bag-white-24.png'
 import cartIconSmall from '../assets/icons/bag-white-16.png'
 import { CartContext } from '../context/CartContext'
 import { UserContext } from '../context/UserContext';
-import { onAuthStateChanged } from "firebase/auth";
-import {auth} from '../firebase/firebase.js'
-
 
 const CarWidget = () => {
 const {cartItems} = useContext(CartContext)
@@ -17,10 +14,9 @@ useEffect(() => {
   if(userId != null){
     setIsCartActive(cartItemsAmount>0)
   }else{
-
     setIsCartActive(cartItems.length>0)
   }
-}, [cartItems, cartItemsAmount])
+}, [cartItems, cartItemsAmount, userId])
 
 
   return (
