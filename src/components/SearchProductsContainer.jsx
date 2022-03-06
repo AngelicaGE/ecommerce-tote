@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import useGetProducts from '../hooks/useGetProducts';
 import ProductList from './ProductList';
 import { ScrollerTop } from '../containers/ScrollerTop';
+import LoadingElement from '../containers/LoadingElement'
 
 const SearchProductsContainer = ({message='', filter='paid-ebooks', maxResults=40}) => {
     const { id } = useParams();
@@ -14,10 +15,10 @@ const SearchProductsContainer = ({message='', filter='paid-ebooks', maxResults=4
     return (
         <div className='SearchProductsContainer'>
             <h1>{message} {id}</h1>
-            {
-                loading? <h1>LOADING</h1>: ''
-            }
             <p>{error}</p>
+            {
+                loading? <LoadingElement></LoadingElement>: ''
+            }
             <ProductList products={products}></ProductList>
             <div>
                 <ScrollerTop/>
