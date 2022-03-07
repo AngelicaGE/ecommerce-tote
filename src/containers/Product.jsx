@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import '../styles/Product.scss'
 import { useNavigate } from "react-router-dom";
 
-const Product = ({ id, name, saleability, price, imagePath, freeLink}) => {
+const Product = ({ id, name, saleability, price, imagePath, freeLink, displayButton=true}) => {
     const [selected, setselected] = useState(false);
 
     let navigate = useNavigate();
@@ -14,7 +14,7 @@ const Product = ({ id, name, saleability, price, imagePath, freeLink}) => {
     }
 
     return(
-        <div className='ProductItem' onMouseEnter={() => setselected(true)} onMouseLeave={() => setselected(false)} onClick={()=>navToDetails()}>
+        <div className=' ProductItem' onMouseEnter={() => setselected(true)} onMouseLeave={() => setselected(false)} onClick={()=>navToDetails()}>
                 <picture>
                     <img src={imagePath?.thumbnail} alt={'producto ' + name} className={selected? 'selected':''}/>
                 </picture>
@@ -30,9 +30,10 @@ const Product = ({ id, name, saleability, price, imagePath, freeLink}) => {
                     <p className='price'>Not for sale</p>
                 }
                 {
-                 (saleability == "FREE" && freeLink)?<a href={freeLink} target="_blank"id="ver-mas" className={`view-details-btn ${selected? 'selected':'unselected'}`} type='button'>Get book</a>
-                 :<Link to={`/product/${id}`} id="ver-mas" className={`view-details-btn ${selected? 'selected':'unselected'}`} type='button'>View details</Link>
-
+                 (saleability == "FREE" && freeLink && displayButton)?
+                 <a href={freeLink} target="_blank"id="ver-mas" className={`view-details-btn ${selected? 'selected':'unselected'}`} type='button'>Get book</a>
+                 :(displayButton)?<Link to={`/product/${id}`} id="ver-mas" className={`view-details-btn ${selected? 'selected':'unselected'}`} type='button'>View details</Link>
+                :''
                 }             
         </div>
     );

@@ -1,22 +1,25 @@
-import React from 'react'
+import React, {useState} from 'react'
 import '../styles/ProductsContainer.scss'
 import useGetProducts from '../hooks/useGetProducts';
-import ProductList from './ProductList';
-import LoadingElement from '../containers/LoadingElement';
+import ProductListCarrousel from './ProductListCarrousel';
 
-const ProductsContainer = ({category, message='', maxResults=40, seeAll=true}) => {
-    const API = `https://www.googleapis.com/books/v1/volumes?q=${category}+subject&filter=paid-ebooks&maxResults=${maxResults}`;
+const ProductsContainer = ({category, message='', maxResults=40, 
+                            startIndex=1, seeAll=true, createTitle=true}) => {
+    let API = `https://www.googleapis.com/books/v1/volumes?q=${category}+subject&filter=paid-ebooks&startIndex=${startIndex}&maxResults=${maxResults}`;
 
     const {products, loading, error} = useGetProducts(API);
 
     return (
         <div className='ProductsContainer'>
-            <div className='category-title'>{category}</div>
             {
-                loading? <LoadingElement></LoadingElement>: ''
+                createTitle?
+                <>
+                   <div className='category-title'>{category}</div>
+                </>
+                : ''
             }
             <p>{error}</p>
-            <ProductList products={products} hookAPI={true}></ProductList>
+            <ProductListCarrousel products={products} loading={loading}></ProductListCarrousel>
             {
                 seeAll?<p className='see-all' onClick={() => alert('TODO: Implement later')}>See more...</p>
                 : ''

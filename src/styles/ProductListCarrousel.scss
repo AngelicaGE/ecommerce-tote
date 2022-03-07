@@ -1,0 +1,20 @@
+.ProductListCarrousel{
+    display: flex;
+    flex-direction: row;
+}
+#right-arrow, #left-arrow{
+    filter: invert(100%);
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+#right-arrow{
+    transform: rotate(90deg);
+}
+#left-arrow{
+    transform: rotate(-90deg);
+}
+.arrow{
+    display: flex;
+    align-items: center;
+}

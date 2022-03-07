@@ -1,6 +1,5 @@
 //rafce
 import React from 'react';
-import useGetProducts from '../hooks/useGetProducts';
 import Product from '../containers/Product';
 import '../styles/ProductList.scss'
 

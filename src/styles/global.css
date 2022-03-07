@@ -15,6 +15,10 @@ html{
 .show{
     display: inline-block;
 }
+.hide-visibility{
+    visibility: hidden;
+}
+
 
 
 .view-details-btn{
