@@ -5,9 +5,9 @@ import "../styles/ProductListCarrousel.scss";
 import LoadingElement from '../containers/LoadingElement'
 import arrow from '../assets/icons/arrow-up.png'
 
-const ProductListCarrousel = ({ products, loading}) => {
+const ProductListCarrousel = ({ products, loading, amountVisibleParameter=3}) => {
     const [visibleItems, setVisibleItems] = useState([])
-    const [amountVisible, setAmountVisible] = useState(3)
+    const [amountVisible, setAmountVisible] = useState(amountVisibleParameter)
     const [firstVisibleIndex, setFirstVisibleIndex] = useState(0)
     
 

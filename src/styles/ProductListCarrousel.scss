@@ -1,6 +1,7 @@
 .ProductListCarrousel{
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 #right-arrow, #left-arrow{
     filter: invert(100%);

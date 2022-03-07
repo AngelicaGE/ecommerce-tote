@@ -34,3 +34,8 @@ export function getAllCategories(){
 } 
 
 export const allCategories = [ "Romance", "Science", "Young Adult Nonfiction", "Finance"]
+export const ourPicks = [ 
+    {category: "Romance", message: "To melt your hear"},
+    {category: "Finance", message: "Lets talk about finance"},
+    {category: "Fairy tales", message: "Recomendations for the little ones"}
+]

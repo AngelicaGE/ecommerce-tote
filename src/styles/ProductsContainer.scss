@@ -12,11 +12,17 @@
     border-radius: 25px;
     color: white;//var(--slack-purple);
 }
-.see-all{
+.see-all a{
     padding: 0 var(--sm);
     margin: 0 0.5rem;
     text-align: right;
-
+    text-decoration: none;
+    color: black;
+}
+.see-all{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
 }
 
 @media(min-width:300px){

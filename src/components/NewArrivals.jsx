@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import '../styles/NewArrivals.scss'
 import ProductsContainer from './ProductsContainer.jsx'
-import { allCategories } from '../helpers/promises.js'
+import { ourPicks } from '../helpers/promises.js'
 import { ScrollerTop } from '../containers/ScrollerTop.jsx'
 
 const NewArrivals = () => {
@@ -20,13 +20,14 @@ const NewArrivals = () => {
                       startIndex={1} seeAll={false} createTitle={false} />
           </div>
         </div>
-
       </div>
         {
-            allCategories.map(cat => (
-                // TODO change better key
-                <p key={`cat${cat}`}>{ cat}</p>
-               // <ProductsContainer key={`cat${cat}`} category={cat} maxResults={5} seeAll={false}/>
+            ourPicks.map(pick => (
+              <div key={`cat${pick.category}`} className='pick-group'>
+                <h2 className='pick-group-title rule'>{pick.message}</h2>
+                <ProductsContainer category={pick.category} maxResults={15} startIndex={1} seeAll={true} createTitle={false} amountVisibleParameter={5}/>
+              </div>
+              
             ))
         }
         <div>
