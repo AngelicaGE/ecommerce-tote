@@ -104,15 +104,16 @@ const About = () => {
       {
         /**** DEVELOPER ****/
         generalInfo.length >= 2 ? (
-          <div className={`InfoBlock`}>
+          <div className={`DevBlock`}>
             <div className={`main-cont`}>
               <p className="ib-title">{generalInfo[2].titulo}</p>
-              <p className="ib-subtitle">{generalInfo[2].subtitulo}</p>
-              <p
-                className={`ib-content`}
-                id="ib-content-big"
-                dangerouslySetInnerHTML={{ __html: generalInfo[2].contenido }}
-              ></p>
+              <p className="ib-subtitle">I'm a software engineer</p>
+              <p>Graduated in dec 2020 from University of ITESM in México.
+                  I worked as a QA Automation Engineer at Oracle from feb 2021 to April 2022. <br />
+                  Other jobs include: QA databse intern at oracle (6months) and Unity Developer at NGX (4  months) <br />
+                  <br />
+                  I have great passion for programming and project management, I want to start a career in Web development as a front end developer.
+                  I have started my journey learning react and so far I have LOVED the library and hope to keep working on developing amazing projects for the web.</p>
             </div>
           </div>
         ) : (

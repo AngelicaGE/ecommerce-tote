@@ -15,8 +15,16 @@
     flex-direction: column;
     align-items: center;
     background-color: antiquewhite;
-
 }
+
+.DevBlock{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: antiquewhite;
+    padding: 2rem 0;
+}
+.DevBlock 
 .About a{
     text-decoration: none;
 }
@@ -46,7 +54,7 @@
 
 // TECHNOLOGIES
 .techs-cont{
-    background-color: grey;
+    background-color: var(--slack-purple);
     display: flex;
     justify-content: space-evenly;
     align-items: center;
