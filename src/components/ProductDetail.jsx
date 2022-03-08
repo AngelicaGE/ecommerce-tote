@@ -49,7 +49,7 @@ const ProductDetail = ({ product, categories, stock }) => {
     //console.log(item);
     if(userId){
       addToUserCart(item, userId).then(res=>{
-        alert("Cart updated", res);
+        //alert("Cart updated", res);
         setIsInCart(true);
       })
     }else{

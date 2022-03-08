@@ -32,6 +32,15 @@ export function getAllCategories(){
     });
 } 
 
+export const allTechs = [
+    {name: "Github", icon:"gh.png"},
+    {name: "React.js", icon:"react.png"},
+    {name: "CSS (no framework)", icon:"css.png"},
+    {name: "Firebase", icon:"firebase.png"},
+    {name: "Google Book API", icon:"google.png"}
+
+]
+
 export const allCategories = [
     {title: "Novels", category: "Novels", image: "novels.jpg"},
     {title: "Fiction", category: "Fiction", image: "fiction.jpg"},

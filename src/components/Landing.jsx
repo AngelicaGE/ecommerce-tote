@@ -2,7 +2,6 @@ import React from 'react'
 import '../styles/Landing.scss'
 import { allCategories, allCards } from '../helpers/promises'
 import {Link } from 'react-router-dom'
-import searchIcon from '../assets/icons/search-white-24.png'
 
 const Landing = () => {
 
