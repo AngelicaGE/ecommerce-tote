@@ -14,9 +14,9 @@ import Favorites from '../components/Favorites';
 
 const Paths = () => {
   return (
-    <BrowserRouter basename="ecommerce-tote">
-      <NavbarContainer name="Bazarcito lector 1"/>
-      <Routes >
+    <BrowserRouter>
+      <NavbarContainer name="Bazarcito lector 2"/>
+      <Routes basename="ecommerce-tote">
         {/* Cambiar este por un Landing page jsx con multiples ProductsContainerWithHook*/}
         <Route path="/" element={<Landing/>}/>
         <Route path='/category/:id' element={<SearchProductsContainer message='Category: ' maxResults={40} />}></Route>
