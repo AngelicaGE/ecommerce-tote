@@ -46,7 +46,7 @@ const ProductDetail = ({ product, categories, stock }) => {
   const handleAddToCart = () => {
     console.log("****** ADDING THE PRODUCT ******");
     const item = createItem();
-    console.log(item);
+    //console.log(item);
     if(userId){
       addToUserCart(item, userId).then(res=>{
         alert("Cart updated", res);
@@ -60,30 +60,28 @@ const ProductDetail = ({ product, categories, stock }) => {
   };
 
   const clickOnSeeMoreCats = () => {
-    console.log("seeAllCategories");
-    console.log(categories);
+    //console.log(categories);
     if (seeAllCategories < categories.length) {
       setSeeAllCategories(categories.length);
     } else {
       setSeeAllCategories(defaultCategories);
     }
-    console.log(seeAllCategories);
+    //console.log(seeAllCategories);
   };
 
   // methods for modal
   const handleOpenModal = () => {
-    console.log("handleOpenModal");
+    //console.log("handleOpenModal");
     setModalStyle("show");
   };
   // end of methods for modal
 
   useEffect(() => {
     onAuthStateChanged(auth,  (userAuth) => {
-        console.log(userAuth)
+        //console.log(userAuth)
         if(userAuth){
           setuserId(userAuth.uid);
           isInUserCart(product.id, userAuth.uid).then(res =>{
-            console.log(res);
             setIsInCart(res);
           });
         }else{

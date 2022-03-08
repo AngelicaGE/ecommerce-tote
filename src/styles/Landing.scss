@@ -1,0 +1,33 @@
+.Landing{
+    font-family: var(--main-font);
+    max-width: 1280px;
+    margin: auto;
+
+}
+.categories-cont{
+    //background-color: red;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    max-width: 1000px;
+    margin: auto;
+    cursor: pointer;
+}
+.category-element{
+    //background-color: aqua;
+    width: fit-content;
+    margin: 1rem 3rem;
+    text-align: center;
+    text-decoration: none;
+}
+.category-element p{
+    margin-bottom: 1rem;
+    text-decoration: none;
+    color: black;
+}
+.category-element:hover{
+    transform: scale(1.05);
+}
+

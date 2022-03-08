@@ -28,12 +28,19 @@ export function getCategories(categories){
 
 export function getAllCategories(){
     return new Promise((resolve, reject) => {
-        //console.log('in the promise getCategories');
-        resolve(["Physics", "Science", "Young Adult Nonfiction"])
+        resolve(allCategories)
     });
 } 
 
-export const allCategories = [ "Romance", "Science", "Young Adult Nonfiction", "Finance"]
+export const allCategories = [
+    {title: "Novels", category: "Novels", image: "novels.jpg"},
+    {title: "Fiction", category: "Fiction", image: "fiction.jpg"},
+    {title: "Education", category: "Education", image: "education.jpg"},
+    {title: "History", category: "History", image: "history.jpg"},
+    {title: "Non Fiction", category: "Nonfiction", image: "nonfiction.jpg"},
+    {title: "Health", category: "Health and personal growth", image: "health.jpg"}
+]
+
 export const ourPicks = [ 
     {category: "Romance", message: "To melt your hear"},
     {category: "Finance", message: "Lets talk about finance"},

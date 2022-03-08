@@ -9,12 +9,13 @@ import LoadingElement from '../containers/LoadingElement'
 const SearchProductsContainer = ({message='', filter='paid-ebooks', maxResults=40}) => {
     const { id } = useParams();
     const [API, setAPI] = useState(`https://www.googleapis.com/books/v1/volumes?q=${id}+subject&filter=${filter}&maxResults=${maxResults}`)
+    //     const [API, setAPI] = useState(`https://www.googleapis.com/books/v1/volumes?q=${id}&subject=${id}&filter=${filter}&maxResults=${maxResults}`)
 
     const {products, loading, error} = useGetProducts(API);
 
     return (
         <div className='SearchProductsContainer'>
-            <h1>{message} {id}</h1>
+            <h2 className='pick-group-title rule'>{message} {id}</h2>
             <p>{error}</p>
             {
                 loading? <LoadingElement></LoadingElement>: ''

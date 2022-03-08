@@ -1,7 +1,6 @@
 import React, { useState, useEffect, memo, createRef } from "react";
 import "../styles/SearchContainer.scss";
 import { useNavigate } from "react-router-dom";
-import { allCategories } from "../helpers/promises";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 const key = "searches";
@@ -14,7 +13,7 @@ const SearchContainer = () => {
 
   let navigate = useNavigate();
   const redirectToSearch = () => {
-    let exists = searchHistory.includes(search) || allCategories.includes(search);
+    let exists = searchHistory.includes(search);
     if(!exists)setSearchHistory([...searchHistory, search]);
     console.log("search " + search);
     if (search == "") {
@@ -49,7 +48,7 @@ const SearchContainer = () => {
             placeholder="Category, Author, Title..."
           />
           <datalist id="categories">
-            {[...searchHistory, ...allCategories].map((cat) => (
+            {searchHistory.map((cat) => (
               <option value={cat} key={`cat${cat.id}`}></option>
             ))}
           </datalist>
