@@ -14,8 +14,8 @@ import Favorites from '../components/Favorites';
 
 const Paths = () => {
   return (
-    <BrowserRouter>
-      <NavbarContainer name="Bazarcito lector"/>
+    <BrowserRouter basename="ecommerce-tote">
+      <NavbarContainer name="Bazarcito lector 1"/>
       <Routes >
         {/* Cambiar este por un Landing page jsx con multiples ProductsContainerWithHook*/}
         <Route path="/" element={<Landing/>}/>
