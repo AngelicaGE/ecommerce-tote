@@ -96,7 +96,6 @@ const BuyModal = ({ modalStyle, products, setModalStyle }) => {
     const docRef = await addDoc(collection(db, "orders"), order);
     setOrderNumber(docRef.id);
     setOrderCompleted(true);
-    setFormFieldsInputs(inputsUser);
     if (userId) {
       clearUserCart(userId);
     }
@@ -109,6 +108,7 @@ const BuyModal = ({ modalStyle, products, setModalStyle }) => {
 
   let navigate = useNavigate();
   const handleCloseConfirmation = () => {
+    setFormFieldsInputs(inputsUser);
     if (userId) {
       clearUserCart(userId);
     } else {
