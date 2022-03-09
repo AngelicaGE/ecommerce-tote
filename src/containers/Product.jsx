@@ -15,9 +15,7 @@ const Product = ({ id, name, saleability, price, imagePath, freeLink, displayBut
 
     return(
         <div className=' ProductItem' onMouseEnter={() => setselected(true)} onMouseLeave={() => setselected(false)} onClick={()=>navToDetails()}>
-                <picture>
-                    <img src={imagePath?.thumbnail} alt={'producto ' + name} className={selected? 'selected':''}/>
-                </picture>
+                <img src={imagePath?.thumbnail} alt={'producto ' + name} className={selected? 'selected':''}/>
                 <p className='name'>{name}</p>
                 {
                     (saleability == "FOR_SALE")

@@ -26,6 +26,19 @@ export function getCategories(categories){
     });
 } 
 
+export function fixMixContent(url){
+    return new Promise((resolve, reject) => {
+        try {
+            // agregar la s a http
+            let newUrl = url.replace('http:', 'https:')
+            resolve(newUrl);
+        } catch (error) {
+            //reject(imagen estatica)
+            reject(url);
+        }
+    });
+}
+
 export function getAllCategories(){
     return new Promise((resolve, reject) => {
         resolve(allCategories)
