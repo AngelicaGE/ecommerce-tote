@@ -12,7 +12,7 @@ import Cart from '../components/Cart';
 import NewArrivals from '../components/NewArrivals';
 import Favorites from '../components/Favorites';
 
-const bname = "";//"ecommerce-tote"
+const bname = "ecommerce-tote";
 
 const Paths = () => {
   return (
