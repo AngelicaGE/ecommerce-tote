@@ -12,11 +12,13 @@ import Cart from '../components/Cart';
 import NewArrivals from '../components/NewArrivals';
 import Favorites from '../components/Favorites';
 
+const bname = "";//"ecommerce-tote"
+
 const Paths = () => {
   return (
-    <BrowserRouter basename="ecommerce-tote">
+    <BrowserRouter basename={bname}>
       <NavbarContainer name="Bazarcito lector"/>
-      <Routes basename="ecommerce-tote">
+      <Routes basename={bname}>
         {/* Cambiar este por un Landing page jsx con multiples ProductsContainerWithHook*/}
         <Route path="/" element={<Landing/>}/>
         <Route path='/category/:id' element={<SearchProductsContainer message='Category: ' maxResults={40} />}></Route>

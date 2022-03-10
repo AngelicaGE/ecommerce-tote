@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
+import "../styles/InfoBlock.scss";
+import { NavLink } from "react-router-dom";
 import { db } from "../firebase/firebase.js";
 import { allTechs } from "../helpers/promises.js";
 import { useNavigate } from "react-router-dom";
@@ -8,12 +9,8 @@ import {
   collection,
   query,
   orderBy,
-  doc,
-  getDoc,
   getDocs,
-  getFirestore,
 } from "firebase/firestore";
-import "../styles/InfoBlock.scss";
 
 const About = () => {
   const [generalInfo, setGeneralInfo] = useState([]);
@@ -33,7 +30,7 @@ const About = () => {
             tmpArray = [...tmpArray, { id: doc.id, ...doc.data() }];
           }
         });
-        console.log(tmpArray);
+        //console.log(tmpArray);
       })
       .catch((error) => {
         console.log(error);
