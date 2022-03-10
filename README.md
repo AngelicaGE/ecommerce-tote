@@ -27,6 +27,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 2. NPM (react-router-dom)
 3. custom Hooks   
 4. Google Books API 
+5. All styles are hand-made no Bootstrap or other UI libraries...
 
 ## Prerequisites
 * [Node.js](https://nodejs.org/)
