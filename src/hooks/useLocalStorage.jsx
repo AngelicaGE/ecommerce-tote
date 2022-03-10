@@ -21,7 +21,7 @@ const useLocalStorage = (key, initialValue) =>{
         try {
             window.localStorage.setItem(key, JSON.stringify(value))
             setStoragevalue(value);
-            console.log("set local storage "+ window.localStorage.getItem(key))
+            //console.log("set local storage "+ window.localStorage.getItem(key))
         } catch (error) {
             console.log(error)
         }

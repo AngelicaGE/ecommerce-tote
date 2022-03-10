@@ -19,12 +19,12 @@ const UserModal = ({modalStyle, setModalStyle, user, handleClickUser}) => {
 
   const handleCloseModal = (event) => {
     event.stopPropagation();
-    console.log("handleCloseModal");
+    //console.log("handleCloseModal");
     setModalStyle("hide")
   }
   const handleLogClick = (event) =>{
     event.stopPropagation()
-    console.log("log")
+    //console.log("log")
   }
 
   const handleSignIn = () =>{ 

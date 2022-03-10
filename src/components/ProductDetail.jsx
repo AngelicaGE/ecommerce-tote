@@ -44,7 +44,7 @@ const ProductDetail = ({ product, categories, stock }) => {
   };
 
   const handleAddToCart = () => {
-    console.log("****** ADDING THE PRODUCT ******");
+    //console.log("****** ADDING THE PRODUCT ******");
     const item = createItem();
     //console.log(item);
     if(userId){

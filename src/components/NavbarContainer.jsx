@@ -9,7 +9,7 @@ const NavbarContainer = ({name}) => {
     
     const clickOnMenu = () => {
       updateMenuState(!isMenuOpen);
-        console.log("isMenuOpen: " + !isMenuOpen);
+        //console.log("isMenuOpen: " + !isMenuOpen);
     }
   return (
   <div>

@@ -78,7 +78,7 @@ const About = () => {
                 <p className={`ib-content`} id="ib-content-big">
                   I joined the React.js course on the online school Coderhouse.
                   This e-commerce is my final project where I had fun
-                  implementing what I learned in this 2 month course.
+                  implementing what I learned in this 1.5 month course.
                 </p>
               </div>
             </div>

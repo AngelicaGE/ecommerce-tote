@@ -60,7 +60,7 @@ const BuyModal = ({ modalStyle, products, setModalStyle }) => {
 
   const validateForm = () => {
     let isValid = true;
-    console.log(formFieldsInputs.fconfirmEmail);
+    //console.log(formFieldsInputs.fconfirmEmail);
     if (
       formFieldsInputs.fconfirmEmail &&
       formFieldsInputs.femail !== formFieldsInputs.fconfirmEmail
@@ -71,7 +71,7 @@ const BuyModal = ({ modalStyle, products, setModalStyle }) => {
 
     Object.entries(formFieldsInputs).forEach(([key, value]) => {
       if (value === "") {
-        console.log(value);
+        //console.log(value);
         isValid = false;
       }
     });

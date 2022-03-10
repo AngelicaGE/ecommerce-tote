@@ -20,7 +20,7 @@ export const UserProvider = ({children}) => {
         let tmpArray = [];
         const itemCollection = collection(db, collectionName);
         const q = query(itemCollection,where("useruid", "==",useruid))
-        console.log("getAllForUser");
+        //console.log("getAllForUser");
         let res = await getDocs(q);
         if(res){
             res.docs.map(doc => (
@@ -41,15 +41,15 @@ export const UserProvider = ({children}) => {
 
     //its a promise
     const addtoUserFavs = async (productInfo, useruid) => {
-        console.log("*** ADDING LIKED ***")
+        //console.log("*** ADDING LIKED ***")
         const likeInfo ={productInfo, useruid}
         const docRef = await addDoc(collection(db, likesCollection), likeInfo);
-        console.log("Add book to user favs: " + docRef.id)
+        //console.log("Add book to user favs: " + docRef.id)
     };
 
     //its a promise
     const removeUserFavsFromDetails = async (bookId, useruid) => {
-        console.log("*** REMOVING LIKED ***")
+        //console.log("*** REMOVING LIKED ***")
         let itemCollection = collection(db, likesCollection);
         let q = query(itemCollection,where("useruid", "==", useruid))
         let res = await getDocs(q)
@@ -57,8 +57,8 @@ export const UserProvider = ({children}) => {
         // search for this book entry id in loked collection
         res.docs.forEach(doc => {
             if(doc.data().productInfo.id ===bookId) {
-                console.log("book is liked")
-                console.log(doc.id)
+                //console.log("book is liked")
+                //console.log(doc.id)
                 docId=doc.id;
             }
         })
@@ -90,7 +90,7 @@ export const UserProvider = ({children}) => {
         let isLiked = false;
         res.docs.forEach(doc => {
             if(doc.data().item.id ===itemId) {
-                console.log("book is in cart", doc.data().item)
+                //console.log("book is in cart", doc.data().item)
                 isLiked = true;
             }
         })
@@ -98,15 +98,15 @@ export const UserProvider = ({children}) => {
 };
 
     const addToUserCart = async (item, useruid)=>{
-        console.log("*** PUSH TO FIREBASE ***")
+        //console.log("*** PUSH TO FIREBASE ***")
         const cartItem ={item, useruid}
         const docRef = await addDoc(collection(db, cartCollection), cartItem);
-        console.log("Add item to user cart: " + docRef.id)
+        //console.log("Add item to user cart: " + docRef.id)
         getCartItemsAmount(useruid)
     }
 
     const removeFromUserCart = async (itemId, useruid) => {
-        console.log("*** REMOVING FROM CART ***")
+        //console.log("*** REMOVING FROM CART ***")
         let itemCollection = collection(db, cartCollection);
         let q = query(itemCollection,where("useruid", "==", useruid))
         let res = await getDocs(q)

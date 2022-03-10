@@ -13,14 +13,14 @@ export const CartProvider = ({children}) => {
     
 
     const addCartItem = async (newCartItem) => {
-        console.log("*** ADDING ITEM ***")
-        console.log(newCartItem)
+        //console.log("*** ADDING ITEM ***")
+        //console.log(newCartItem)
        if(productIsInCart(newCartItem.id)) {
            alert("duplicate");
            return;
        }
         setCartItems([...cartItems, newCartItem]);
-        alert("cart updated")
+        //alert("cart updated")
     };
 
     const removeCartItem = (cartItemId) => {
@@ -28,7 +28,7 @@ export const CartProvider = ({children}) => {
     };
 
     const updateCartItem = (cartItemId, newAmount) => {
-        console.log("updateCartItem")
+        //console.log("updateCartItem")
         // grab specific item
         let item = cartItems.find((prod) => prod.id === cartItemId)
         function  search(el){
@@ -40,7 +40,7 @@ export const CartProvider = ({children}) => {
             // not sure how to update so workaround with temp copy of array
             let cartItempsTemp = cartItems;
             cartItempsTemp[itemIndex] = item;
-            console.log(cartItempsTemp)
+            //console.log(cartItempsTemp)
             // update actual state
             setCartItems(cartItempsTemp);
         }else{
@@ -49,7 +49,7 @@ export const CartProvider = ({children}) => {
     };
 
     const clearCart = () => {
-        console.log("clear");
+        //console.log("clear");
         setCartItems([]);
     };
 

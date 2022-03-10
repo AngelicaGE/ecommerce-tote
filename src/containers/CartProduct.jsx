@@ -6,14 +6,14 @@ const CartProduct = ({cartProduct, handleClickOnRemove, onUpdateAmountItem}) => 
     const [amount, setAmount] = useState(cartProduct.amount)
 
     const onAdd = () => {
-        console.log("one more...");
+        //console.log("one more...");
         let amountTemp = amount+1;
         // update local value 'amount'
         setAmount(amountTemp);
         onUpdateAmountItem(cartProduct.id, amountTemp)
     }
     const onRemove = () =>{
-        console.log("one less...")
+        //console.log("one less...")
         let amountTemp = amount-1;
         // update local value 'amount'
         setAmount(amountTemp);
