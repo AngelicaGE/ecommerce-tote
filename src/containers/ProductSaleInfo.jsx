@@ -30,13 +30,13 @@ const ProductSaleInfo = ({
     onAuthStateChanged(auth,  (userAuth) => {
       if(userAuth){
         setuserId(userAuth.uid)
-        console.log("find out if this book is liked inside user firebase");
+        //console.log("find out if this book is liked inside user firebase");
         isInUserFavs(productInfo.id, userAuth.uid).then(liked=>{
-          console.log(liked)  
+          //console.log(liked)  
           setIsLiked(liked)
         })
       }else{
-        console.log("find out if this book is liked inside localStorage");
+        //console.log("find out if this book is liked inside localStorage");
         const likeIndex = localLikes.find(like => like.id === productInfo.id);
         likeIndex? setIsLiked(true): setIsLiked(false);
       }
@@ -46,14 +46,14 @@ const ProductSaleInfo = ({
 
   const handleAddToFavs = async () => {
     if(userId){
-      console.log("add liked book to user");
+      //console.log("add liked book to user");
       if(isLiked){
         removeUserFavsFromDetails(productInfo.id, userId)
       }else{
         addtoUserFavs(productInfo, userId)
       }
     }else{
-      console.log("add liked book to localStorage");
+      //console.log("add liked book to localStorage");
       let newLikes;
       if(isLiked){
         newLikes = [...localLikes];
@@ -61,7 +61,7 @@ const ProductSaleInfo = ({
       }else{
         newLikes = [...localLikes, productInfo];
       }
-      console.log(newLikes);
+      //console.log(newLikes);
       setLocalLikes(newLikes);
     }
     setIsLiked(!isLiked)

@@ -23,10 +23,10 @@ const Favorites = () => {
 
   useEffect(() => {
     onAuthStateChanged(auth,  (userAuth) => {
-      console.log(userAuth)
+     // console.log(userAuth)
       if(userAuth){
         setUserId(userAuth.uid)
-        console.log("Getting likes from user " );
+        //console.log("Getting likes from user " );
         getAllForUser(likesDocument, userAuth.uid).then((items) =>{
           setUserLikes(items);
           setTimeout(function () {
@@ -40,7 +40,7 @@ const Favorites = () => {
   }, [])
 
   const handleOpenModal = (prod) => {
-    console.log("handleOpenModal");
+    //console.log("handleOpenModal");
     setModalProduct(prod)
     setModalStyle("show")
 }

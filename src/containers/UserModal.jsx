@@ -19,12 +19,12 @@ const UserModal = ({modalStyle, setModalStyle, user, handleClickUser}) => {
 
   const handleCloseModal = (event) => {
     event.stopPropagation();
-    console.log("handleCloseModal");
+    //console.log("handleCloseModal");
     setModalStyle("hide")
   }
   const handleLogClick = (event) =>{
     event.stopPropagation()
-    console.log("log")
+    //console.log("log")
   }
 
   const handleSignIn = () =>{ 
@@ -35,12 +35,12 @@ const UserModal = ({modalStyle, setModalStyle, user, handleClickUser}) => {
       const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
-      console.log(user)
+      //console.log(user)
     }).catch((error) => {
       // Handle Errors here.
       const errorCode = error.code;
       const errorMessage = error.message;
-      console.log(errorCode+": "+errorMessage)
+      //console.log(errorCode+": "+errorMessage)
       // The email of the user's account used.
       const email = error.email;
       // The AuthCredential type that was used.
@@ -52,7 +52,7 @@ const UserModal = ({modalStyle, setModalStyle, user, handleClickUser}) => {
  let navigate = useNavigate();
  const handleSignOut =()=> {
     signOut(auth).then(() => {
-        console.log("signed out succeeded")
+        //console.log("signed out succeeded")
       }).catch((error) => {
         console.log(error)
       }).finally ( () =>{

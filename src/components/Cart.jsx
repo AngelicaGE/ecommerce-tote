@@ -22,11 +22,11 @@ const Cart = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        console.log(isLoading)
+        //console.log(isLoading)
         onAuthStateChanged(auth,  (userAuth) => {
             if(userAuth){
               setUserId(userAuth.uid)
-              console.log("Getting orders from user " );
+              //console.log("Getting orders from user " );
               setUserCartFromFirebase(userAuth.uid).then(()=>{
                   setTimeout(function () {
                     setIsLoading(false);
@@ -39,7 +39,7 @@ const Cart = () => {
     }, [])
 
     useEffect(() =>{
-        console.log(isLoading)
+        //console.log(isLoading)
         setAllTotals();
     }, [cartItems, userCart])
 
@@ -50,7 +50,7 @@ const Cart = () => {
 
     const setUserCartFromFirebase = async (userAuthId) =>{
         getAllForUser(ordersDocument, userAuthId).then((items) =>{
-            console.log(items)
+            //console.log(items)
             if(items){
               setUserCart(items)
             }
@@ -58,14 +58,14 @@ const Cart = () => {
     }
 
     const addAllPrices = () => {
-        console.log("addAllPrices")
+        //console.log("addAllPrices")
         let totalTemp = 0;
         let array = userId? userCart: cartItems;
         for (let i = 0; i < array.length; i++) {
            totalTemp +=  userId? (array[i].item.amount * array[i].item.price): (array[i].amount * array[i].price);
         }
         totalTemp = Math.round(totalTemp * 100) / 100;
-        console.log("total: $"+totalTemp);
+        //console.log("total: $"+totalTemp);
         setTotal(totalTemp);
     }
 
@@ -76,7 +76,7 @@ const Cart = () => {
         for (let i = 0; i < array.length; i++) {
             countTemp += userId? array[i].item.amount :array[i].amount;
         }
-        console.log("total items: "+countTemp);
+        //console.log("total items: "+countTemp);
         setorderdata({...orderdata, totalItems: countTemp});
     }
 
@@ -109,7 +109,7 @@ const Cart = () => {
     }
 
     const handleClickClear = () => {
-        console.log("click clear")
+        //console.log("click clear")
         if(userId){
             clearUserCart(userId);
             setUserCart([]);
@@ -119,7 +119,7 @@ const Cart = () => {
 
     }
     const handleOpenModal = () => {
-        console.log("handleOpenModal");
+        //console.log("handleOpenModal");
         setModalStyle("show")
     }
     // modal

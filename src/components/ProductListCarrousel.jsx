@@ -12,36 +12,36 @@ const ProductListCarrousel = ({ products, loading, amountVisibleParameter=3}) =>
     
 
     useEffect(() => {
-        console.log("useEffect", window.screen.width)
+        //console.log("useEffect", window.screen.width)
         
         if(window.screen.width<=600){
             setAmountVisible(2);
         }
-        console.log(products)
+        //console.log(products)
         setVisibleItems(products.slice(firstVisibleIndex, firstVisibleIndex+amountVisible))
     }, [products])
     
     
     const handleNextBooks = ()=>{
-        console.log("next")
+        //console.log("next")
         const newFirstVisibleIndex = firstVisibleIndex+amountVisible;
         if(newFirstVisibleIndex >= products.length)return;
         setFirstVisibleIndex(newFirstVisibleIndex)
         const newVisibleItems = products.slice(newFirstVisibleIndex, newFirstVisibleIndex+amountVisible)
         setVisibleItems(newVisibleItems)
-        console.log(newFirstVisibleIndex)
-        console.log(newVisibleItems)
+        //console.log(newFirstVisibleIndex)
+        //console.log(newVisibleItems)
 
       }
       const handlePrevBooks = ()=>{
-        console.log("prev")
+        //console.log("prev")
         const newFirstVisibleIndex = firstVisibleIndex-amountVisible;
         if(newFirstVisibleIndex < 0) return;
         setFirstVisibleIndex(newFirstVisibleIndex)
         const newVisibleItems = products.slice(newFirstVisibleIndex, newFirstVisibleIndex+amountVisible)
         setVisibleItems(newVisibleItems)
-        console.log(newFirstVisibleIndex)
-        console.log(newVisibleItems)
+        //console.log(newFirstVisibleIndex)
+        //console.log(newVisibleItems)
       }
 
       if(loading){

@@ -15,7 +15,7 @@ const SearchContainer = () => {
   const redirectToSearch = () => {
     let exists = searchHistory.includes(search);
     if(!exists)setSearchHistory([...searchHistory, search]);
-    console.log("search " + search);
+    //console.log("search " + search);
     if (search == "") {
       navigate("/");
     } else {
