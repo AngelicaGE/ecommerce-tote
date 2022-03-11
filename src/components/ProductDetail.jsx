@@ -156,9 +156,7 @@ const ProductDetail = ({ product, categories, stock }) => {
 
       <div className="group">
         <section className="book-image">
-          <picture>
             <img src={images.thumbnail} alt={`Book ${details.title}`}/>
-          </picture>
         </section>
 
         <section className="book-details">
